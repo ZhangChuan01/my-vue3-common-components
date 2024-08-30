@@ -11,15 +11,15 @@ my-vue3-common-components
 2. 引入及使用  
     在main.ts中进行组件引入，全局注册，使用类似于element-plus
     ```
-    import myVue3CommonComponents from 'my-vue3-common-components/dist'
+    import MyVue3CommonComponents from 'my-vue3-common-components/dist'
     import 'my-vue3-common-components/dist/style.css'
 
     const app = createApp(App)
     app
-      .use(components)
+      .use(MyVue3CommonComponents)
       .mount('#app')
     ```
 3. 其他  
     table组件中有v-has指令，用于按钮权限判断，根据实际业务自行实现或者复制本人源码中此指令代码    
     组件搭配本人开发的hooks使用将更加快捷方便    
-    [一个基础的增删改查页面](https://github.com/ZhangChuan01/my-vue3-common-components)
+    [一个基础的增删改查页面示例](https://github.com/ZhangChuan01/my-vue3-common-components/blob/main/src/views/Home/HomePage.vue)
