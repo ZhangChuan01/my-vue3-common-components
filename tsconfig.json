@@ -16,6 +16,8 @@
     "strictPropertyInitialization": false,
     "noImplicitAny": false,
     "baseUrl": ".",
+    "outDir": "dist",
+    "declaration": true,
     "paths": {
       "@/*": ["src/*"]
     },

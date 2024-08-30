@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "description": "my-vue3-common-components",
-  "files": ["dist", "demo.png"],
+  "files": ["dist"],
   "keywords": [
     "my-vue3-common-components"
   ],

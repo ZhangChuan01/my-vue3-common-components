@@ -2,7 +2,7 @@
 import { GlobalComponents, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
-export default function useTableHook (formDataList?: any) {
+export default function useTableHook(formDataList?: any):any {
   const mytable = ref<GlobalComponents['MyTable'] | null>(null)
   const dialogVisible = ref(false), operate = ref('add'), rowValue = ref<any>({})
 

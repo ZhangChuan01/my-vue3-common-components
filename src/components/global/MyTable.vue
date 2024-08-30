@@ -1,39 +1,34 @@
 <script setup lang='ts'>
 
-interface Col {
-  code: string
-  label: string
-  width?: string | number
-  showOverflowTooltip?: boolean
-  type?: string  // template,datetime,date,time,num
-}
-interface Operate {
-  label?: string
-  width?: string | number
-  fixed?: boolean | string
-  list: {
-    disabled?: boolean | ((row: any) => boolean)
-    isShow?: (row: any) => boolean
-    label: string | ((row: any) => string)
-    type?: string
-    permission?: string
-    handleClick?: (row: any) => void
-  }[]
-}
-
-interface DataSource {
-  cols: Col[]
-  operate?: Operate
-  tableData?: any
-}
-
 const props = withDefaults(defineProps<{
   dataFun?: null | ((params?: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
   needIndex?: boolean
   needPage?: boolean
   needSelection?: boolean
-  dataSource: DataSource
+  dataSource: {
+    tableData?: any,
+    cols: {
+      code: string
+      label: string
+      width?: string | number
+      showOverflowTooltip?: boolean
+      type?: string  // template,datetime,date,time,num
+    }[]
+    operate?: {
+      label?: string
+      width?: string | number
+      fixed?: boolean | string
+      list: {
+        disabled?: boolean | ((row: any) => boolean)
+        isShow?: (row: any) => boolean
+        label: string | ((row: any) => string)
+        type?: string
+        permission?: string
+        handleClick?: (row: any) => void
+      }[]
+    }
+  }
   fixedParams?: {[key: string]: any} | null
 }>(), {
   dataFun: null,
