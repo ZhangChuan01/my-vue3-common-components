@@ -1,0 +1,26 @@
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: #f6f8fa;
+  border-radius: 10px;
+  box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #f6f8fa;
+}
+#app {
+  height: 100vh;
+}
+#nprogress .bar {
+  background: #67c23a !important;
+}

@@ -1,0 +1,25 @@
+.dfa {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.dfb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dfc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.common-filter-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  & > div {
+    &:last-child {
+      flex-shrink: 0;
+    }
+  }
+}
