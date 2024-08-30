@@ -24,7 +24,7 @@ const filters = reactive([
 
 let filterRes = ref<any>({})
 
-const formDataList = reactive<(ComponentsProps.Input | ComponentsProps.Select)[]>([
+const formDataList = reactive<any>([
   {
     label: '姓名',
     code: 'name',
