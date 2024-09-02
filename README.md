@@ -4,7 +4,7 @@ my-vue3-common-components
 #### 如何使用
 1. 安装
     ```  
-    yard add my-vue3-common-components --save
+    yarn add my-vue3-common-components --save
     or
     npm install my-vue3-common-components --save
     ```
