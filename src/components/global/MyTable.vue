@@ -3,6 +3,7 @@
 const props = withDefaults(defineProps<{
   dataFun?: null | ((params?: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
+  height?: string | number
   needIndex?: boolean
   needPage?: boolean
   needSelection?: boolean
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   dataFun: null,
   filters: null,
+  height: 'auto',
   needIndex: false,
   needSelection: false,
   needPage: true,
@@ -118,6 +120,7 @@ defineExpose({
       ref="tableComponent"
       :data="tableData"
       width="100%"
+      :height="height"
       stripe
     >
       <el-table-column
