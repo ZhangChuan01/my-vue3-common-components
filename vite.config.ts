@@ -6,6 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import AutoImport from 'unplugin-auto-import/vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'  //便于使用组件名
+import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import autoprefixer from 'autoprefixer'
 
@@ -34,6 +35,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    dts(),
     vueSetupExtend(),
     eslintPlugin({
       include: [ 'src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue' ]
