@@ -22,7 +22,7 @@ const bindValue = computed({
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  obj.placeholder = window.$utils.hasField(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `请选择${props.filterObj.label}`
+  obj.placeholder = window.$utils.hasField(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `请选择${props.filterObj.label || ''}`
   obj.clearable = window.$utils.hasField(props.filterObj,'clearable') ? props.filterObj.clearable : true
   return obj
 }
