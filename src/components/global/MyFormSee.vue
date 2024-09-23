@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-
+import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
 const props = withDefaults(defineProps<{
-  formDataList: (ComponentsProps.Input | ComponentsProps.Select | ComponentsProps.Date | ComponentsProps.Switch | ComponentsProps.ColorPicker)[]
+  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
   labelWidth?: string | number
 }>(), {
   labelWidth: 'auto'

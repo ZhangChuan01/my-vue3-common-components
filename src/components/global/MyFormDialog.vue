@@ -2,6 +2,7 @@
 <script setup lang='ts'>
 import type { FormRules } from 'element-plus'
 import { GlobalComponents } from 'vue'
+import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
 
 const emits = defineEmits<{
   (e:'update:dialogVisible', dialogVisible: boolean): void
@@ -13,7 +14,7 @@ const emits = defineEmits<{
 const props = withDefaults(defineProps<{
   title?: string
   operate?: string
-  formDataList: (ComponentsProps.Input | ComponentsProps.Select | ComponentsProps.Date | ComponentsProps.Switch | ComponentsProps.ColorPicker)[]
+  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
   rules?: FormRules | undefined
   width?: string | number
   labelWidth?: string | number

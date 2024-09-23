@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-
+import { Input, Select, Date } from './base/base'
 const props = withDefaults(defineProps<{
-  filterList: (ComponentsProps.Input | ComponentsProps.Select | ComponentsProps.Date)[]
+  filterList: (Input | Select | Date)[]
   needBtn?: boolean
 }>(), {
   needBtn: true
@@ -16,7 +16,9 @@ const dateTypes = [ 'year', 'month', 'date', 'dates', 'datetime', 'week', 'datet
 const search = () => {
   const res: {[key: string]: unknown} = {}
   props.filterList.forEach(filter => {
-    res[filter.code] = filter.value
+    if(filter.code){
+      res[filter.code] = filter.value
+    }
   })
   emits('search', res)
 }
@@ -32,29 +34,33 @@ const reset = () => {
     <el-form
       :inline="true"
     >
-      <el-form-item
+      <template
         v-for="filter in props.filterList"
         :key="filter.code"
-        :label="filter.label"
-        :label-width="filter.labelWidth || ''"
-        :style="filter.style || ''"
       >
-        <MyInput
-          v-if="inputTypes.includes(filter.type)"
-          v-model="filter.value"
-          :filter-obj="filter"
-        />
-        <MySelect
-          v-else-if="filter.type === 'select'"
-          v-model="filter.value"
-          :filter-obj="filter"
-        />
-        <MyDate
-          v-else-if="dateTypes.includes(filter.type)"
-          v-model="filter.value"
-          :filter-obj="filter"
-        />
-      </el-form-item>
+        <el-form-item
+          v-if="filter.type"
+          :label="filter.label"
+          :label-width="filter.labelWidth || ''"
+          :style="filter.style || ''"
+        >
+          <MyInput
+            v-if="inputTypes.includes(filter.type)"
+            v-model="(filter.value as string)"
+            :filter-obj="filter"
+          />
+          <MySelect
+            v-else-if="filter.type === 'select'"
+            v-model="(filter.value as string)"
+            :filter-obj="(filter as Select)"
+          />
+          <MyDate
+            v-else-if="dateTypes.includes(filter.type)"
+            v-model="(filter.value as string)"
+            :filter-obj="filter"
+          />
+        </el-form-item>
+      </template>
       <el-form-item v-if="props.needBtn">
         <div class="btn-wrapper">
           <el-button

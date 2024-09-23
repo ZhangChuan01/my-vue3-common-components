@@ -1,11 +1,12 @@
 <script setup lang='ts'>
+import { Input } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
   (e:'change', modelValue: string | number): void
 }>()
 
 const props = withDefaults(defineProps<{
-  filterObj: ComponentsProps.Input
+  filterObj: Input
   modelValue: string | number
 }>(), {
   modelValue: ''

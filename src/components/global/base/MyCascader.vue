@@ -1,12 +1,12 @@
 <script setup lang='ts'>
-
+import { Cascader } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
 }>()
 
 const props = defineProps<{
   modelValue: string
-  filterObj: ComponentsProps.Date
+  filterObj: Cascader
 }>()
 
 const bindValue = computed({

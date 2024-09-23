@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-
+import { Switch } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
 }>()
 
 const props = withDefaults(defineProps<{
-  filterObj: ComponentsProps.Switch
+  filterObj: Switch
   modelValue: string | number
 }>(), {
   modelValue: ''

@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
-
+import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
 const props = withDefaults(defineProps<{
-  formDataList: (ComponentsProps.Input | ComponentsProps.Select | ComponentsProps.Date | ComponentsProps.Switch | ComponentsProps.ColorPicker)[]
+  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
   rules?: FormRules | ''
   labelWidth?: string | number
 }>(), {
@@ -21,8 +21,8 @@ const formModel = ref<any>({})
 const setModel = () => {
   let obj:{[key: string]: any} = {}
   props.formDataList.forEach(formData => {
-    if (formData.type !== 'title'){
-      obj[formData.code] = formData.value
+    if (formData.type !== 'title' && formData.code){
+      obj[formData.code] = formData.value || ''
     }
   })
   formModel.value = obj
@@ -93,6 +93,7 @@ defineExpose({
         :key="formData.type === 'title' ? formData.label : formData.code"
       >
         <el-form-item
+          v-if="formData.type"
           :label="formData.label"
           :prop="formData.type === 'title' ? formData.label : formData.code"
           :style="formData.style || ''"
@@ -100,38 +101,38 @@ defineExpose({
         >
           <MyInput
             v-if="inputTypes.includes(formData.type)"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
           <MySelect
             v-else-if="formData.type === 'select'"
-            v-model="formModel[formData.code]"
-            :filter-obj="formData"
+            v-model="formModel[(formData.code as string)]"
+            :filter-obj="(formData as Select)"
             @update-model="changeModel"
           />
           <MyTime
             v-else-if="formData.type === 'time'"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
           <MyDate
             v-else-if="dateTypes.includes(formData.type)"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
           <MySwitch
             v-else-if="formData.type === 'switch'"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
           <MyCascader
             v-else-if="formData.type === 'cascader'"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
           <MyColorPicker
             v-else-if="formData.type === 'color-picker'"
-            v-model="formModel[formData.code]"
+            v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
           />
         </el-form-item>

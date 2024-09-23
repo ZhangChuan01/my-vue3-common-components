@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-
+import { Select } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number | boolean): void
   (e:'updateModel', modelValue: {[key: string]: string | number | boolean}): void
@@ -7,7 +7,7 @@ const emits = defineEmits<{
 }>()
 
 const props = withDefaults(defineProps<{
-  filterObj: ComponentsProps.Select
+  filterObj: Select
   modelValue: string | number | boolean
 }>(), {
   modelValue: ''

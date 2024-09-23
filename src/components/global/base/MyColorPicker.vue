@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-
+import { ColorPicker } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
 }>()
 
 const props = withDefaults(defineProps<{
-  filterObj: ComponentsProps.ColorPicker
+  filterObj: ColorPicker
   modelValue: string | number
 }>(), {
   modelValue: ''
