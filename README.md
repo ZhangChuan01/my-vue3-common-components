@@ -20,7 +20,9 @@ my-vue3-common-components
       .mount('#app')
     ```
 3. TypeScript支持    
-    在```tsconfig.json```中的```types```字段中添加```"my-vue3-common-components/dist/components.d.ts"```即可获得组件及字段提示
+    在```tsconfig.json```中的```types```字段中添加```"my-vue3-common-components/dist/components"```即可获得组件及字段提示   
+    如果需要基础组件类型可自行引入   
+    ```import { Input, Select, Date, Switch, ColorPicker } from 'my-vue3-common-components/dist/components/global/base/base'```
 4. 其他  
     table组件中有v-has指令，用于按钮权限判断，根据实际业务自行实现或者复制本人源码中此指令代码    
     组件搭配本人开发的hooks使用将更加快捷方便    
