@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { App, defineAsyncComponent } from 'vue'
+
+export interface InitConfig {
+  formCol?: number
+  formLabelPosition?: string
+}
 export default {
-  install (app: App) {
+  install (app: App, options?: InitConfig | undefined) {
+    // console.log('install', options)
+    if(options) {
+      app.provide('initConfig', options)
+    }
     const baseModules = import.meta.glob('./base/*.vue')
     for (const path in baseModules) {
       const result: Array<any> = path.match(/.*\/(.+).vue$/)!
@@ -12,6 +21,7 @@ export default {
     for (const path in requireModules) {
       const result: Array<any> = path.match(/.*\/(.+).vue$/)!
       const modulesConent: any = requireModules[path]
+      // console.log(modulesConent,result)
       app.component(result[1], defineAsyncComponent(modulesConent))
     }
   }

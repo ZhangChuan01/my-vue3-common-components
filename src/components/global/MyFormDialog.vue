@@ -26,6 +26,8 @@ const props = withDefaults(defineProps<{
   fixedParams?: {[key: string]: any} | undefined
   beforeSubmit?: (() => boolean)| null
   handleField?: ((res: any) => void ) | null
+  labelPosition?: string | undefined
+  col?: number | undefined
 }>(), {
   title: '',
   operate: 'add',
@@ -39,7 +41,9 @@ const props = withDefaults(defineProps<{
   currentRowValue: {},
   fixedParams: undefined,
   beforeSubmit: null,
-  handleField: null
+  handleField: null,
+  col: undefined,
+  labelPosition: undefined
 })
 const dialogShow = computed({
   get: () => props.dialogVisible,
@@ -122,6 +126,8 @@ defineExpose({
             :rules="props.rules"
             :form-data-list="props.formDataList"
             :label-width="props.labelWidth"
+            :label-position="props.labelPosition"
+            :col="props.col"
           />
         </div>
         <slot />

@@ -25,7 +25,7 @@ const dialogShow = computed({
 </script>
 
 <template>
-  <div>
+  <div class="my-dialog-wrapper">
     <el-dialog
       v-model="dialogShow"
       :close-on-press-escape="false"

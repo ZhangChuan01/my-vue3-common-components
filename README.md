@@ -18,7 +18,11 @@ my-vue3-common-components
     app
       .use(MyVue3CommonComponents)
       .mount('#app')
-    ```
+    ```      
+    全局配置(可选项)    
+    ```use(MyVue3CommonComponents,{ formCol: 1, formLabelPosition: 'right' })```
+    formCol 表单列数，可选项为1,2，默认值为2      
+    formLabelPosition  表单label对齐方式，参考element-plus的table组件，默认值为top
 3. TypeScript支持    
     在```tsconfig.json```中的```types```字段中添加```"my-vue3-common-components/dist/components"```即可获得组件及字段提示   
     如果需要基础组件类型可自行引入   

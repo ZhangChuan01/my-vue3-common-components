@@ -22,8 +22,8 @@ const bindValue = computed({
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  obj.clearable = window.$utils.hasField(props.filterObj,'clearable') ? props.filterObj.clearable : true
-  obj.valueFormat = window.$utils.hasField(props.filterObj,'valueFormat') ? props.filterObj.valueFormat : 'YYYY-MM-DD HH:mm:ss'
+  obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
+  obj.valueFormat = Object.hasOwnProperty.call(props.filterObj,'valueFormat') ? props.filterObj.valueFormat : 'YYYY-MM-DD HH:mm:ss'
   return obj
 }
 

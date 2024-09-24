@@ -1,9 +1,25 @@
 <script setup lang='ts'>
+import moment from 'moment'
 
+// 时间格式
+function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
+  if (!val) return ''
+  const tz = JSON.stringify(val).includes('z') ? 0 : 8
+  if (val && val !== '0001-01-01T00:00:00') {
+    return moment(val).utcOffset(tz).format(type)
+  } else {
+    return ' '
+  }
+}
+function takeMoreThan(value: number) {
+  if (!value || value === 0) return value
+  return Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))
+}
 const props = withDefaults(defineProps<{
   dataFun?: null | ((params?: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
-  height?: string | number
+  height?: string | number | undefined
+  maxHeight?: string | number | undefined
   needIndex?: boolean
   needPage?: boolean
   needSelection?: boolean
@@ -34,7 +50,8 @@ const props = withDefaults(defineProps<{
 }>(), {
   dataFun: null,
   filters: null,
-  height: 'auto',
+  height: undefined,
+  maxHeight: undefined,
   needIndex: false,
   needSelection: false,
   needPage: true,
@@ -71,10 +88,16 @@ const getData = async () => {
     params = Object.assign({}, params, props.fixedParams)
   }
   const res = await props.dataFun!(params)
+  // console.log('tableData', res)
   if (res.code !== -1) {
-    tableData.value = props.needPage ? (res.items || res.item) : (res.items || res)
+    tableData.value = props.needPage ? (res?.items || res?.item || res?.result?.items || []) : (res?.items || res || res?.result?.items || [])
     if(props.needPage){
-      pageData.total = res.totalCount
+      pageData.total = res?.totalCount || res?.result?.totalCount || 0
+    }
+  }else{
+    tableData.value = []
+    if(props.needPage){
+      pageData.total = 0
     }
   }
   
@@ -99,7 +122,7 @@ const refresh = (pagenum?: number) => {
     pageData.currentPage = pagenum
   }
   if(pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
-    pagenum = pageData.currentPage - 1
+    pageData.currentPage = pageData.currentPage - 1
   }
   getData()
 }
@@ -120,7 +143,8 @@ defineExpose({
       ref="tableComponent"
       :data="tableData"
       width="100%"
-      :height="height"
+      :height="props.height"
+      :max-height="props.maxHeight"
       stripe
     >
       <el-table-column
@@ -159,7 +183,7 @@ defineExpose({
           :width="col.width || (col.type === 'datetime' ? '180px' : '120px')"
         >
           <template #default="scope">
-            {{ $utils.dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
+            {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
           </template>
         </el-table-column>
         <el-table-column
@@ -169,7 +193,7 @@ defineExpose({
           :width="col.width || ''"
         >
           <template #default="scope">
-            {{ $utils.takeMoreThan(scope.row[col.code || '']) }}
+            {{ takeMoreThan(scope.row[col.code || '']) }}
           </template>
         </el-table-column>
         <el-table-column

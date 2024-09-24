@@ -1,14 +1,24 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
+import { InitConfig } from './index'
+
 const props = withDefaults(defineProps<{
   formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
   rules?: FormRules | ''
   labelWidth?: string | number
+  col?: number | undefined
+  labelPosition?: string | undefined
 }>(), {
   rules: '',
-  labelWidth: 'auto'
+  labelWidth: 'auto',
+  col: undefined,
+  labelPosition: undefined
 })
+const initConfig: InitConfig | undefined = inject('initConfig')
+
+const col = props.col || initConfig?.formCol || 2
+const labelPosition = props.labelPosition || initConfig?.formLabelPosition || 'top'
 
 const emits = defineEmits<{
   (e: 'submit', filter: any ): void
@@ -81,10 +91,11 @@ defineExpose({
 </script>
 
 <template>
-  <div class="form-wrapper">
+  <div :class="['form-wrapper',{col2: col === 2}]">
     <el-form
       ref="ruleForm"
       :label-width="props.labelWidth"
+      :label-position="labelPosition"
       :rules="rules"
       :model="formModel"
     >
@@ -149,50 +160,23 @@ defineExpose({
   overflow: auto;
 }
 :deep(.el-form) {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  .el-form-item {
-    flex-direction: column;
-    width: calc(50% - 12px);
-    margin-bottom: 24px;
-    .el-form-item__label-wrap {
-      margin-left: 0 !important;
-    }
-    .el-form-item__label {
-      justify-content: flex-start !important;
-      font-weight: 600 !important;
-    }
-    .el-form-item__content {
-      align-items: baseline !important;
-      .el-input,
-      .el-select {
-        width: 100%;
-      }
-      .el-col {
-        .el-form-item {
-          width: 100%;
-          margin-bottom: 0;
-        }
-      }
-      .disabled-inp {
-        width: 100%;
-        height: 100%;
-        padding: 0 15px;
-        color: #a8abb2;
-        background-color: #f5f7fa;
-        border-radius: 4px;
-        box-shadow: 0 0 0 1px #e4e7ed inset;
-        cursor: no-drop;
-      }
-    }
-    .el-input-group__prepend {
-      width: 30%;
-    }
-  }
   .myswitch {
     flex-direction: row;
     width: 100%;
+  }
+}
+.col2 {
+  :deep(.el-form) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .el-form-item {
+      width: calc(50% - 12px);
+      margin-bottom: 24px;
+    }
+    .el-form-item__content {
+      align-items: baseline !important;
+    }
   }
 }
 .title {
