@@ -20,7 +20,7 @@ my-vue3-common-components
       .mount('#app')
     ```      
     全局配置(可选项)    
-    ```use(MyVue3CommonComponents,{ formCol: 1, formLabelPosition: 'right' })```
+    ```use(MyVue3CommonComponents,{ formCol: 1, formLabelPosition: 'right' })```     
     formCol 表单列数，可选项为1,2，默认值为2      
     formLabelPosition  表单label对齐方式，参考element-plus的table组件，默认值为top
 3. TypeScript支持    
