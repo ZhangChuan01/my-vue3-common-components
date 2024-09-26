@@ -121,7 +121,7 @@ const refresh = (pagenum?: number) => {
   if (pagenum) {
     pageData.currentPage = pagenum
   }
-  if(pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
+  if(pageData.currentPage !== 1 && pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
     pageData.currentPage = pageData.currentPage - 1
   }
   getData()
