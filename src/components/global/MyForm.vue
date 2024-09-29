@@ -121,6 +121,12 @@ defineExpose({
             :filter-obj="(formData as Select)"
             @update-model="changeModel"
           />
+          <MyVirtualizedSelect
+            v-else-if="formData.type === 'virtualizedSelect'"
+            v-model="formModel[(formData.code as string)]"
+            :filter-obj="(formData as Select)"
+            @update-model="changeModel"
+          />
           <MyTime
             v-else-if="formData.type === 'time'"
             v-model="formModel[(formData.code as string)]"

@@ -6,12 +6,16 @@ const filters = reactive([
   {
     label: '性别',
     code: 'sex',
-    type: 'select',
+    type: 'virtualizedSelect',
     options: [
       { name: '男', id: 1 },
       { name: '女', id: 0 }
     ],
-    value: ''
+    value: '',
+    props: {
+      label: 'name',
+      value: 'id'
+    }
   },
   {
     label: '关键词',
@@ -41,12 +45,12 @@ const formDataList = reactive<any>([
   {
     label: '性别',
     code: 'sex',
-    type: 'select',
+    type: 'virtualizedSelect',
     options: [
       { name: '男', id: 1 },
       { name: '女', id: 0 }
     ],
-    value: 1,
+    value: '',
     clearable: false
   },
   {

@@ -54,6 +54,11 @@ const reset = () => {
             v-model="(filter.value as string)"
             :filter-obj="(filter as Select)"
           />
+          <MyVirtualizedSelect
+            v-else-if="filter.type === 'virtualizedSelect'"
+            v-model="(filter.value as string)"
+            :filter-obj="(filter as Select)"
+          />
           <MyDate
             v-else-if="dateTypes.includes(filter.type)"
             v-model="(filter.value as string)"

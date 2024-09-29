@@ -7,6 +7,7 @@ import MyFormSee from './components/global/MyFormSee.vue'
 import SvgIcon from './components/global/SvgIcon.vue'
 import MyInput from './components/global/base/MyInput.vue'
 import MySelect from './components/global/base/MySelect.vue'
+import MyVirtualizedSelect from './components/global/base/MyVirtualizedSelect.vue'
 import MyDate from './components/global/base/MyDate.vue'
 import MyCascader from './components/global/base/MyCascader.vue'
 import MyTime from './components/global/base/MyTime.vue'
@@ -24,6 +25,7 @@ declare module 'vue'{
     SvgIcon: typeof SvgIcon
     MyInput: typeof MyInput
     MySelect: typeof MySelect
+    MyVirtualizedSelect: typeof MyVirtualizedSelect
     MyDate: typeof MyDate
     MyCascader: typeof MyCascader
     MyTime: typeof MyTime
