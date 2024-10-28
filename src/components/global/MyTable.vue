@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<{
 })
 
 const tableComponent = ref<any>()
-let tableData = ref<unknown[]>([])
+let tableData = ref<any>([])
 let pageData = reactive({
   total: 0,
   pageSize: 10,
@@ -194,6 +194,16 @@ defineExpose({
         >
           <template #default="scope">
             {{ takeMoreThan(scope.row[col.code || '']) }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          v-else-if="col.type === 'intNum'"
+          :prop="col.code"
+          :label="col.label"
+          :width="col.width || ''"
+        >
+          <template #default="scope">
+            {{ Math.floor(scope.row[col.code]) || '' }}
           </template>
         </el-table-column>
         <el-table-column
