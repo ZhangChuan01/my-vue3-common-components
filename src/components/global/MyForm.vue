@@ -98,6 +98,7 @@ defineExpose({
       :label-position="labelPosition"
       :rules="rules"
       :model="formModel"
+      v-bind="$attrs"
     >
       <template
         v-for="formData in props.formDataList"

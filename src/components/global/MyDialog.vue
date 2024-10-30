@@ -33,6 +33,7 @@ const dialogShow = computed({
       :width="width"
       :destroy-on-close="true"
       align-center
+      v-bind="$attrs"
       @close="emits('close')"
     > 
       <template #header>

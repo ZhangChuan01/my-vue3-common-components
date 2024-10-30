@@ -117,6 +117,7 @@ defineExpose({
       v-model:dialog-visible="dialogShow"
       :title="`${operate === 'edit' ? '编辑' : '新建'}${title}`"
       :width="props.width"
+      v-bind="$attrs"
       @close="cancel"
     >
       <div :id="domId">

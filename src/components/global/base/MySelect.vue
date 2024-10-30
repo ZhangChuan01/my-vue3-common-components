@@ -40,7 +40,7 @@ const setPropData = () => {
     obj.emptyValues = [ null, undefined ]
     obj.valueOnClear = null
   }
-  return obj
+  return Object.assign(obj, useAttrs())
 }
 
 </script>

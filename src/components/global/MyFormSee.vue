@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<{
   <div class="form-wrapper">
     <el-form
       :label-width="props.labelWidth"
+      v-bind="$attrs"
     >
       <template
         v-for="formData in props.formDataList"

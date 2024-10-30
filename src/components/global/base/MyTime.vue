@@ -24,7 +24,7 @@ const setPropData = () => {
   delete obj.value
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
   obj.valueFormat = Object.hasOwnProperty.call(props.filterObj,'valueFormat') ? props.filterObj.valueFormat : 'HH:mm:ss'
-  return obj
+  return Object.assign(obj, useAttrs())
 }
 </script>
 

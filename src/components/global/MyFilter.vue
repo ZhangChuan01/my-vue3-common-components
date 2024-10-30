@@ -33,6 +33,7 @@ const reset = () => {
   <div class="filter-wrapper">
     <el-form
       :inline="true"
+      v-bind="$attrs"
     >
       <template
         v-for="filter in props.filterList"

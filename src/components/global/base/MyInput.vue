@@ -50,7 +50,7 @@ const setPropData = () => {
   delete obj.value
   obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `请输入${props.filterObj.label || ''}`
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
-  return obj
+  return Object.assign(obj, useAttrs())
 }
 
 </script>

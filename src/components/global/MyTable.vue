@@ -135,6 +135,7 @@ defineExpose({
   tableData,
   getSelectionRows
 })
+
 </script>
 
 <template>
@@ -143,9 +144,8 @@ defineExpose({
       ref="tableComponent"
       :data="tableData"
       width="100%"
-      :height="props.height"
-      :max-height="props.maxHeight"
       stripe
+      v-bind="$attrs"
     >
       <el-table-column
         v-if="props.needIndex"

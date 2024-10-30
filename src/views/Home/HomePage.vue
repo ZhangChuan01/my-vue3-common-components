@@ -91,6 +91,9 @@ const dataSource = reactive({
     ]
   }
 })
+const rowClick = (row: any) => {
+  console.log('rowClick', row)
+}
 
 </script>
 
@@ -113,6 +116,7 @@ const dataSource = reactive({
       :filters="filterRes"
       :data-fun="getPeopleListApi"
       :data-source="dataSource"
+      @row-click="rowClick"
     >
       <template #sex="scope">
         {{ scope.row.sex === 1 ? '男' : '女' }}

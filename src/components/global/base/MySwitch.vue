@@ -23,7 +23,7 @@ const bindValue = computed({
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  return obj
+  return Object.assign(obj, useAttrs())
 }
 </script>
 
