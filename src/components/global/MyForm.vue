@@ -32,7 +32,7 @@ const setModel = () => {
   let obj:{[key: string]: any} = {}
   props.formDataList.forEach(formData => {
     if (formData.type !== 'title' && formData.code){
-      obj[formData.code] = formData.value || ''
+      obj[formData.code] = formData.value === undefined ? '' : formData.value
     }
   })
   formModel.value = obj
