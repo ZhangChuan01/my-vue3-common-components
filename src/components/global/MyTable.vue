@@ -18,8 +18,6 @@ function takeMoreThan(value: number) {
 const props = withDefaults(defineProps<{
   dataFun?: null | ((params?: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
-  height?: string | number | undefined
-  maxHeight?: string | number | undefined
   needIndex?: boolean
   needPage?: boolean
   needSelection?: boolean
@@ -50,8 +48,6 @@ const props = withDefaults(defineProps<{
 }>(), {
   dataFun: null,
   filters: null,
-  height: undefined,
-  maxHeight: undefined,
   needIndex: false,
   needSelection: false,
   needPage: true,
