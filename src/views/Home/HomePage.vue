@@ -85,9 +85,11 @@ const dataSource = reactive({
   ],
   operate: {
     label: '操作',
+    width: 220,
     list: [
       { label: '编辑', type: 'primary', handleClick: row => edit(row) },
-      { label: '删除', type: 'danger', handleClick: row => deleteData(deletePeopleApi,row) }
+      { label: '删除', type: 'danger', handleClick: row => deleteData(deletePeopleApi,row) },
+      { label: '自定义内容', type: 'template' }
     ]
   }
 })
@@ -120,6 +122,15 @@ const rowClick = (row: any) => {
     >
       <template #sex="scope">
         {{ scope.row.sex === 1 ? '男' : '女' }}
+      </template>
+      <template #自定义内容>
+        <el-button
+          type="primary"
+          text
+          @click="create"
+        >
+          自定义按钮
+        </el-button>
       </template>
     </my-table>
     <my-form-dialog

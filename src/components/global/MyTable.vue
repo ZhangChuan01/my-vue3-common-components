@@ -222,11 +222,23 @@ defineExpose({
               v-for="btn in props.dataSource.operate.list"
               :key="typeof btn.label === 'string' ? btn.label : btn.label(scope.row)"
             >
-              <div
-                v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
-                class="table-btn"
-              >
-                <template v-if="btn.permission">
+              <template v-if="btn.type === 'template'">
+                <div
+                  v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
+                  v-has="btn.permission"
+                  class="table-btn"
+                >
+                  <slot
+                    :name="btn.label"
+                    :row="scope.row"
+                  />
+                </div>
+              </template>
+              <template v-else>
+                <div
+                  v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
+                  class="table-btn"
+                >
                   <el-button
                     v-has="btn.permission"
                     :type="btn.type || 'primary'"
@@ -236,19 +248,8 @@ defineExpose({
                   >
                     {{ typeof btn.label === 'string' ? btn.label : btn.label(scope.row) }}
                   </el-button>
-                </template>
-                <template v-else>
-                  <el-button
-                    v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
-                    :type="btn.type || 'primary'"
-                    :disabled="typeof btn.disabled === 'boolean' || btn.disabled === undefined ? btn.disabled : btn.disabled(scope.row)"
-                    link
-                    @click="btn.handleClick && btn.handleClick(scope.row)"
-                  >
-                    {{ typeof btn.label === 'string' ? btn.label : btn.label(scope.row) }}
-                  </el-button>
-                </template>
-              </div>
+                </div>
+              </template>
             </template>
           </div>
         </template>
@@ -277,6 +278,9 @@ defineExpose({
   .table-btn {
     display: inline-block;
     margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .pagination-wrapper {

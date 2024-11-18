@@ -2,6 +2,7 @@ import type { App, Directive } from 'vue'
 
 export default function setupPermissionDirective(app: App) {
   function updateElVisible(el: HTMLElement, permission: string) {
+    // console.log('permission: ' , permission)
     if (!permission) return
     const funListStr = localStorage.getItem('permissionNameList')
     if (funListStr) {
