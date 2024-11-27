@@ -21,6 +21,7 @@ export interface Input extends Base {
   max?: number
   min?: number
   labelIsInner?: boolean
+  allowNegativeNumber?: boolean
 }
 export interface Select extends Base {
   options: { [key: string]: unknown }[]
