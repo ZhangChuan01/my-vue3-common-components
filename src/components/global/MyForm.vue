@@ -177,6 +177,9 @@ defineExpose({
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    .el-form-item__label {
+      display: inline-block;
+    }
     .el-form-item {
       width: calc(50% - 12px);
       margin-bottom: 24px;
