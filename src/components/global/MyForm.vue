@@ -39,8 +39,8 @@ const setModel = () => {
   // console.log('formModel', formModel.value)
 }
 setModel()
-const getValue = (code: string) => {
-  return formModel.value[code]
+const getValue = (code?: string) => {
+  return code ? formModel.value[code] : formModel.value
 }
 const setValue = (data: {[key:string]: any}) => {
   Object.assign(formModel.value, data)
