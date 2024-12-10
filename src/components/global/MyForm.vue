@@ -36,7 +36,7 @@ const setModel = () => {
     }
   })
   formModel.value = obj
-  // console.log('formModel', formModel.value)
+  console.log('formModel', formModel.value)
 }
 setModel()
 const getValue = (code?: string) => {
@@ -66,11 +66,20 @@ const checkRules = () => {
     }
   })
 }
+const deleteEmptyValue = (obj: {[key: string]: any}) => {
+  Object.keys(obj).forEach(key => {
+    if (obj[key] === '') {
+      delete obj[key]
+    }
+  })
+  return obj
+}
 const submit = async () => {
   const valid = await checkRules()
   // console.log('valid', valid)
   if (valid) {
-    const res = Object.assign(modelParams,formModel.value)
+    const res = deleteEmptyValue(JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value))))
+    // console.log('res', res)
     emits('submit', res)
     return res
   }

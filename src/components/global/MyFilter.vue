@@ -14,13 +14,22 @@ const emits = defineEmits<{
 const inputTypes = [ 'text', 'number' ]
 const dateTypes = [ 'year', 'month', 'date', 'dates', 'datetime', 'week', 'datetimerange', 'daterange', 'monthrange' ]
 const search = () => {
-  const res: {[key: string]: unknown} = {}
+  const res: {[key: string]: any} = {}
   props.filterList.forEach(filter => {
     if(filter.code){
       res[filter.code] = filter.value
     }
   })
-  emits('search', res)
+  // console.log('res2222', res)
+  emits('search', deleteEmptyValue(JSON.parse(JSON.stringify(res))))
+}
+const deleteEmptyValue = (obj: {[key: string]: any}) => {
+  Object.keys(obj).forEach(key => {
+    if (obj[key] === '') {
+      delete obj[key]
+    }
+  })
+  return obj
 }
 const reset = () => {
   props.filterList.forEach(filter => {

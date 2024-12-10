@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
 
 const getFinalVal = (val: string | number) => {
   let res = val
-  console.log('filterObj',props.filterObj)
+  // console.log('filterObj',props.filterObj)
   if (props.filterObj.limitNumber || props.filterObj.limitIntNumber) {
     res = res.toString().replace(/[^0-9.-]+/g, '')
     if(props.filterObj.allowNegativeNumber){

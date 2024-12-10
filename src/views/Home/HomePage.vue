@@ -46,6 +46,7 @@ const formDataList = reactive<any>([
     label: '性别',
     code: 'sex',
     type: 'virtualizedSelect',
+    // multiple: true,
     options: [
       { name: '男', id: 1 },
       { name: '女', id: 0 }
@@ -64,6 +65,9 @@ const formDataList = reactive<any>([
 const rules = {
   name: [
     { required: true, message: '请输入人员名称', trigger: 'blur' }
+  ],
+  sex: [
+    { required: true, message: '请选择性别', trigger: 'change' }
   ]
 }
 
