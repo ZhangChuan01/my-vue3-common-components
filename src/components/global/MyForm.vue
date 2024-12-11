@@ -36,7 +36,7 @@ const setModel = () => {
     }
   })
   formModel.value = obj
-  console.log('formModel', formModel.value)
+  // console.log('formModel', formModel.value)
 }
 setModel()
 const getValue = (code?: string) => {
@@ -44,11 +44,11 @@ const getValue = (code?: string) => {
 }
 const setValue = (data: {[key:string]: any}) => {
   Object.assign(formModel.value, data)
-  console.log('setValue', formModel.value)
+  // console.log('setValue', formModel.value)
 }
 let modelParams = {}
 const changeModel = (val: any) => {
-  console.log('changeModel', val)
+  // console.log('changeModel', val)
   modelParams = val
 }
 const checkRules = () => {
@@ -79,7 +79,7 @@ const submit = async () => {
   // console.log('valid', valid)
   if (valid) {
     const res = deleteEmptyValue(JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value))))
-    // console.log('res', res)
+    console.log('ressssssssss', res)
     emits('submit', res)
     return res
   }

@@ -19,15 +19,9 @@ const bindValue = computed({
     if (props.filterObj.handleChange) {
       props.filterObj.handleChange(val)
     }
-    if(props.filterObj.codesMap){
-      let obj = {}
-      Object.entries(props.filterObj.codesMap).forEach(item => {
-        obj[item[0]] = val[item[1]]
-      })
-      emits('updateModel', obj)
-    }
     emits('update:modelValue', val)
     emits('change', val)
+    setCodesMap(val)
   }
 })
 console.log('props.filterObj',props.filterObj)
@@ -43,7 +37,23 @@ const setPropData = () => {
   }
   return Object.assign(obj, useAttrs())
 }
-
+const setCodesMap = val => {
+  console.log('aaaaaaaaaaaaa',props.filterObj)
+  if(!props.filterObj.codesMap) return
+  console.log('val',val)
+  let obj = {}
+  const key = props.filterObj.props?.value ? props.filterObj.props.value : 'id'
+  const tartget = props.filterObj.options.find(o => o[key] === val[key])
+  if(!tartget) return
+  Object.entries(props.filterObj.codesMap).forEach(item => {
+    obj[item[0]] = tartget[item[1]]
+  })
+  // console.log('oooooooooo',val,props.filterObj.codesMap,obj)
+  emits('updateModel', obj)
+}
+onMounted(() => {
+  if(props.modelValue) setCodesMap(props.modelValue)
+})
 </script>
 
 <template>
@@ -52,7 +62,9 @@ const setPropData = () => {
     v-bind="setPropData()"
     :props="{
       label: props.filterObj.props && props.filterObj.props.label ? props.filterObj.props.label : 'name',
-      value: props.filterObj.props && props.filterObj.props.value ? props.filterObj.props.value : 'id'
+      value: props.filterObj.props && props.filterObj.props.value ? props.filterObj.props.value : 'id',
+      options: props.filterObj.options || 'options',
+      disabled: props.filterObj.disabled || 'disabled'
     }"
   >
     <template

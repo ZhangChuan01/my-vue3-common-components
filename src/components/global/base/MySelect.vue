@@ -19,15 +19,9 @@ const bindValue = computed({
     if (props.filterObj.handleChange) {
       props.filterObj.handleChange(val)
     }
-    if(props.filterObj.codesMap){
-      let obj = {}
-      Object.entries(props.filterObj.codesMap).forEach(item => {
-        obj[item[0]] = val[item[1]]
-      })
-      emits('updateModel', obj)
-    }
     emits('update:modelValue', val)
     emits('change', val)
+    setCodesMap(val)
   }
 })
 
@@ -42,7 +36,17 @@ const setPropData = () => {
   }
   return Object.assign(obj, useAttrs())
 }
-
+const setCodesMap = val => {
+  if(!props.filterObj.codesMap) return
+  let obj = {}
+  Object.entries(props.filterObj.codesMap).forEach(item => {
+    obj[item[0]] = val[item[1]]
+  })
+  emits('updateModel', obj)
+}
+onMounted(() => {
+  if(props.modelValue) setCodesMap(props.modelValue)
+})
 </script>
 
 <template>

@@ -44,15 +44,18 @@ const formDataList = reactive<any>([
   },
   {
     label: '性别',
-    code: 'sex',
-    type: 'virtualizedSelect',
+    code: 'sex2',
+    // type: 'virtualizedSelect',
+    type: 'select',
     // multiple: true,
     options: [
       { name: '男', id: 1 },
       { name: '女', id: 0 }
     ],
     value: '',
-    clearable: false
+    clearable: false,
+    valueKey: 'id',
+    codesMap: { sexC: 'name',sexV: 'id' }
   },
   {
     label: '地址',
@@ -91,7 +94,10 @@ const dataSource = reactive({
     label: '操作',
     width: 220,
     list: [
-      { label: '编辑', type: 'primary', handleClick: row => edit(row) },
+      { label: '编辑', type: 'primary', handleClick: row => {
+        row.sex2 = { id: row.sex }
+        edit(row)} 
+      },
       { label: '删除', type: 'danger', handleClick: row => deleteData(deletePeopleApi,row) },
       { label: '自定义内容', type: 'template' }
     ]
