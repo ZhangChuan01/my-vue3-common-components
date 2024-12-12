@@ -192,6 +192,7 @@ defineExpose({
     .el-form-item {
       width: calc(50% - 12px);
       margin-bottom: 24px;
+      overflow: hidden;
     }
     .el-form-item__content {
       align-items: baseline !important;

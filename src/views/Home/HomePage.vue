@@ -40,6 +40,7 @@ const formDataList = reactive<any>([
     code: 'age',
     type: 'text',
     limitIntNumber: true,
+    // reg: new RegExp(/\W/g),
     value: ''
   },
   {
