@@ -6,7 +6,7 @@ const emits = defineEmits<{
 
 const props = withDefaults(defineProps<{
   filterObj: ColorPicker
-  modelValue: string | number
+  modelValue: any
 }>(), {
   modelValue: ''
 })

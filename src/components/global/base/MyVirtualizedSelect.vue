@@ -8,7 +8,7 @@ const emits = defineEmits<{
 
 const props = withDefaults(defineProps<{
   filterObj: Select
-  modelValue: string | number | boolean
+  modelValue: string | number | boolean | any
 }>(), {
   modelValue: ''
 })

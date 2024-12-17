@@ -5,9 +5,9 @@ export interface Title {
 export interface Base {
   label?: string
   labelWidth?: string | number
-  code?: string
-  value?: string | number | boolean | { [key: string]: string | number | boolean } | null | string[]
   type?: string
+  code?: string
+  value?: string | number | boolean | { [key: string]: string | number | boolean } | null | string[] | any
   clearable?: boolean
   showPassword?: boolean
   placeholder?: string

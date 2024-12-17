@@ -6,7 +6,7 @@ const emits = defineEmits<{
 
 const props = withDefaults(defineProps<{
   filterObj: Switch
-  modelValue: string | number
+  modelValue: any
 }>(), {
   modelValue: ''
 })

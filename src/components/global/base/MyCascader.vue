@@ -5,7 +5,7 @@ const emits = defineEmits<{
 }>()
 
 const props = defineProps<{
-  modelValue: string
+  modelValue: any
   filterObj: Cascader
 }>()
 
