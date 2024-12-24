@@ -1,6 +1,6 @@
 {
   "name": "my-vue3-common-components",
-  "version": "0.3.9",
+  "version": "0.4.1",
   "type": "module",
   "types": "dist/components.d.ts",
   "description": "my-vue3-common-components",

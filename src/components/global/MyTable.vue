@@ -193,7 +193,7 @@ defineExpose({
           </template>
         </el-table-column>
         <el-table-column
-          v-else-if="col.type === 'intNum'"
+          v-else-if="col.type === 'intNum' || col.type === 'weight'"
           :prop="col.code"
           :label="col.label"
           :width="col.width || ''"
