@@ -1,5 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang='ts'>
+import { v4 as uuidv4 } from 'uuid'
 import type { FormRules } from 'element-plus'
 import { GlobalComponents } from 'vue'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
@@ -85,7 +86,7 @@ const formSubmit = async () => {
     }
   }
 }
-const domId = window.$uuid()
+const domId = uuidv4()
 watch(() => props.dialogVisible,async () => {
   if (props.dialogVisible && props.formHeight) {
     await nextTick()

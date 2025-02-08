@@ -8,6 +8,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'  //便于使用组件名
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
+import { fileURLToPath } from 'node:url'
 import autoprefixer from 'autoprefixer'
 
 const name = 'vue3通用组件'
@@ -73,11 +74,12 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部依赖项不应捆绑到你的库中
-      external: [ 'vue' ],
+      external: [ 'vue', 'element-plus', '@element-plus/icons-vue', /element-plus/ ],
       output: {
         // 提供全局变量以便在 UMD 构建中可以被外部依赖项使用
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
+          'element-plus': 'ElementPlus'
         }
       }
     },
