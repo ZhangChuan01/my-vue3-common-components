@@ -21,8 +21,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite-plugin-svg-icons/client","node"]
+    "types": ["vite-plugin-svg-icons/client","node","vite/client"]
   },
-  "include": ["src/components.ts"],
+  "include": ["./src/**/*.vue","./src/**/*.ts","./src/components.ts","./auto-imports.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

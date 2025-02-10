@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import type { FormRules } from 'element-plus'
 import { GlobalComponents } from 'vue'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
+import { ElMessage } from 'element-plus'
 
 const emits = defineEmits<{
   (e:'update:dialogVisible', dialogVisible: boolean): void
@@ -20,8 +21,8 @@ const props = withDefaults(defineProps<{
   width?: string | number
   labelWidth?: string | number
   formHeight?: string | number
-  addFun?: (data: any) => Promise<Api.Result> | undefined
-  editFun: (data?: any) => Promise<Api.Result> | undefined
+  addFun?: (data: any) => Promise<any> | undefined
+  editFun: (data?: any) => Promise<any> | undefined
   dialogVisible?: boolean
   currentRowValue?: any
   fixedParams?: {[key: string]: any} | undefined
@@ -79,7 +80,7 @@ const formSubmit = async () => {
     }
     console.log('res', res)
     if (res.code !== -1) {
-      window.$message.success(props.operate === 'add' ? '新建成功' : '编辑成功')
+      ElMessage.success(props.operate === 'add' ? '新建成功' : '编辑成功')
       myDialogForm.value?.reset()
       dialogShow.value = false
       emits('success', finallyParams)
