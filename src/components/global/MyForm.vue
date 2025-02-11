@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
-import { InitConfig } from './index'
+import { InitConfig } from '../../index'
 
 const props = withDefaults(defineProps<{
   formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]

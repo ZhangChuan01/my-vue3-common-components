@@ -15,7 +15,7 @@ import 'element-plus/dist/index.css'
 import './mock'
 
 // 全局组件
-import components from '@/components/global/index'
+import components from '@/index'
 
 import App from './App.vue'
 

@@ -11,13 +11,13 @@ export default {
     if(options) {
       app.provide('initConfig', options)
     }
-    const baseModules = import.meta.glob('./base/*.vue')
+    const baseModules = import.meta.glob('./components/global/base/*.vue')
     for (const path in baseModules) {
       const result: Array<any> = path.match(/.*\/(.+).vue$/)!
       const modulesConent: any = baseModules[path]
       app.component(result[1], defineAsyncComponent(modulesConent))
     }
-    const requireModules = import.meta.glob('./*.vue')
+    const requireModules = import.meta.glob('./components/global/*.vue')
     for (const path in requireModules) {
       const result: Array<any> = path.match(/.*\/(.+).vue$/)!
       const modulesConent: any = requireModules[path]

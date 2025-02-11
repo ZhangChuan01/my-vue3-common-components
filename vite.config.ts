@@ -66,15 +66,16 @@ export default defineConfig({
   build: {
     lib: {
       // src/indext.ts 是我们导出组件的地方
-      entry: resolve(__dirname, 'src/components/global/index.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'MyVue3CommonComponents',
+      formats: [ 'es', 'umd' ],
       // 运行构建时输出文件的名称
       fileName: 'index'
     },
     rollupOptions: {
       // 确保外部依赖项不应捆绑到你的库中
       external: [ 'vue', 'element-plus', '@element-plus/icons-vue', /element-plus/ ],
-      input: 'src/components/global/index.ts',
+      input: 'src/index.ts',
       output: {
         // 提供全局变量以便在 UMD 构建中可以被外部依赖项使用
         globals: {
