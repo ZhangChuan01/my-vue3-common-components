@@ -90,12 +90,31 @@ const reset = () => {
   ruleForm.value?.clearValidate()
   ruleForm.value?.resetFields()
 }
-
+const validate = (callback?: () => void) => {
+  return ruleForm.value?.validate(callback)
+}
+const validateField = (code: string) => {
+  return ruleForm.value?.validateField(code)
+}
+const resetFields = () => {
+  reset()
+}
+const scrollToField = (code: string) => {
+  ruleForm.value?.scrollToField(code)
+}
+const clearValidate = (code: string) => {
+  ruleForm.value?.clearValidate(code)
+}
 defineExpose({
   submit,
   reset,
   setValue,
-  getValue
+  getValue,
+  validate,
+  validateField,
+  resetFields,
+  scrollToField,
+  clearValidate
 })
 </script>
 

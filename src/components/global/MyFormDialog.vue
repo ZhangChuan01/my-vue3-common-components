@@ -106,10 +106,29 @@ const setValue = (data: { [key: string]: any }) => {
 const getValue = (code: string) => {
   return myDialogForm.value?.getValue(code)
 }
-
+const validate = (callback?: () => void) => {
+  return myDialogForm.value?.validate(callback)
+}
+const validateField = (code: string) => {
+  return myDialogForm.value?.validateField(code)
+}
+const resetFields = () => {
+  myDialogForm.value?.reset()
+}
+const scrollToField = (code: string) => {
+  myDialogForm.value?.scrollToField(code)
+}
+const clearValidate = (code: string) => {
+  myDialogForm.value?.clearValidate(code)
+}
 defineExpose({
   getValue,
-  setValue
+  setValue,
+  validate,
+  validateField,
+  resetFields,
+  scrollToField,
+  clearValidate
 })
 </script>
 

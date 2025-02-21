@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import useTabelHook from '@/hooks/useTableHook'
+import { GlobalComponents } from 'vue'
 import { getPeopleListApi,addPeopleApi,editPeopleApi,deletePeopleApi } from '@/api/test'
 
 const filters = reactive([
@@ -27,7 +28,7 @@ const filters = reactive([
 ])
 
 let filterRes = ref<any>({})
-
+const formRef = ref<InstanceType<GlobalComponents['MyFormDialog']>>()
 const formDataList = reactive<any>([
   {
     label: '姓名',
@@ -62,6 +63,7 @@ const formDataList = reactive<any>([
     label: '地址',
     code: 'address',
     type: 'textarea',
+    // limitNumber: true,
     value: ''
   }
 ])
@@ -70,9 +72,27 @@ const rules = {
   name: [
     { required: true, message: '请输入人员名称', trigger: 'blur' }
   ],
+  // age: [
+  //   { validator: (rule, value, callback) => {
+  //     console.log('age',value,formRef.value?.getValue('address'))
+  //     if(formRef.value?.getValue('address') !== '' && Number(formRef.value?.getValue('address')) < Number(value)) {
+  //       callback(new Error('最小值不能大于最大值'))
+  //     }
+  //   }, trigger: 'blur' }
+  // ],
   sex: [
     { required: true, message: '请选择性别', trigger: 'change' }
   ]
+  // address: [
+  //   { validator: (rule, value, callback) => {
+  //     console.log('address',value,formRef.value?.getValue('age'))
+  //     if(formRef.value?.getValue('age') !== '' && Number(formRef.value?.getValue('age')) > Number(value)) {
+  //       callback(new Error('最大值不能小于最小值'))
+  //     }else{
+  //       formRef.value?.clearValidate('age')
+  //     }
+  //   }, trigger: 'blur' }
+  // ]
 }
 
 const { mytable, dialogVisible, operate, rowValue, create, edit, resetForm, deleteData } = useTabelHook(formDataList)
@@ -145,6 +165,7 @@ const rowClick = (row: any) => {
       </template>
     </my-table>
     <my-form-dialog
+      ref="formRef"
       v-model:dialog-visible="dialogVisible"
       title="人员"
       :operate="operate"
