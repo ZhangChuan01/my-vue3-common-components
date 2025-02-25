@@ -235,7 +235,14 @@ defineExpose({
           :prop="col.code"
           v-bind="col"
           :width="col.width || ''"
-        />
+        >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot :name="col.filterSlot" />
+          </template>
+        </el-table-column>
       </template>
       <el-table-column
         v-if="props.dataSource.operate"

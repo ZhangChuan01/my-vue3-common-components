@@ -154,6 +154,9 @@ const rowClick = (row: any) => {
       <template #sex="scope">
         {{ scope.row.sex === 1 ? '男' : '女' }}
       </template>
+      <template #sexFilter>
+        测试筛选
+      </template>
       <template #自定义内容>
         <el-button
           type="primary"
