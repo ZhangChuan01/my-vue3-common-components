@@ -29,6 +29,8 @@ const props = withDefaults(defineProps<{
       width?: string | number
       showOverflowTooltip?: boolean
       type?: string  // template,datetime,date,time,num
+      headerSlot?: string
+      filterSlot?: string
     }[]
     operate?: {
       label?: string
@@ -42,6 +44,8 @@ const props = withDefaults(defineProps<{
         permission?: string
         handleClick?: (row: any) => void
       }[]
+      headerSlot?: string
+      filterSlot?: string
     }
   }
   fixedParams?: {[key: string]: any} | null
@@ -162,9 +166,15 @@ defineExpose({
         <el-table-column
           v-if="col.type === 'template'"
           :prop="col.code"
-          :label="col.label"
+          v-bind="col"
           :width="col.width || ''"
         >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot :name="col.filterSlot" />
+          </template>
           <template #default="scope">
             <slot
               :name="col.code"
@@ -175,9 +185,15 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'datetime' || col.type === 'date' || col.type === 'time'"
           :prop="col.code"
-          :label="col.label"
           :width="col.width || (col.type === 'datetime' ? '180px' : '120px')"
+          v-bind="col"
         >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot :name="col.filterSlot" />
+          </template>
           <template #default="scope">
             {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
           </template>
@@ -185,9 +201,15 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'num'"
           :prop="col.code"
-          :label="col.label"
+          v-bind="col"
           :width="col.width || ''"
         >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot :name="col.filterSlot" />
+          </template>
           <template #default="scope">
             {{ takeMoreThan(scope.row[col.code || '']) }}
           </template>
@@ -195,9 +217,15 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'intNum' || col.type === 'weight'"
           :prop="col.code"
-          :label="col.label"
+          v-bind="col"
           :width="col.width || ''"
         >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot :name="col.filterSlot" />
+          </template>
           <template #default="scope">
             {{ Math.floor(scope.row[col.code]) || '' }}
           </template>
@@ -205,9 +233,8 @@ defineExpose({
         <el-table-column
           v-else
           :prop="col.code"
-          :label="col.label"
+          v-bind="col"
           :width="col.width || ''"
-          :show-overflow-tooltip="col.showOverflowTooltip || false"
         />
       </template>
       <el-table-column
@@ -216,6 +243,12 @@ defineExpose({
         :width="props.dataSource.operate.width || '120px'"
         :fixed="props.dataSource.operate.fixed || 'right'"
       >
+        <template #header>
+          <slot :name="props.dataSource.operate.headerSlot" />
+        </template>
+        <template #filter-icon>
+          <slot :name="props.dataSource.operate.filterSlot" />
+        </template>
         <template #default="scope">
           <div class="table-btn-wrapper">
             <template
