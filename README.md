@@ -28,6 +28,9 @@ my-vue3-common-components
     在script中获取组件类型及提示可参考如下操作    
     ```import { GlobalComponents } from 'vue'```     
     ```const formRef = ref<InstanceType<GlobalComponents['MyFormDialog']>>()```     
+    ```const myInput = ref<InstanceType<GlobalComponents['MyInput']>>()```     
+    获取基础类型     
+    ```import BaseType from 'my-vue3-common-components/dist/baseType'```  
 4. 其他  
     table组件中有v-has指令，用于按钮权限判断，根据实际业务自行实现或者复制本人源码中此指令代码    
     组件搭配本人开发的hooks使用将更加快捷方便    

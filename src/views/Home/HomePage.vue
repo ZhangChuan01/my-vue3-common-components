@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import useTabelHook from '@/hooks/useTableHook'
 import { GlobalComponents } from 'vue'
+import BaseType from '@/baseType'
 import { getPeopleListApi,addPeopleApi,editPeopleApi,deletePeopleApi } from '@/api/test'
 
 const filters = reactive([
@@ -29,7 +30,7 @@ const filters = reactive([
 
 let filterRes = ref<any>({})
 const formRef = ref<InstanceType<GlobalComponents['MyFormDialog']>>()
-const formDataList = reactive<any>([
+const formDataList = reactive<(BaseType.Input | BaseType.Select)[]>([
   {
     label: '姓名',
     code: 'name',
