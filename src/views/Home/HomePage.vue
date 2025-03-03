@@ -108,7 +108,7 @@ const dataSource = reactive({
   cols: [
     { code: 'name', label: '姓名' },
     { code: 'age', label: '年龄',type: 'num' },
-    { code: 'sex', label: '性别', type: 'template' },
+    { code: 'sex', label: '性别', type: 'template',filters: [ { text: '男',value: 1 },{ text: '女',value: 0 } ] },
     { code: 'address', label: '地址',width: 300 },
     { code: 'createTime', label: '创建时间', type: 'datetime' }
   ],
@@ -154,9 +154,6 @@ const rowClick = (row: any) => {
     >
       <template #sex="scope">
         {{ scope.row.sex === 1 ? '男' : '女' }}
-      </template>
-      <template #sexFilter>
-        测试筛选
       </template>
       <template #自定义内容>
         <el-button

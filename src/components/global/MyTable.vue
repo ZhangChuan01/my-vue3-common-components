@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import moment from 'moment'
-
+import FilterSvg from '../assets/FilterSvg.vue'
 // 时间格式
 function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
   if (!val) return ''
@@ -129,6 +129,16 @@ const refresh = (pagenum?: number) => {
 const getSelectionRows = () => {
   return props.needSelection ? tableComponent.value.getSelectionRows() : ''
 }
+const handleBindObj = (data: any) => {
+  if(data.filters){
+    if(!data.filterMethod){
+      data.filterMethod = (value,row,column) => {
+        return row[column['property']] === value
+      }
+    }
+  }
+  return data
+}
 defineExpose({
   handleCurrentChange,
   refresh,
@@ -166,14 +176,18 @@ defineExpose({
         <el-table-column
           v-if="col.type === 'template'"
           :prop="col.code"
-          v-bind="col"
+          v-bind="handleBindObj(col)"
           :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
           </template>
           <template #filter-icon>
-            <slot :name="col.filterSlot" />
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
           </template>
           <template #default="scope">
             <slot
@@ -192,7 +206,11 @@ defineExpose({
             <slot :name="col.headerSlot" />
           </template>
           <template #filter-icon>
-            <slot :name="col.filterSlot" />
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
           </template>
           <template #default="scope">
             {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
@@ -208,7 +226,11 @@ defineExpose({
             <slot :name="col.headerSlot" />
           </template>
           <template #filter-icon>
-            <slot :name="col.filterSlot" />
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
           </template>
           <template #default="scope">
             {{ takeMoreThan(scope.row[col.code || '']) }}
@@ -224,7 +246,11 @@ defineExpose({
             <slot :name="col.headerSlot" />
           </template>
           <template #filter-icon>
-            <slot :name="col.filterSlot" />
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
           </template>
           <template #default="scope">
             {{ Math.floor(scope.row[col.code]) || '' }}
@@ -240,7 +266,11 @@ defineExpose({
             <slot :name="col.headerSlot" />
           </template>
           <template #filter-icon>
-            <slot :name="col.filterSlot" />
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
           </template>
         </el-table-column>
       </template>
