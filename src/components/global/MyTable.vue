@@ -200,7 +200,7 @@ defineExpose({
           v-else-if="col.type === 'datetime' || col.type === 'date' || col.type === 'time'"
           :prop="col.code"
           :width="col.width || (col.type === 'datetime' ? '180px' : '120px')"
-          v-bind="col"
+          v-bind="handleBindObj(col)"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -219,7 +219,7 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'num'"
           :prop="col.code"
-          v-bind="col"
+          v-bind="handleBindObj(col)"
           :width="col.width || ''"
         >
           <template #header>
@@ -239,7 +239,7 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'intNum' || col.type === 'weight'"
           :prop="col.code"
-          v-bind="col"
+          v-bind="handleBindObj(col)"
           :width="col.width || ''"
         >
           <template #header>
@@ -259,7 +259,7 @@ defineExpose({
         <el-table-column
           v-else
           :prop="col.code"
-          v-bind="col"
+          v-bind="handleBindObj(col)"
           :width="col.width || ''"
         >
           <template #header>
@@ -279,12 +279,17 @@ defineExpose({
         :label="props.dataSource.operate.label || '操作'"
         :width="props.dataSource.operate.width || '120px'"
         :fixed="props.dataSource.operate.fixed || 'right'"
+        v-bind="handleBindObj(props.dataSource.operate)"
       >
         <template #header>
           <slot :name="props.dataSource.operate.headerSlot" />
         </template>
         <template #filter-icon>
-          <slot :name="props.dataSource.operate.filterSlot" />
+          <slot
+            v-if="props.dataSource.operate.filterSlot"
+            :name="props.dataSource.operate.filterSlot"
+          />
+          <FilterSvg v-else />
         </template>
         <template #default="scope">
           <div class="table-btn-wrapper">
