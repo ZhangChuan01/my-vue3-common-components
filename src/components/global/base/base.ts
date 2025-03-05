@@ -12,8 +12,9 @@ export interface Base {
   showPassword?: boolean
   placeholder?: string
   style?: { [key: string]: string | number }
-  handleChange?: (val: string | number | boolean, oldVal?: string | number | boolean) => void
+  handleChange?: (val: string | number | boolean | string[] | number[], oldVal?: string | number | boolean | string[] | number[]) => void
   disabled?: boolean
+  [key: string]: any
 }
 /**
  * @property {limitNumber} boolean 是否限制为数字
@@ -61,4 +62,22 @@ export interface Switch extends Base {
 export interface ColorPicker extends Base {
 }
 export interface Cascader extends Base {
+}
+/**
+ * @property {options} Array 选项
+ * @property {props} Object 选项的属性
+ * @property {singleSelect} boolean 是否单选
+ * @property {circleIcon} boolean 选择框是否为圆形
+ */
+export interface CheckGroup extends Base {
+  options: {
+    label?: string
+    value?: string | number
+  }[]
+  props?: { 
+    label: string
+    value: string
+  }
+  singleSelect?: boolean
+  circleIcon?: boolean
 }

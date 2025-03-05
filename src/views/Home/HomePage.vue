@@ -30,7 +30,7 @@ const filters = reactive([
 
 let filterRes = ref<any>({})
 const formRef = ref<InstanceType<GlobalComponents['MyFormDialog']>>()
-const formDataList = reactive<(BaseType.Input | BaseType.Select)[]>([
+const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.CheckGroup)[]>([
   {
     label: '姓名',
     code: 'name',
@@ -43,6 +43,18 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select)[]>([
     type: 'text',
     limitIntNumber: true,
     // reg: new RegExp(/\W/g),
+    value: ''
+  },
+  {
+    label: '测试checkbox',
+    code: 'checkbox',
+    type: 'check-group',
+    circleIcon: true,
+    // singleSelect: true,
+    options: [
+      { label: '男', value: 1 },
+      { label: '女', value: 0 }
+    ],
     value: ''
   },
   {

@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
-import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
+import { Input, Select, Date,Switch,ColorPicker,Cascader,CheckGroup } from './base/base'
 import { InitConfig } from '../../index'
 
 const props = withDefaults(defineProps<{
-  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
+  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader | CheckGroup)[]
   rules?: FormRules | ''
   labelWidth?: string | number
   col?: number | undefined
@@ -153,7 +153,7 @@ defineExpose({
             @update-model="changeModel"
           />
           <MyVirtualizedSelect
-            v-else-if="formData.type === 'virtualizedSelect'"
+            v-else-if="formData.type === 'virtualizedSelect' || formData.type === 'virtualized-select'"
             v-model="formModel[(formData.code as string)]"
             :filter-obj="(formData as Select)"
             @update-model="changeModel"
@@ -179,9 +179,14 @@ defineExpose({
             :filter-obj="formData"
           />
           <MyColorPicker
-            v-else-if="formData.type === 'color-picker'"
+            v-else-if="formData.type === 'colorPicker' || formData.type === 'color-picker'"
             v-model="formModel[(formData.code as string)]"
             :filter-obj="formData"
+          />
+          <MyCheckGroup
+            v-else-if="formData.type === 'checkGroup' || formData.type === 'check-group'"
+            v-model="formModel[(formData.code as string)]"
+            :filter-obj="formData as CheckGroup"
           />
         </el-form-item>
       </template>
