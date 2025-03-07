@@ -160,6 +160,7 @@ const rowClick = (row: any) => {
     <my-table
       ref="mytable"
       :filters="filterRes"
+      :fun-args="['2222',{x: 10}]"
       :data-fun="getPeopleListApi"
       :data-source="dataSource"
       @row-click="rowClick"

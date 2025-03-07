@@ -21,8 +21,9 @@ const props = withDefaults(defineProps<{
   width?: string | number
   labelWidth?: string | number
   formHeight?: string | number
-  addFun?: (data: any) => Promise<any> | undefined
-  editFun: (data?: any) => Promise<any> | undefined
+  addFun?: (data: any,...args: any) => Promise<any> | undefined
+  editFun?: (data: any,...args: any) => Promise<any> | undefined
+  funArgs?: Array<any>
   dialogVisible?: boolean
   currentRowValue?: any
   fixedParams?: {[key: string]: any} | undefined
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<{
   operate: 'add',
   addFun: undefined,
   editFun: undefined,
+  funArgs: undefined,
   rules: undefined,
   width: '700px',
   labelWidth: 'auto',
@@ -74,9 +76,9 @@ const formSubmit = async () => {
     let finallyParams = props.fixedParams ? Object.assign({}, props.fixedParams, formRes) : formRes
     console.log('finallyParams', finallyParams,props.operate,props.addFun)
     if (props.operate === 'add' && props.addFun) {
-      res = await props.addFun(finallyParams)
+      res = props.funArgs ? await props.addFun(finallyParams,...props.funArgs) : await props.addFun(finallyParams)
     } else if (props.operate === 'edit' && props.editFun) {
-      res = await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
+      res = props.funArgs ? await props.editFun(Object.assign({}, props.currentRowValue, finallyParams,...props.funArgs)) : await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
     }
     console.log('res', res)
     if (res.code !== -1) {

@@ -16,8 +16,9 @@ function takeMoreThan(value: number) {
   return Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))
 }
 const props = withDefaults(defineProps<{
-  dataFun?: null | ((params?: any) => Promise<any>)
+  dataFun?: null | ((params?: any,...args: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
+  funArgs?: Array<any>
   needIndex?: boolean
   needPage?: boolean
   needSelection?: boolean
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   dataFun: null,
   filters: null,
+  funArgs: undefined,
   needIndex: false,
   needSelection: false,
   needPage: true,
@@ -74,7 +76,7 @@ const indexMethod = (index: number) => {
 
 const getData = async () => {
   await nextTick()
-  let params:unknown = {}
+  let params:any = {}
   if (props.needPage) {
     params = {
       SkipCount: (pageData.currentPage - 1) * pageData.pageSize,
@@ -87,8 +89,13 @@ const getData = async () => {
   if(props.fixedParams){
     params = Object.assign({}, params, props.fixedParams)
   }
-  const res = await props.dataFun!(params)
-  // console.log('tableData', res)
+  // console.log('funArgs', props.funArgs)
+  let res:any = null
+  if(Object.keys(params).length === 0){
+    res = props.funArgs ? await props.dataFun!(...props.funArgs) : await props.dataFun!()
+  }else {
+    res = props.funArgs ? await props.dataFun!(params,...props.funArgs) : await props.dataFun!(params)
+  }
   if (res.code !== -1) {
     tableData.value = props.needPage ? (res?.items || res?.item || res?.result?.items || []) : (res?.items || res || res?.result?.items || [])
     if(props.needPage){
