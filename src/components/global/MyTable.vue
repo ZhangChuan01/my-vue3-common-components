@@ -260,7 +260,7 @@ defineExpose({
             <FilterSvg v-else />
           </template>
           <template #default="scope">
-            {{ Math.floor(scope.row[col.code]) || '' }}
+            {{ Math.floor(scope.row[col.code]) || 0 }}
           </template>
         </el-table-column>
         <el-table-column
