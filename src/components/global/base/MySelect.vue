@@ -39,8 +39,10 @@ const setPropData = () => {
 const setCodesMap = val => {
   if(!props.filterObj.codesMap) return
   let obj = {}
+  const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
+  if(!target) return
   Object.entries(props.filterObj.codesMap).forEach(item => {
-    obj[item[0]] = val[item[1]]
+    obj[item[0]] = target[item[1]]
   })
   emits('updateModel', obj)
 }

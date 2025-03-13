@@ -24,6 +24,8 @@ const props = withDefaults(defineProps<{
   addFun?: (data: any,...args: any) => Promise<any> | undefined
   editFun?: (data: any,...args: any) => Promise<any> | undefined
   funArgs?: Array<any>
+  funArgsAdd?: Array<any>
+  funArgsEdit?: Array<any>
   dialogVisible?: boolean
   currentRowValue?: any
   fixedParams?: {[key: string]: any} | undefined
@@ -37,6 +39,8 @@ const props = withDefaults(defineProps<{
   addFun: undefined,
   editFun: undefined,
   funArgs: undefined,
+  funArgsAdd: undefined,
+  funArgsEdit: undefined,
   rules: undefined,
   width: '700px',
   labelWidth: 'auto',
@@ -76,9 +80,26 @@ const formSubmit = async () => {
     let finallyParams = props.fixedParams ? Object.assign({}, props.fixedParams, formRes) : formRes
     console.log('finallyParams', finallyParams,props.operate,props.addFun)
     if (props.operate === 'add' && props.addFun) {
-      res = props.funArgs ? await props.addFun(finallyParams,...props.funArgs) : await props.addFun(finallyParams)
+      const finaFunArgs:any = []
+      if (props.funArgsAdd) {
+        finaFunArgs.push(...props.funArgsAdd)
+      }else {
+        if(props.funArgs){
+          finaFunArgs.push(...props.funArgs)
+        }
+      }
+      res = finaFunArgs.length ? await props.addFun(finallyParams,...finaFunArgs) : await props.addFun(finallyParams)
     } else if (props.operate === 'edit' && props.editFun) {
-      res = props.funArgs ? await props.editFun(Object.assign({}, props.currentRowValue, finallyParams,...props.funArgs)) : await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
+      const finaFunArgs:any = []
+      if (props.funArgsEdit) {
+        finaFunArgs.push(...props.funArgsEdit)
+      }else{
+        if(props.funArgs){
+          finaFunArgs.push(...props.funArgs)
+        }
+      }
+      console.log('edit', finaFunArgs)
+      res = finaFunArgs.length ? await props.editFun(Object.assign({}, props.currentRowValue, finallyParams),...finaFunArgs) : await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
     }
     console.log('res', res)
     if (res.code !== -1) {

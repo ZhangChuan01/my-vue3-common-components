@@ -20,7 +20,8 @@ export function addPeopleApi (data: Test.People) {
     data
   })
 }
-export function editPeopleApi(data: Test.People) {
+export function editPeopleApi(data: Test.People, arg1?: any, arg2?: any) {
+  console.log('editPeopleApi', data, 'arg1',arg1,'arg2',arg2)
   return request({
     url: '/api/people',
     method: 'put',
