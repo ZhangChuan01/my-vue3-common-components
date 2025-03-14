@@ -12,7 +12,7 @@ export interface Base {
   showPassword?: boolean
   placeholder?: string
   style?: { [key: string]: string | number }
-  handleChange?: (val: string | number | boolean | string[] | number[], oldVal?: string | number | boolean | string[] | number[]) => void
+  handleChange?: (val: any, oldVal?: any) => void
   disabled?: boolean
   [key: string]: any
 }
@@ -81,3 +81,5 @@ export interface CheckGroup extends Base {
   singleSelect?: boolean
   circleIcon?: boolean
 }
+
+export interface Readonly extends Base {}

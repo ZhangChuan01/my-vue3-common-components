@@ -188,6 +188,11 @@ defineExpose({
             v-model="formModel[(formData.code as string)]"
             :filter-obj="formData as CheckGroup"
           />
+          <MyReadOnly
+            v-else-if="formData.type === 'readOnly' || formData.type === 'read-only'"
+            v-model="formModel[(formData.code as string)]"
+            :filter-obj="formData as CheckGroup"
+          />
         </el-form-item>
       </template>
     </el-form>

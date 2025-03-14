@@ -38,6 +38,12 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     value: ''
   },
   {
+    label: '测试readOnly',
+    code: 'readOnly',
+    type: 'readOnly',
+    value: '只读文本'
+  },
+  {
     label: '年龄',
     code: 'age',
     type: 'text',
@@ -57,6 +63,7 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     ],
     value: ''
   },
+  
   {
     label: '性别',
     code: 'sex2',
@@ -180,6 +187,7 @@ const rowClick = (row: any) => {
     <my-form-dialog
       ref="formRef"
       v-model:dialog-visible="dialogVisible"
+      :col="2"
       title="人员"
       :operate="operate"
       :current-row-value="rowValue"
