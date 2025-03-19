@@ -63,7 +63,16 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     ],
     value: ''
   },
-  
+  {
+    label: '测试radio',
+    code: 'radio',
+    type: 'radio-group',
+    options: [
+      { label: '男', value: 1 },
+      { label: '女', value: 0 }
+    ],
+    value: ''
+  },
   {
     label: '性别',
     code: 'sex2',

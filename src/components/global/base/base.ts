@@ -81,5 +81,15 @@ export interface CheckGroup extends Base {
   singleSelect?: boolean
   circleIcon?: boolean
 }
+export interface RadioGroup extends Base {
+  options: {
+    label?: string
+    value?: string | number
+  }[]
+  props?: {
+    label: string
+    value: string
+  }
+}
 
 export interface Readonly extends Base {}

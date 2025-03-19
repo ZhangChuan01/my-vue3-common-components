@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
-import { Input, Select, Date,Switch,ColorPicker,Cascader,CheckGroup } from './base/base'
+import { Input, Select, Date,Switch,ColorPicker,Cascader,CheckGroup,RadioGroup } from './base/base'
 import { InitConfig } from '../../index'
 
 const props = withDefaults(defineProps<{
-  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader | CheckGroup)[]
+  formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader | CheckGroup | RadioGroup)[]
   rules?: FormRules | ''
   labelWidth?: string | number
   col?: number | undefined
@@ -186,12 +186,17 @@ defineExpose({
           <MyCheckGroup
             v-else-if="formData.type === 'checkGroup' || formData.type === 'check-group'"
             v-model="formModel[(formData.code as string)]"
-            :filter-obj="formData as CheckGroup"
+            :filter-obj="(formData as CheckGroup)"
+          />
+          <MyRadioGroup
+            v-else-if="formData.type === 'radioGroup' || formData.type === 'radio-group'"
+            v-model="formModel[(formData.code as string)]"
+            :filter-obj="(formData as RadioGroup)"
           />
           <MyReadOnly
             v-else-if="formData.type === 'readOnly' || formData.type === 'read-only'"
             v-model="formModel[(formData.code as string)]"
-            :filter-obj="formData as CheckGroup"
+            :filter-obj="formData"
           />
         </el-form-item>
       </template>
