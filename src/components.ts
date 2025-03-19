@@ -14,6 +14,7 @@ import MyTime from './components/global/base/MyTime.vue'
 import MySwitch from './components/global/base/MySwitch.vue'
 import MyColorPicker from './components/global/base/MyColorPicker.vue'
 import MyCheckGroup from './components/global/base/MyCheckGroup.vue'
+import MyRadioGroup from './components/global/base/MyRadioGroup.vue'
 import MyReadOnly from './components/global/base/MyReadOnly.vue'
 
 declare module 'vue'{
@@ -34,6 +35,7 @@ declare module 'vue'{
     MySwitch: typeof MySwitch
     MyColorPicker: typeof MyColorPicker
     MyCheckGroup: typeof MyCheckGroup
+    MyRadioGroup: typeof MyRadioGroup
     MyReadOnly: typeof MyReadOnly
   }
 }
