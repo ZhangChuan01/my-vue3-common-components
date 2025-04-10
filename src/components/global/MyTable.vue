@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
+import MySwitch from './base/MySwitch.vue'
 // 时间格式
 function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
   if (!val) return ''
@@ -32,6 +33,7 @@ const props = withDefaults(defineProps<{
       type?: string  // template,datetime,date,time,num
       headerSlot?: string
       filterSlot?: string
+      valueChange?: (val: any) => void
     }[]
     operate?: {
       label?: string
@@ -261,6 +263,31 @@ defineExpose({
           </template>
           <template #default="scope">
             {{ Math.floor(scope.row[col.code]) || 0 }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          v-else-if="col.type === 'switch'"
+          :prop="col.code"
+          v-bind="handleBindObj(col)"
+          :width="col.width || ''"
+        >
+          <template #header>
+            <slot :name="col.headerSlot" />
+          </template>
+          <template #filter-icon>
+            <slot
+              v-if="col.filterSlot"
+              :name="col.filterSlot"
+            />
+            <FilterSvg v-else />
+          </template>
+          <template #default="scope">
+            <MySwitch
+              v-model="scope.row[col.code]"
+              :filter-obj="{}"
+              v-bind="handleBindObj(col)"
+              @change="col.valueChange && col.valueChange(scope.row)"
+            />
           </template>
         </el-table-column>
         <el-table-column

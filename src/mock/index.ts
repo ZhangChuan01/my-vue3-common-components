@@ -23,7 +23,8 @@ const data: {list: Test.People[]} = Mock.mock({
       'age|1-100': 10,
       'sex|1': [ 0, 1 ],
       'address|1': '@county(true)',
-      'createTime|1': '@datetime("")'
+      'createTime|1': '@datetime("")',
+      'switch|1': [ true, false ]
     }
   ]
 })

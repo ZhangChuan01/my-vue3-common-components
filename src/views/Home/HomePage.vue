@@ -138,6 +138,7 @@ const dataSource = reactive({
     { code: 'age', label: '年龄',type: 'num' },
     { code: 'sex', label: '性别', type: 'template',filters: [ { text: '男',value: 1 },{ text: '女',value: 0 } ] },
     { code: 'address', label: '地址',width: 300 },
+    { code: 'switch', label: '状态',style: { '--el-switch-on-color': '#13ce66', '--el-switch-off-color': '#ff4949' },valueChange: (val: any) => console.log('val',val), type: 'switch' },
     { code: 'createTime', label: '创建时间', type: 'datetime' }
   ],
   operate: {
