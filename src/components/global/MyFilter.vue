@@ -3,12 +3,17 @@ import { Input, Select, Date } from './base/base'
 const props = withDefaults(defineProps<{
   filterList: (Input | Select | Date)[]
   needBtn?: boolean
+  confirmText?: string
+  resetText?: string
 }>(), {
-  needBtn: true
+  needBtn: true,
+  confirmText: '查询',
+  resetText: '重置'
 })
 
 const emits = defineEmits<{
   (e: 'search', filter: {[key: string]: unknown}): void
+  (e: 'reset'): void
 }>()
 
 const inputTypes = [ 'text', 'number' ]
@@ -35,6 +40,7 @@ const reset = () => {
   props.filterList.forEach(filter => {
     filter.value = ''
   })
+  emits('reset')
 }
 </script>
 
@@ -82,13 +88,13 @@ const reset = () => {
             type="default"
             @click="reset"
           >
-            重置
+            {{ props.resetText }}
           </el-button>
           <el-button
             type="primary"
             @click="search"
           >
-            查询
+            {{ props.confirmText }}
           </el-button>
         </div>
       </el-form-item>
