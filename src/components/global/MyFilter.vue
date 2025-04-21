@@ -7,8 +7,8 @@ const props = withDefaults(defineProps<{
   resetText?: string
 }>(), {
   needBtn: true,
-  confirmText: '查询',
-  resetText: '重置'
+  confirmText: window.$t('search'),
+  resetText: window.$t('reset')
 })
 
 const emits = defineEmits<{

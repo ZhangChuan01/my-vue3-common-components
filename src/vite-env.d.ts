@@ -12,6 +12,7 @@ interface Window {
   $router: any
   $uuid: any
   $utils: any
+  $t: any
 }
 
 interface HttpResult {

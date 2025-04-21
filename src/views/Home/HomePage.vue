@@ -6,6 +6,12 @@ import { getPeopleListApi,addPeopleApi,editPeopleApi,deletePeopleApi } from '@/a
 
 const filters = reactive([
   {
+    label: '测试时间组件',
+    code: 'time',
+    type: 'datetimerange',
+    value: ''
+  },
+  {
     label: '性别',
     code: 'sex',
     type: 'virtualizedSelect',
@@ -142,7 +148,6 @@ const dataSource = reactive({
     { code: 'createTime', label: '创建时间', type: 'datetime' }
   ],
   operate: {
-    label: '操作',
     width: 220,
     list: [
       { label: '编辑', type: 'primary', handleClick: row => {
@@ -176,6 +181,7 @@ const rowClick = (row: any) => {
     </div>
     <my-table
       ref="mytable"
+      :need-index="true"
       :filters="filterRes"
       :data-fun="getPeopleListApi"
       :data-source="dataSource"

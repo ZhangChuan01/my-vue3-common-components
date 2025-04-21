@@ -22,7 +22,7 @@ const bindValue = computed({
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `请选择${props.filterObj.label || ''}`
+  obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `${window.$t('select')}${props.filterObj.label || ''}`
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
   return Object.assign(obj, useAttrs())
 }

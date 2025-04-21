@@ -170,8 +170,8 @@ defineExpose({
         v-if="props.needIndex"
         type="index"
         :index="indexMethod"
-        label="序号"
-        width="60"
+        :label="$t('serialNumber')"
+        :width="$t('tableIndexWidth')"
       />
       <el-table-column
         v-if="props.needSelection"
@@ -310,7 +310,7 @@ defineExpose({
       </template>
       <el-table-column
         v-if="props.dataSource.operate"
-        :label="props.dataSource.operate.label || '操作'"
+        :label="props.dataSource.operate.label || $t('operate')"
         :width="props.dataSource.operate.width || '120px'"
         :fixed="props.dataSource.operate.fixed || 'right'"
         v-bind="handleBindObj(props.dataSource.operate)"

@@ -19,10 +19,11 @@ my-vue3-common-components
       .use(MyVue3CommonComponents)
       .mount('#app')
     ```      
-    全局配置(可选项)    
-    ```use(MyVue3CommonComponents,{ formCol: 1, formLabelPosition: 'right' })```     
+    全局配置及国际化(可选项)    
+    ```use(MyVue3CommonComponents,{ formCol: 1, formLabelPosition: 'right',locale: 'zh' })```     
     formCol 表单列数，可选项为1,2，默认值为2      
-    formLabelPosition  表单label对齐方式，参考element-plus的table组件，默认值为top
+    formLabelPosition  表单label对齐方式，参考element-plus的table组件，默认值为top      
+    locale  国际化参数，目前仅支持zh（中文），en（英文），默认zh
 3. TypeScript支持    
     在```tsconfig.json```中的```types```字段中添加```"my-vue3-common-components/dist/components"```即可获得组件及字段提示     
     在script中获取组件类型及提示可参考如下操作    

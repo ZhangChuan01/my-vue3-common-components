@@ -33,9 +33,9 @@ const setPropData = () => {
   <el-date-picker
     v-model="bindValue"
     v-bind="setPropData()"
-    placeholder="选择日期"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
+    :placeholder="$t('selectDate')"
+    :start-placeholder="$t('startTime')"
+    :end-placeholder="$t('endTime')"
   />
 </template>
 

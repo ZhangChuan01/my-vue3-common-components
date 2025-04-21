@@ -10,9 +10,11 @@ import '@/styles/index.scss'
 
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
 import { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css'
 import './mock'
+import i18n from './locals'
 
 // 全局组件
 import components from '@/index'
@@ -29,6 +31,7 @@ setupDirectives(app)
 app
   .use(router)
   .use(store)
-  .use(ElementPlus, { locale: zhCn })
-  .use(components,{ formCol: 1,formLabelPosition: 'right' })
+  .use(ElementPlus, { locale: en })
+  .use(components,{ formCol: 1,formLabelPosition: 'right',locale: 'zh' })
+  .use(i18n)
   .mount('#app')

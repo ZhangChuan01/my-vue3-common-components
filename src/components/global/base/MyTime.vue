@@ -32,7 +32,7 @@ const setPropData = () => {
   <el-time-picker
     v-model="bindValue"
     v-bind="setPropData()"
-    placeholder="选择时间"
+    :placeholder="$t('selectTime')"
   />
 </template>
 

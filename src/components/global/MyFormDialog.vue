@@ -103,7 +103,7 @@ const formSubmit = async () => {
     }
     console.log('res', res)
     if (res.code !== -1) {
-      ElMessage.success(props.operate === 'add' ? '新建成功' : '编辑成功')
+      ElMessage.success(props.operate === 'add' ? window.$t('newCreationSucceededL') : window.$t('editingSuccessfully'))
       myDialogForm.value?.reset()
       dialogShow.value = false
       emits('success', finallyParams)

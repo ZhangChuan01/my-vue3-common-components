@@ -7,9 +7,10 @@ export interface InitConfig {
 }
 export default {
   install (app: App, options?: InitConfig | undefined) {
-    // console.log('install', options)
+    console.log('install', options)
     if(options) {
       app.provide('initConfig', options)
+      app.config.globalProperties.$componentsConfig = options
     }
     const baseModules = import.meta.glob('./components/global/base/*.vue')
     for (const path in baseModules) {
