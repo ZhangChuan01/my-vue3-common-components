@@ -6,7 +6,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-
+declare module 'canvas-datagrid';
 interface Window {
   $message: any
   $router: any

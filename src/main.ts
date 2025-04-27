@@ -31,7 +31,7 @@ setupDirectives(app)
 app
   .use(router)
   .use(store)
-  .use(ElementPlus, { locale: en })
+  .use(ElementPlus, { locale: zhCn })
   .use(components,{ formCol: 1,formLabelPosition: 'right',locale: 'zh' })
   .use(i18n)
   .mount('#app')
