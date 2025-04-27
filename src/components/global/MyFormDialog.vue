@@ -5,7 +5,9 @@ import type { FormRules } from 'element-plus'
 import { GlobalComponents } from 'vue'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits<{
   (e:'update:dialogVisible', dialogVisible: boolean): void
   (e: 'cancel'): void
@@ -103,7 +105,7 @@ const formSubmit = async () => {
     }
     console.log('res', res)
     if (res.code !== -1) {
-      ElMessage.success(props.operate === 'add' ? window.$t('newCreationSucceededL') : window.$t('editingSuccessfully'))
+      ElMessage.success(props.operate === 'add' ? t('newCreationSucceededL') : t('editingSuccessfully'))
       myDialogForm.value?.reset()
       dialogShow.value = false
       emits('success', finallyParams)
