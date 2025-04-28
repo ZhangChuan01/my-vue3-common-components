@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<{
   needSelection?: boolean
   dataSource: {
     tableData?: any,
+    colWidthAverage?: boolean
     cols: {
       code: string
       label: string
@@ -51,7 +53,7 @@ const props = withDefaults(defineProps<{
       filterSlot?: string
     }
   }
-  fixedParams?: {[key: string]: any} | null
+  fixedParams?: {[key: string]: any} | null,
 }>(), {
   dataFun: null,
   filters: null,
@@ -146,6 +148,19 @@ const handleBindObj = (data: any) => {
       }
     }
   }
+  if(props.dataSource.colWidthAverage){
+    data.width = ''
+  }else{
+    if(data.width === undefined || data.width === null){
+      if(data.type === 'datetime'){
+        data.width = '180px'
+      }else if(data.type === 'date' || data.type === 'time'){
+        data.width = '120px'
+      }else if(data.list){
+        data.width = '120px'
+      }
+    }
+  }
   return data
 }
 defineExpose({
@@ -154,11 +169,12 @@ defineExpose({
   tableData,
   getSelectionRows
 })
-
 </script>
 
 <template>
-  <div class="my-table">
+  <div
+    class="my-table"
+  >
     <el-table
       ref="tableComponent"
       :data="tableData"
@@ -171,7 +187,6 @@ defineExpose({
         type="index"
         :index="indexMethod"
         :label="$t('serialNumber')"
-        :width="$t('tableIndexWidth')"
       />
       <el-table-column
         v-if="props.needSelection"
@@ -186,7 +201,6 @@ defineExpose({
           v-if="col.type === 'template'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
-          :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -208,7 +222,6 @@ defineExpose({
         <el-table-column
           v-else-if="col.type === 'datetime' || col.type === 'date' || col.type === 'time'"
           :prop="col.code"
-          :width="col.width || (col.type === 'datetime' ? '180px' : '120px')"
           v-bind="handleBindObj(col)"
         >
           <template #header>
@@ -229,7 +242,6 @@ defineExpose({
           v-else-if="col.type === 'num'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
-          :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -249,7 +261,6 @@ defineExpose({
           v-else-if="col.type === 'intNum' || col.type === 'weight'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
-          :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -269,7 +280,6 @@ defineExpose({
           v-else-if="col.type === 'switch'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
-          :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -294,7 +304,6 @@ defineExpose({
           v-else
           :prop="col.code"
           v-bind="handleBindObj(col)"
-          :width="col.width || ''"
         >
           <template #header>
             <slot :name="col.headerSlot" />
@@ -311,7 +320,6 @@ defineExpose({
       <el-table-column
         v-if="props.dataSource.operate"
         :label="props.dataSource.operate.label || $t('operate')"
-        :width="props.dataSource.operate.width || '120px'"
         :fixed="props.dataSource.operate.fixed || 'right'"
         v-bind="handleBindObj(props.dataSource.operate)"
       >

@@ -139,6 +139,7 @@ const search = (filters:any) => {
 }
 // 表格
 const dataSource = reactive({
+  colWidthAverage: true,
   cols: [
     { code: 'name', label: '姓名' },
     { code: 'age', label: '年龄',type: 'num' },
