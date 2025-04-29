@@ -2,6 +2,7 @@
 import GenerallyComponetDemoPage from '../components/GenerallyComponetDemoPage.vue'
 import PreviewFileDemoPage from '../components/PreviewFileDemoPage.vue'
 import LineAreaDemoPage from '../components/LineAreaDemoPage.vue'
+import NativeTableDemoPage from '../components/NativeTableDemoPage.vue'
 const activeName = ref('first')
 
 </script>
@@ -25,6 +26,12 @@ const activeName = ref('first')
       name="third"
     >
       <LineAreaDemoPage />
+    </el-tab-pane>
+    <el-tab-pane
+      label="原生table"
+      name="fourth"
+    >
+      <NativeTableDemoPage />
     </el-tab-pane>
   </el-tabs>
 </template>

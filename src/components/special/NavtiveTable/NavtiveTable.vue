@@ -6,13 +6,11 @@ interface Base{
   width?:number
   type?: string
 }
-interface DataSource {
-  thead: Base[][]
-  tbody: Base[][][]
-}
-
 const props = withDefaults(defineProps<{
-  dataSource: DataSource
+  dataSource: {
+    thead: Base[][]
+    tbody: Base[][]
+  }
 }>(),
 {
 })
@@ -20,71 +18,93 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-  <table>
-    <thead>
-      <tr
-        v-for="(thead,index) in props.dataSource.thead"
-        :key="index"
-      >
-        <th
-          v-for="(item,index2) in thead"
-          :key="index2"
-          :rowspan="item.rowspan"
-          :colspan="item.colspan"
-          :width="item.width"
-        >
-          {{ item.value }}
-        </th>
-      </tr>
-    </thead>
-    <!-- 表格数据行（示例） -->
-    <tbody>
-      <template
-        v-for="(tbody,index) in props.dataSource.tbody"
-        :key="index"
-      >
+  <div class="native-table">
+    <table>
+      <thead>
         <tr
-          v-for="(trData,index2) in tbody"
-          :key="index2"
+          v-for="(thead,index) in props.dataSource.thead"
+          :key="index"
         >
-          <td
-            v-for="(item,index3) in trData"
-            :key="index3"
+          <th
+            v-for="(item,index2) in thead"
+            :key="index2"
             :rowspan="item.rowspan"
             :colspan="item.colspan"
             :width="item.width"
           >
-            <span v-if="item.type === 'input'">
-              <input
-                v-model="item.value"
-                type="text"
-                class="no-border"
-              >
-            </span>
-            <span v-else>{{ item.value }}</span>
+            {{ item.value }}
+          </th>
+        </tr>
+      </thead>
+      <!-- 表格数据行（示例） -->
+      <tbody>
+        <tr
+          v-for="(trData,index) in props.dataSource.tbody"
+          :key="index"
+        >
+          <td
+            v-for="(tdData,index2) in trData"
+            :key="index2"
+            :rowspan="tdData.rowspan"
+            :colspan="tdData.colspan"
+            :width="tdData.width"
+          >
+            <input
+              v-model="tdData.value"
+              :disabled="tdData.type !== 'input'"
+              type="text"
+              class="no-border"
+            >
           </td>
         </tr>
-      </template>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped lang=scss>
+.native-table {
+  padding: 10px;
+}
 table {
   width: 100%;
+  border: 1px solid black;
   border-collapse: collapse;
+}
+thead {
+  border-bottom: 1px solid black;
+}
+tr {
+  border-bottom: 1px solid black;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 th,
 td {
   padding: 8px;
   color: #000;
   font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
   text-align: center;
   vertical-align: middle;
-  border: 1px solid black;
+  border-right: 1px solid black;
+  &:last-child {
+    border-right: none;
+  }
+  span {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    input {
+      width: 100%;
+    }
+  }
 }
 .no-border {
-  padding: 2px;
+  padding: 0;
+  color: #000;
   font-size: 14px;
   text-align: center;
   background: transparent;

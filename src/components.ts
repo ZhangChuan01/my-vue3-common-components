@@ -19,6 +19,7 @@ import MyReadOnly from './components/generally/base/MyReadOnly.vue'
 import SvgIcon from './components/special/SvgIcon/SvgIcon.vue'
 import PreviewFile from './components/special/PreviewFile/PreviewFile.vue'
 import LineArea from './components/special/LineArea/LineArea.vue'
+import NavtiveTable from './components/special/NavtiveTable/NavtiveTable.vue'
 
 declare module 'vue'{
   export interface GlobalComponents {
@@ -42,5 +43,6 @@ declare module 'vue'{
     SvgIcon: typeof SvgIcon
     PreviewFile: typeof PreviewFile
     LineArea: typeof LineArea
+    NavtiveTable: typeof NavtiveTable
   }
 }
