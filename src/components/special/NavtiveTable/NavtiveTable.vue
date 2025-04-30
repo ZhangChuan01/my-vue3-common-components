@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-interface Base{
+type TdData = {
   value?: any
   rowspan?: number
   colspan?: number
@@ -9,21 +9,23 @@ interface Base{
 }
 const props = withDefaults(defineProps<{
   dataSource: {
-    thead: Base[][]
-    tbody: Base[][]
+    thead: TdData[][]
+    tbody: TdData[][]
   }
 }>(),
 {
 })
 
 const getData = () => {
-  let obj = {}
+  let obj:any = {}
   props.dataSource.tbody.forEach(item => {
     item.forEach(item2 => {
-      if(item2.code && !obj[item2.code]) {
-        obj[item2.code] = [ item2.value ]
-      }else {
-        obj[item2.code].push(item2.value)
+      if(item2.code){
+        if(!obj[item2.code]) {
+          obj[item2.code] = [ item2.value ]
+        }else {
+          obj[item2.code].push(item2.value)
+        }
       }
     })
   })

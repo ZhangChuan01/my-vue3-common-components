@@ -1,17 +1,17 @@
 <script setup lang='ts'>
-interface DataInfo {
+type DataInfo = {
     name?: string
     percentage: number
     color?: string
   }
-interface Area {
+type Area = {
   range: {
     start: number
     end: number
   }
   data: DataInfo[]
 }
-interface Areas {
+type Areas = {
   maxY: number
   area: Area
 }
