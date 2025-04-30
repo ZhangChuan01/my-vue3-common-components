@@ -5,6 +5,7 @@ interface Base{
   colspan?: number
   width?:number
   type?: string
+  code?: string
 }
 const props = withDefaults(defineProps<{
   dataSource: {
@@ -15,6 +16,27 @@ const props = withDefaults(defineProps<{
 {
 })
 
+const getData = () => {
+  let obj = {}
+  props.dataSource.tbody.forEach(item => {
+    item.forEach(item2 => {
+      if(item2.code && !obj[item2.code]) {
+        obj[item2.code] = [ item2.value ]
+      }else {
+        obj[item2.code].push(item2.value)
+      }
+    })
+  })
+  Object.keys(obj).forEach(key => {
+    if(obj[key].length === 1) {
+      obj[key] = obj[key][0]
+    }
+  })
+  return obj
+}
+defineExpose({
+  getData
+})
 </script>
 
 <template>
