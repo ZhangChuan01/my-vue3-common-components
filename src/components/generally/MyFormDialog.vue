@@ -5,7 +5,9 @@ import type { FormRules } from 'element-plus'
 import { GlobalComponents } from 'vue'
 import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits<{
   (e:'update:dialogVisible', dialogVisible: boolean): void
   (e: 'cancel'): void
@@ -69,7 +71,7 @@ const formSubmit = async () => {
     if(!valid) return
   }
   const formRes = await myDialogForm.value?.submit()
-  console.log('valid1111', formRes)
+  // console.log('valid1111', formRes)
   let res:any
   
   if (formRes && formRes !== true) {
@@ -78,7 +80,7 @@ const formSubmit = async () => {
     }
     
     let finallyParams = props.fixedParams ? Object.assign({}, props.fixedParams, formRes) : formRes
-    console.log('finallyParams', finallyParams,props.operate,props.addFun)
+    // console.log('finallyParams', finallyParams,props.operate,props.addFun)
     if (props.operate === 'add' && props.addFun) {
       const finaFunArgs:any = []
       if (props.funArgsAdd) {
@@ -98,12 +100,12 @@ const formSubmit = async () => {
           finaFunArgs.push(...props.funArgs)
         }
       }
-      console.log('edit', finaFunArgs)
+      // console.log('edit', finaFunArgs)
       res = finaFunArgs.length ? await props.editFun(Object.assign({}, props.currentRowValue, finallyParams),...finaFunArgs) : await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
     }
-    console.log('res', res)
+    // console.log('res', res)
     if (res.code !== -1) {
-      ElMessage.success(props.operate === 'add' ? window.$t('newCreationSucceededL') : window.$t('editingSuccessfully'))
+      ElMessage.success(props.operate === 'add' ? t('newCreationSucceededL') : t('editingSuccessfully'))
       myDialogForm.value?.reset()
       dialogShow.value = false
       emits('success', finallyParams)

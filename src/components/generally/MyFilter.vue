@@ -1,5 +1,8 @@
 <script setup lang='ts'>
 import { Input, Select, Date } from './base/base'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = withDefaults(defineProps<{
   filterList: (Input | Select | Date)[]
   needBtn?: boolean
@@ -7,10 +10,9 @@ const props = withDefaults(defineProps<{
   resetText?: string
 }>(), {
   needBtn: true,
-  confirmText: window.$t('search'),
-  resetText: window.$t('reset')
+  confirmText: '',
+  resetText: ''
 })
-
 const emits = defineEmits<{
   (e: 'search', filter: {[key: string]: unknown}): void
   (e: 'reset'): void
@@ -42,6 +44,9 @@ const reset = () => {
   })
   emits('reset')
 }
+onMounted(() => {
+  
+})
 </script>
 
 <template>
@@ -88,13 +93,13 @@ const reset = () => {
             type="default"
             @click="reset"
           >
-            {{ props.resetText }}
+            {{ props.resetText || t('reset') }}
           </el-button>
           <el-button
             type="primary"
             @click="search"
           >
-            {{ props.confirmText }}
+            {{ props.confirmText || t('search') }}
           </el-button>
         </div>
       </el-form-item>

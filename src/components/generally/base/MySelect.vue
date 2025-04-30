@@ -1,5 +1,8 @@
 <script setup lang='ts'>
 import { Select } from './base'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number | boolean): void
   (e:'updateModel', modelValue: {[key: string]: string | number | boolean}): void
@@ -28,7 +31,7 @@ const bindValue = computed({
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `${window.$t('select')}${props.filterObj.label || ''}`
+  obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `${t('select')}${props.filterObj.label || ''}`
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
   if(props.filterObj.emptyIsValue){
     obj.emptyValues = [ null, undefined ]

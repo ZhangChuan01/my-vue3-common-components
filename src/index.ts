@@ -1,16 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { App, defineAsyncComponent } from 'vue'
-
+import { createI18n } from 'vue-i18n'
+import locals from './locals'
 export interface InitConfig {
   formCol?: number
   formLabelPosition?: string
+  i18n?: any
 }
 export default {
   install (app: App, options?: InitConfig | undefined) {
-    console.log('install', options)
+    // console.log('install', options)
     if(options) {
       app.provide('initConfig', options)
-      app.config.globalProperties.$componentsConfig = options
+    }
+    const i18n = options?.i18n || createI18n({
+      locale: 'zh',
+      messages: locals
+    })
+    Object.keys(locals).forEach(lang => {
+      i18n.global.mergeLocaleMessage(lang, locals[lang])
+    })
+    // console.log('locals[lang]', i18n)
+    if(!options?.i18n) {
+      app.use(i18n)
     }
     const baseModules = import.meta.glob('./components/generally/base/*.vue')
     for (const path in baseModules) {
