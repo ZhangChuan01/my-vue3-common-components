@@ -154,7 +154,7 @@ const handleBindObj = (data: any) => {
     if(data.width === undefined || data.width === null){
       if(data.type === 'datetime'){
         data.width = '180px'
-      }else if(data.type === 'date' || data.type === 'time'){
+      }else if(data.type === 'date' || data.type === 'time' || data.type === 'datetime2'){
         data.width = '120px'
       }else if(data.list){
         data.width = '120px'
@@ -220,7 +220,7 @@ defineExpose({
           </template>
         </el-table-column>
         <el-table-column
-          v-else-if="col.type === 'datetime' || col.type === 'date' || col.type === 'time'"
+          v-else-if="col.type === 'datetime' || col.type === 'datetime2' || col.type === 'date' || col.type === 'time'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
         >
@@ -235,7 +235,14 @@ defineExpose({
             <FilterSvg v-else />
           </template>
           <template #default="scope">
-            {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
+            <span v-if="col.type === 'datetime2'">
+              {{ dateFormat(scope.row[col.code],'YYYY-MM-DD') }}
+              <br>
+              {{ dateFormat(scope.row[col.code],'HH:mm:ss') }}
+            </span>
+            <span v-else>
+              {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
+            </span>
           </template>
         </el-table-column>
         <el-table-column
