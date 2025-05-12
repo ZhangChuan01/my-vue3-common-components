@@ -1,5 +1,4 @@
-<script setup lang='ts'>
-import { v4 as uuidv4 } from 'uuid'
+<script setup lang='tsx'>
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
@@ -51,6 +50,7 @@ const props = withDefaults(defineProps<{
       }[]
       headerSlot?: string
       filterSlot?: string
+      close?: boolean
     }
   }
   fixedParams?: {[key: string]: any} | null,
@@ -157,11 +157,43 @@ const handleBindObj = (data: any) => {
       }else if(data.type === 'date' || data.type === 'time' || data.type === 'datetime2'){
         data.width = '120px'
       }else if(data.list){
-        data.width = '120px'
+        data.width = data.close ? '60px' : '120px'
       }
     }
   }
   return data
+}
+const slots = useSlots()
+const OperateTemplate = (data: any) => {
+  return <div class="table-btn-wrapper">
+    {props.dataSource.operate?.list.map((btn: any) => {
+      const show = btn.isShow === undefined ? true : btn.isShow(data.scope.row)
+      if (!show) return null
+      let domHtml:any = null
+      if(btn.type === 'template'){
+        domHtml = <div
+          v-has={btn.permission}
+          class="table-btn"
+        >
+          {slots[btn.label]?.(data.scope.row)}
+        </div>
+      }else{
+        domHtml = <div class="table-btn" >
+          <el-button
+            v-has="btn.permission"
+            type={btn.type || 'primary'}
+            disabled={typeof btn.disabled === 'boolean' || btn.disabled === undefined ? btn.disabled : btn.disabled(data.scope.row)}
+            link
+            onClick={() => btn.handleClick && btn.handleClick(data.scope.row)}
+          >
+            {typeof btn.label === 'string' ? btn.label : btn.label(data.scope.row)}
+            
+          </el-button>
+        </div>
+      }
+      return props.dataSource.operate?.close ? <el-dropdown-item>{domHtml}</el-dropdown-item> : domHtml
+    })}
+  </div>
 }
 defineExpose({
   handleCurrentChange,
@@ -341,41 +373,23 @@ defineExpose({
           <FilterSvg v-else />
         </template>
         <template #default="scope">
-          <div class="table-btn-wrapper">
-            <template
-              v-for="btn in props.dataSource.operate.list"
-              :key="typeof btn.label === 'string' ? btn.label : btn.label(scope.row)"
-            >
-              <template v-if="btn.type === 'template'">
-                <div
-                  v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
-                  v-has="btn.permission"
-                  class="table-btn"
-                >
-                  <slot
-                    :name="btn.label"
-                    :row="scope.row"
-                  />
-                </div>
-              </template>
-              <template v-else>
-                <div
-                  v-if="btn.isShow === undefined ? true : btn.isShow(scope.row)"
-                  class="table-btn"
-                >
-                  <el-button
-                    v-has="btn.permission"
-                    :type="btn.type || 'primary'"
-                    :disabled="typeof btn.disabled === 'boolean' || btn.disabled === undefined ? btn.disabled : btn.disabled(scope.row)"
-                    link
-                    @click="btn.handleClick && btn.handleClick(scope.row)"
-                  >
-                    {{ typeof btn.label === 'string' ? btn.label : btn.label(scope.row) }}
-                  </el-button>
-                </div>
-              </template>
+          <el-dropdown
+            v-if="props.dataSource.operate.close"
+            trigger="click"
+          >
+            <span style="font-weight: 600;">
+              ...
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <OperateTemplate :scope="scope" />
+              </el-dropdown-menu>
             </template>
-          </div>
+          </el-dropdown>
+          <OperateTemplate
+            v-else
+            :scope="scope"
+          />
         </template>
       </el-table-column>
     </el-table>
@@ -398,7 +412,7 @@ defineExpose({
 </template>
 
 <style scoped lang=scss>
-.table-btn-wrapper {
+:deep(.table-btn-wrapper) {
   .table-btn {
     display: inline-block;
     margin-right: 10px;

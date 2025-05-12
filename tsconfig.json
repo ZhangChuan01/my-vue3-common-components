@@ -6,6 +6,9 @@
     "moduleResolution": "Node",
     "strict": true,
     "jsx": "preserve",
+    "jsxImportSource":"vue",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
@@ -23,6 +26,6 @@
     },
     "types": ["vite-plugin-svg-icons/client","node","vite/client"]
   },
-  "include": ["./src/**/*.vue","./src/**/*d..ts","./src/**/*.ts","./src/components.ts","./auto-imports.d.ts"],
+  "include": ["./src/**/*.vue","./src/**/*d..ts","./src/**/*.ts","./src/components.ts","./auto-imports.d.ts", "src/components/generally/MyTable.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

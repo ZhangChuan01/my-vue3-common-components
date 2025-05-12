@@ -148,7 +148,8 @@ const dataSource = reactive({
     { code: 'createTime', label: '创建时间', type: 'datetime2' }
   ],
   operate: {
-    width: 220,
+    // width: 220,
+    close: true,
     list: [
       { label: '编辑', type: 'primary', handleClick: row => {
         row.sex2 = { id: row.sex }
@@ -196,7 +197,7 @@ const rowClick = (row: any) => {
       <template #自定义内容>
         <el-button
           type="primary"
-          text
+          link
           @click="create"
         >
           自定义按钮

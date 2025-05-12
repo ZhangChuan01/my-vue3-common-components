@@ -17,7 +17,12 @@ module.exports = {
   'parserOptions': {
     'parser': '@typescript-eslint/parser',
     'ecmaVersion': 'latest',
-    'sourceType': 'module'
+    'sourceType': 'module',
+    'jsx': true,
+    'extraFileExtensions': [ '.vue' ],
+    'ecmaFeatures': {
+      'jsx': true
+    }
   },
   'plugins': [
     'vue',
@@ -87,6 +92,9 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [ 'off' ],
     'no-undef': 0,
-    'no-debugger': 'off'
+    'no-debugger': 'off',
+    'vue/jsx-uses-vars': 'error', // 防止 JSX 变量被误判为未使用
+    'react/jsx-uses-react': 'off', // 如果不需要 React 相关规则，直接关闭
+    'react/jsx-uses-vars': 'off'
   }
 }
