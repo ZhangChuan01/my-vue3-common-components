@@ -151,12 +151,12 @@ const dataSource = reactive({
     // width: 220,
     close: true,
     list: [
-      { label: '编辑', type: 'primary', handleClick: row => {
+      { label: '编辑', type: 'primary',isShow: row => row.sex === 1, handleClick: row => {
         row.sex2 = { id: row.sex }
         edit(row)} 
       },
-      { label: '删除', type: 'danger', handleClick: row => deleteData(deletePeopleApi,row) },
-      { label: '自定义内容', type: 'template' }
+      { label: '删除', type: 'danger', isShow: row => row.sex === 1, handleClick: row => deleteData(deletePeopleApi,row) }
+      // { label: '自定义内容', type: 'template' }
     ]
   }
 })

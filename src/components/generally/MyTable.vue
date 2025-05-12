@@ -1,4 +1,5 @@
 <script setup lang='tsx'>
+import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
@@ -42,7 +43,7 @@ const props = withDefaults(defineProps<{
       fixed?: boolean | string
       list: {
         disabled?: boolean | ((row: any) => boolean)
-        isShow?: (row: any) => boolean
+        isShow?: boolean | ((row: any) => boolean)
         label: string | ((row: any) => string)
         type?: string
         permission?: string
@@ -111,7 +112,7 @@ const getData = async () => {
       pageData.total = 0
     }
   }
-  
+  handleOperateEmpty()
 }
 watch(() => props.dataSource.tableData, () => {
   tableData.value = props.dataSource.tableData
@@ -167,7 +168,7 @@ const slots = useSlots()
 const OperateTemplate = (data: any) => {
   return <div class="table-btn-wrapper">
     {props.dataSource.operate?.list.map((btn: any) => {
-      const show = btn.isShow === undefined ? true : btn.isShow(data.scope.row)
+      const show = btn.isShow === undefined ? true : typeof btn.isShow === 'boolean' ? btn.isShow : btn.isShow(data.scope.row)
       if (!show) return null
       let domHtml:any = null
       if(btn.type === 'template'){
@@ -195,6 +196,26 @@ const OperateTemplate = (data: any) => {
     })}
   </div>
 }
+const tableId = uuidv4()
+const handleOperateEmpty = async () => {
+  if(!props.dataSource.operate?.close) return
+  await nextTick()
+  const table = document.getElementById(tableId)
+  const elDropDowns = Array.from(table!.querySelectorAll('.el-dropdown'))
+  // console.log('elDropDowns', elDropDowns)
+  elDropDowns.forEach((elDropDown: any,index: number) => {
+    const elDropDownMenu = document.querySelector(`.operate-dropdown${index}`)
+    if (elDropDownMenu) {
+      const liNums = elDropDownMenu.querySelectorAll('li').length
+      // console.log('liNums', liNums)
+      if (liNums === 0) {
+        (elDropDowns[index] as HTMLElement).style.display = 'none'
+      }
+    }
+  })
+  
+}
+
 defineExpose({
   handleCurrentChange,
   refresh,
@@ -205,6 +226,7 @@ defineExpose({
 
 <template>
   <div
+    :id="tableId"
     class="my-table"
   >
     <el-table
@@ -375,9 +397,10 @@ defineExpose({
         <template #default="scope">
           <el-dropdown
             v-if="props.dataSource.operate.close"
+            :popper-class="'operate-dropdown'+scope.$index"
             trigger="click"
           >
-            <span style="font-weight: 600;">
+            <span style="font-weight: 600;cursor: pointer;">
               ...
             </span>
             <template #dropdown>
