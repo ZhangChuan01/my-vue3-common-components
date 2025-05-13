@@ -1,6 +1,6 @@
 {
   "name": "my-vue3-common-components",
-  "version": "0.9.4",
+  "version": "0.9.6",
   "type": "module",
   "description": "my-vue3-common-components",
   "main": "dist/index.js",

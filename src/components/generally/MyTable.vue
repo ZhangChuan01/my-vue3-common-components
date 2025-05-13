@@ -179,13 +179,13 @@ const OperateTemplate = (data: any) => {
           {slots[btn.label]?.(data.scope.row)}
         </div>
       }else{
-        domHtml = <div class="table-btn" >
+        domHtml = <div class="table-btn" 
+          v-has="btn.permission"
+          onClick={() => btn.handleClick && btn.handleClick(data.scope.row)}>
           <el-button
-            v-has="btn.permission"
             type={btn.type || 'primary'}
             disabled={typeof btn.disabled === 'boolean' || btn.disabled === undefined ? btn.disabled : btn.disabled(data.scope.row)}
             link
-            onClick={() => btn.handleClick && btn.handleClick(data.scope.row)}
           >
             {typeof btn.label === 'string' ? btn.label : btn.label(data.scope.row)}
             
@@ -210,6 +210,8 @@ const handleOperateEmpty = async () => {
       // console.log('liNums', liNums)
       if (liNums === 0) {
         (elDropDowns[index] as HTMLElement).style.display = 'none'
+      }else{
+        (elDropDowns[index] as HTMLElement).style.display = 'block'
       }
     }
   })
@@ -442,6 +444,12 @@ defineExpose({
     &:last-child {
       margin-right: 0;
     }
+  }
+}
+:deep(.el-dropdown-menu__item) {
+  padding: 0;
+  .table-btn {
+    padding: 5px 16px;
   }
 }
 .pagination-wrapper {
