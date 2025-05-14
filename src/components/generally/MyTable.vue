@@ -204,7 +204,7 @@ const handleOperateEmpty = async () => {
   const elDropDowns = Array.from(table!.querySelectorAll('.el-dropdown'))
   // console.log('elDropDowns', elDropDowns)
   elDropDowns.forEach((elDropDown: any,index: number) => {
-    const elDropDownMenu = document.querySelector(`.operate-dropdown${index}`)
+    const elDropDownMenu = document.querySelector(`.operate-dropdown${tableId}${index}`)
     if (elDropDownMenu) {
       const liNums = elDropDownMenu.querySelectorAll('li').length
       // console.log('liNums', liNums)
@@ -399,7 +399,7 @@ defineExpose({
         <template #default="scope">
           <el-dropdown
             v-if="props.dataSource.operate.close"
-            :popper-class="'operate-dropdown'+scope.$index"
+            :popper-class="'operate-dropdown'+ tableId +scope.$index"
             trigger="click"
           >
             <span style="font-weight: 600;cursor: pointer;">

@@ -128,7 +128,7 @@ watch(() => props.dialogVisible,async () => {
 const setValue = (data: { [key: string]: any }) => {
   myDialogForm.value?.setValue(data)
 }
-const getValue = (code: string) => {
+const getValue = (code?: string) => {
   return myDialogForm.value?.getValue(code)
 }
 const validate = (callback?: () => void) => {
