@@ -179,8 +179,8 @@ const OperateTemplate = (data: any) => {
           {slots[btn.label]?.(data.scope.row)}
         </div>
       }else{
-        domHtml = <div class="table-btn" 
-          v-has="btn.permission"
+        domHtml = <div class="table-btn"
+          v-has={btn.permission}
           onClick={() => btn.handleClick && btn.handleClick(data.scope.row)}>
           <el-button
             type={btn.type || 'primary'}
