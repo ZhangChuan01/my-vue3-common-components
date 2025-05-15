@@ -8,9 +8,14 @@ export default {
   selectTime: 'Select Time',
   startTime: 'Start Time',
   endTime: 'End Time',
+  create: 'Create',
+  edit: 'Edit',
+  delete: 'Delete',
   newCreationSucceededL: 'New Creation Succeeded',
   editingSuccessfully: 'Editing Successfully',
   serialNumber: 'Serial Number',
   operate: 'Operate',
-  tableIndexWidth: '150px'
+  tableIndexWidth: '150px',
+  cancel: 'Cancel',
+  confirm: 'Confirm'
 }

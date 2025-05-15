@@ -8,9 +8,14 @@ export default {
   selectTime: '选择时间',
   startTime: '开始时间',
   endTime: '结束时间',
+  create: '新建',
+  edit: '编辑',
+  delete: '删除',
   newCreationSucceededL: '新建成功',
   editingSuccessfully: '编辑成功',
   serialNumber: '序号',
   operate: '操作',
-  tableIndexWidth: '70px'
+  tableIndexWidth: '70px',
+  cancel: '取消',
+  confirm: '确定'
 }

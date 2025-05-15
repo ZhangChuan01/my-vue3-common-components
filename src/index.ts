@@ -14,7 +14,7 @@ export default {
       app.provide('initConfig', options)
     }
     const i18n = options?.i18n || createI18n({
-      locale: 'zh',
+      locale: 'en',
       messages: locals
     })
     Object.keys(locals).forEach(lang => {

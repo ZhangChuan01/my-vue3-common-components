@@ -161,7 +161,7 @@ defineExpose({
   <div class="form-dialog-wrapper">
     <my-dialog
       v-model:dialog-visible="dialogShow"
-      :title="`${operate === 'edit' ? '编辑' : '新建'}${title}`"
+      :title="`${operate === 'edit' ? $t('edit') : $t('create')}${title}`"
       :width="props.width"
       v-bind="$attrs"
       @close="cancel"
@@ -184,14 +184,14 @@ defineExpose({
           type="default"
           @click="cancel"
         >
-          取消
+          {{ $t('cancel') }}
         </el-button>
         <slot name="btn" />
         <el-button
           type="primary"
           @click="formSubmit"
         >
-          确定
+          {{ $t('confirm') }}
         </el-button>
       </div>
     </my-dialog>
