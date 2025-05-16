@@ -199,7 +199,15 @@ const dataSource = reactive({
 const rowClick = (row: any) => {
   console.log('rowClick', row)
 }
-
+const handleCurrentChange = (page: number) => {
+  console.log('handleCurrentChange', page)
+}
+const handleSizeChange = (size: number) => {
+  console.log('handleSizeChange', size)
+}
+const getSelectionRows = () => {
+  console.log('getSelectionRows',mytable.value?.getSelectionRows())
+}
 </script>
 <template>
   <div class="page">
@@ -218,6 +226,12 @@ const rowClick = (row: any) => {
           :size-="20"
         />
       </el-button>
+      <el-button
+        type="primary"
+        @click="getSelectionRows"
+      >
+        获取选中项
+      </el-button>
     </div>
     <my-table
       ref="mytable"
@@ -225,7 +239,11 @@ const rowClick = (row: any) => {
       :filters="filterRes"
       :data-fun="getPeopleListApi"
       :data-source="dataSource"
+      :need-selection="true"
+      selection-model="normal"
       @row-click="rowClick"
+      @page-change="handleCurrentChange"
+      @size-change="handleSizeChange"
     >
       <template #sex="scope">
         {{ scope.row.sex === 1 ? '男' : '女' }}

@@ -3,6 +3,12 @@ import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
+
+const emits = defineEmits<{
+  (e:'pageChange', page: number): void
+  (e:'sizeChange', size: number): void
+}>()
+
 // 时间格式
 function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
   if (!val) return ''
@@ -25,6 +31,7 @@ const props = withDefaults(defineProps<{
   indexWidth?: number
   needPage?: boolean
   needSelection?: boolean
+  selectionModel?: string
   dataSource: {
     tableData?: any,
     colWidthAverage?: boolean
@@ -63,6 +70,7 @@ const props = withDefaults(defineProps<{
   needIndex: false,
   indexWidth: 60,
   needSelection: false,
+  selectionModel: 'noraml',
   needPage: true,
   fixedParams: null
 })
@@ -108,6 +116,13 @@ const getData = async () => {
     if(props.needPage){
       pageData.total = res?.totalCount || res?.result?.totalCount || 0
     }
+    if(props.needSelection && props.selectionModel === 'saveData'){
+      tableData.value.forEach((row: any) => {
+        if(selectedRows.find((item: any) => item.id === row.id)){
+          setSelectionRows(row,true)
+        }
+      })
+    }
   }else{
     tableData.value = []
     if(props.needPage){
@@ -123,10 +138,56 @@ watch(() => props.dataSource.tableData, () => {
 if (props.dataFun) {
   getData()
 }
-// console.log(props.dataSource.operate)
-// watch(() => props.filters, () => {
-//   getData()
-// },{ immediate: true,deep: true })
+let selectedRows:any = []
+const getSelectionRows = () => {
+  return props.needSelection ? props.selectionModel === 'saveData' ? selectedRows : tableComponent.value.getSelectionRows() : ''
+}
+const resetSelectionRows = () => {
+  if(props.needSelection){
+    tableComponent.value.clearSelection()
+    selectedRows = []
+  }
+}
+const setSelectionRows = async (rows: any,isSelected: boolean) => {
+  await nextTick()
+  if(Array.isArray(rows)) {
+    rows.forEach((row: any) => {
+      tableComponent.value.toggleRowSelection(row,isSelected)
+    })
+  }else{
+    tableComponent.value.toggleRowSelection(rows,isSelected)
+  }
+}
+const handleSelect = (rows: any,currentRow) => {
+  if(props.selectionModel === 'saveData'){
+    const checked = rows.find(row => row.id === currentRow.id)
+    if(checked){
+      selectedRows.push(toRaw(currentRow))
+    }else{
+      const index = selectedRows.findIndex((row: any) => row.id === currentRow.id)
+      if(index !== -1){
+        selectedRows.splice(index,1)
+      }
+    }
+  }
+}
+const handleSelectAll = (rows: any) => {
+  if(props.selectionModel === 'saveData'){
+    if(rows.length > 0){
+      rows.forEach((row: any) => {
+        if(!selectedRows.find((item: any) => item.id === row.id)){
+          selectedRows.push(toRaw(row))
+        }
+      })
+    }else{
+      for(let i = selectedRows.length - 1; i >= 0; i--){
+        if(tableData.value.find((row: any) => row.id === selectedRows[i].id)){
+          selectedRows.splice(i,1)
+        }
+      }
+    }
+  }
+}
 const handleCurrentChange = (currentPage: number) => {
   pageData.currentPage = currentPage
   getData()
@@ -140,9 +201,17 @@ const refresh = (pagenum?: number) => {
   }
   getData()
 }
-const getSelectionRows = () => {
-  return props.needSelection ? tableComponent.value.getSelectionRows() : ''
-}
+watch(() => pageData.currentPage, newV => {
+  console.log('currentPage', newV)
+  emits('pageChange', newV)
+  getData()
+})
+watch(() => pageData.pageSize, newV => {
+  console.log('pageSize', newV)
+  emits('sizeChange', newV)
+  getData()
+})
+
 const handleBindObj = (data: any) => {
   if(data.filters){
     if(!data.filterMethod){
@@ -224,7 +293,8 @@ defineExpose({
   handleCurrentChange,
   refresh,
   tableData,
-  getSelectionRows
+  getSelectionRows,
+  resetSelectionRows
 })
 </script>
 
@@ -239,6 +309,8 @@ defineExpose({
       width="100%"
       stripe
       v-bind="$attrs"
+      @select="handleSelect"
+      @select-all="handleSelectAll"
     >
       <el-table-column
         v-if="props.needIndex"
@@ -432,8 +504,6 @@ defineExpose({
         :background="pageData.background"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageData.total"
-        @current-change="getData"
-        @size-change="getData"
       />
     </div>
   </div>
