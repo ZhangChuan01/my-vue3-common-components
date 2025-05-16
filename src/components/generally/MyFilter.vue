@@ -1,10 +1,10 @@
 <script setup lang='ts'>
-import { Input, Select, Date } from './base/base'
+import { Input, Select, Date,Cascader } from './base/base'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const props = withDefaults(defineProps<{
-  filterList: (Input | Select | Date)[]
+  filterList: (Input | Select | Date | Cascader)[]
   needBtn?: boolean
   confirmText?: string
   resetText?: string
@@ -74,6 +74,11 @@ onMounted(() => {
             v-else-if="filter.type === 'select'"
             v-model="(filter.value as string)"
             :filter-obj="(filter as Select)"
+          />
+          <MyCascader
+            v-else-if="filter.type === 'cascader'"
+            v-model="(filter.value as string)"
+            :filter-obj="(filter as Cascader)"
           />
           <MyVirtualizedSelect
             v-else-if="filter.type === 'virtualizedSelect'"

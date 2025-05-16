@@ -26,6 +26,23 @@ const filters = reactive([
     }
   },
   {
+    label: '测试级联',
+    code: 'cascader',
+    // type: 'virtualizedSelect',
+    type: 'cascader',
+    // multiple: true,
+    options: [
+      { name: 'a', id: 1, children: [ { name: 'aa', id: 11 } ] },
+      { name: 'b', id: 0, children: [ { name: 'bb', id: 22 } ] }
+    ],
+    value: '',
+    props: {
+      label: 'name',
+      value: 'id',
+      children: 'children'
+    }
+  },
+  {
     label: '关键词',
     code: 'keyword',
     placeholder: '请输入姓名/地址',
@@ -94,6 +111,23 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     valueKey: 'id',
     codesMap: { sexC: 'name',sexV: 'id' }
   },
+  // {
+  //   label: '测试级联',
+  //   code: 'cascader',
+  //   // type: 'virtualizedSelect',
+  //   type: 'cascader',
+  //   // multiple: true,
+  //   options: [
+  //     { name: 'a', id: 1, children: [ { name: 'aa', id: 11 } ] },
+  //     { name: 'b', id: 0, children: [ { name: 'bb', id: 22 } ] }
+  //   ],
+  //   value: '',
+  //   props: {
+  //     label: 'name',
+  //     value: 'id',
+  //     children: 'children'
+  //   }
+  // },
   {
     label: '地址',
     code: 'address',

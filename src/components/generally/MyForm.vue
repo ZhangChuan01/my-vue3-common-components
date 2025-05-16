@@ -176,7 +176,7 @@ defineExpose({
           <MyCascader
             v-else-if="formData.type === 'cascader'"
             v-model="formModel[(formData.code as string)]"
-            :filter-obj="formData"
+            :filter-obj="(formData as Cascader)"
           />
           <MyColorPicker
             v-else-if="formData.type === 'colorPicker' || formData.type === 'color-picker'"

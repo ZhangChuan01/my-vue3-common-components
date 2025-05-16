@@ -62,6 +62,19 @@ export interface Switch extends Base {
 export interface ColorPicker extends Base {
 }
 export interface Cascader extends Base {
+  props?: {
+    label: string
+    value: string
+    children: string
+  }
+  options: {
+    label?: string
+    value?: string | number
+    children?: {
+      label?: string
+      value?: string | number
+    }[]
+  }[]
 }
 /**
  * @property {options} Array 选项

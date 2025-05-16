@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<{
   filters?: null | {[key: string]: unknown}
   funArgs?: Array<any>
   needIndex?: boolean
+  indexWidth?: number
   needPage?: boolean
   needSelection?: boolean
   dataSource: {
@@ -60,6 +61,7 @@ const props = withDefaults(defineProps<{
   filters: null,
   funArgs: undefined,
   needIndex: false,
+  indexWidth: 60,
   needSelection: false,
   needPage: true,
   fixedParams: null
@@ -242,6 +244,7 @@ defineExpose({
         v-if="props.needIndex"
         type="index"
         :index="indexMethod"
+        :width="props.indexWidth"
         :label="$t('serialNumber')"
       />
       <el-table-column
