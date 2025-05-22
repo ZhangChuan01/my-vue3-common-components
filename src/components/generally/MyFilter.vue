@@ -44,9 +44,17 @@ const reset = () => {
   })
   emits('reset')
 }
-onMounted(() => {
-  
-})
+const computedStyle = (style: any) => {
+  if(style){
+    if(!style.width){
+      style.minWidth = '200px'
+    }
+  }else{
+    return {
+      minWidth: '200px'
+    }
+  }
+}
 </script>
 
 <template>
@@ -63,7 +71,7 @@ onMounted(() => {
           v-if="filter.type"
           :label="filter.label"
           :label-width="filter.labelWidth || ''"
-          :style="filter.style || ''"
+          :style="computedStyle(filter.style)"
         >
           <MyInput
             v-if="inputTypes.includes(filter.type)"
@@ -119,9 +127,6 @@ onMounted(() => {
   .el-form-item {
     margin-right: 16px;
     margin-bottom: 16px;
-    .el-select {
-      min-width: 200px;
-    }
   }
   .btn-wrapper {
     display: flex;
