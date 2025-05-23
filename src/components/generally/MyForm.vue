@@ -49,7 +49,7 @@ const setValue = (data: {[key:string]: any}) => {
 let modelParams = {}
 const changeModel = (val: any) => {
   // console.log('changeModel', val)
-  modelParams = val
+  Object.assign(modelParams, val)
 }
 const checkRules = () => {
   return new Promise(reslove => {
@@ -83,6 +83,7 @@ const submit = async () => {
     const res = JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value)))
     console.log('ressssssssss', res)
     emits('submit', res)
+    modelParams = {}
     return res
   }
   return null

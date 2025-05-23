@@ -27,7 +27,9 @@ const bindValue = computed({
     setCodesMap(val)
   }
 })
-
+watch(() => props.modelValue, () => {
+  setCodesMap(props.modelValue)
+})
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
