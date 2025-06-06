@@ -80,7 +80,7 @@ const submit = async () => {
   // console.log('valid', valid)
   if (valid) {
     // const res = deleteEmptyValue(JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value))))
-    const res = JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value)))
+    const res = JSON.parse(JSON.stringify(Object.assign(formModel.value,modelParams)))
     console.log('ressssssssss', res)
     emits('submit', res)
     modelParams = {}
