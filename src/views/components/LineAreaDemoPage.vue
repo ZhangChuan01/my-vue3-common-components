@@ -103,6 +103,7 @@ onMounted(async () => {
       :max-y="20"
       :line-data="testData2"
       :area-data="areaData"
+      :tooltip="{ formatter: (item: any) => `${item.name}: ${item.percentage * 100}%hh测试换行` }"
     />
   </div>
 </template>

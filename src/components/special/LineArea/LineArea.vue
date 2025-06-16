@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 type DataInfo = {
-    name?: string
+    name: string
     percentage: number
     color?: string
   }
@@ -23,11 +23,18 @@ const props = withDefaults(defineProps<{
   splitY?: number
   lineData: {x: number, y: number}[] | undefined
   areaData: Area[]
+  tooltip?: {
+    show?: boolean
+    formatter?: (params: DataInfo) => string
+  }
 }>(),{
   height: '100px',
   lineData: undefined,
   splitX: 10,
-  splitY: 5
+  splitY: 5,
+  tooltip: () => ({
+    show: true
+  })
 })
 
 const xTicks = ref<number[]>([]),yTicks = ref<number[]>([])
@@ -107,11 +114,16 @@ const setTooltip = () => {
 
   document.body.appendChild(tooltip)
 }
-const showTooltip = e => {
+const showTooltip = (e,item: DataInfo) => {
+  if(props.tooltip?.show === false) return
   // console.log('mouseover', e)
   const tooltip = document.querySelector('.custom-tooltip') as HTMLElement
+  let content = item.name
+  if(props.tooltip?.formatter){
+    content = props.tooltip.formatter(item)
+  }
   // 设置提示内容和样式
-  tooltip.innerHTML = e.target.dataset.title.replace(/hh/g, '<br>')
+  tooltip.innerHTML = content.replace(/hh/g, '<br>')
   tooltip.style.display = 'block'
 }
 const moveEvent = e => {
@@ -200,10 +212,9 @@ onBeforeUnmount(() => {
             :key="item2.name"
           >
             <div
-              :data-title="`${item2.name}hh测试文案`"
               class="area"
               :style="{height: item2.percentage * 100 * item.maxY + 'px',backgroundColor: item2.color}"
-              @mouseover="showTooltip"
+              @mouseover="showTooltip($event,item2)"
               @mouseout="mouseOut"
               @mousemove="moveEvent"
             />
