@@ -111,6 +111,13 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     valueKey: 'id',
     codesMap: { sexC: 'name',sexV: 'id' }
   },
+  {
+    label: '成绩',
+    code: 'score',
+    limitIntNumber: true,
+    type: 'text',
+    value: ''
+  },
   // {
   //   label: '测试级联',
   //   code: 'cascader',
@@ -177,6 +184,7 @@ const dataSource = reactive({
     { code: 'name', label: '姓名' },
     { code: 'age', label: '年龄',type: 'num' },
     { code: 'sex', label: '性别', type: 'template',filters: [ { text: '男',value: 1 },{ text: '女',value: 0 } ] },
+    { code: 'score',label: '分数',type: 'intNum' },
     { code: 'address', label: '地址',width: 300 },
     { code: 'switch', label: '状态',style: { '--el-switch-on-color': '#13ce66', '--el-switch-off-color': '#ff4949' },valueChange: (val: any) => console.log('val',val), type: 'switch' },
     { code: 'createTime', label: '创建时间', type: 'datetime2' }

@@ -25,6 +25,7 @@ const props = withDefaults(defineProps<{
   formHeight?: string | number
   addFun?: (data: any,...args: any) => Promise<any> | undefined
   editFun?: (data: any,...args: any) => Promise<any> | undefined
+  operateFun?: (data: any,...args: any) => Promise<any> | undefined
   funArgs?: Array<any>
   funArgsAdd?: Array<any>
   funArgsEdit?: Array<any>
@@ -40,6 +41,7 @@ const props = withDefaults(defineProps<{
   operate: 'add',
   addFun: undefined,
   editFun: undefined,
+  operateFun: undefined,
   funArgs: undefined,
   funArgsAdd: undefined,
   funArgsEdit: undefined,
@@ -102,10 +104,16 @@ const formSubmit = async () => {
       }
       // console.log('edit', finaFunArgs)
       res = finaFunArgs.length ? await props.editFun(Object.assign({}, props.currentRowValue, finallyParams),...finaFunArgs) : await props.editFun(Object.assign({}, props.currentRowValue, finallyParams))
+    }else if(props.operateFun){
+      const finaFunArgs:any = []
+      if (props.funArgs) {
+        finaFunArgs.push(...props.funArgs)
+      }
+      res = finaFunArgs.length ? await props.operateFun(finallyParams,...finaFunArgs) : await props.operateFun(finallyParams)
     }
     // console.log('res', res)
     if (res.code !== -1) {
-      ElMessage.success(props.operate === 'add' ? t('newCreationSucceededL') : t('editingSuccessfully'))
+      ElMessage.success(props.operate === 'add' ? t('addSuccess') : props.operate === 'edit' ? t('editSuccess') : `${props.operate}${t('success')}`)
       myDialogForm.value?.reset()
       dialogShow.value = false
       emits('success', finallyParams)
@@ -161,7 +169,7 @@ defineExpose({
   <div class="form-dialog-wrapper">
     <my-dialog
       v-model:dialog-visible="dialogShow"
-      :title="`${operate === 'edit' ? $t('edit') : $t('create')}${title}`"
+      :title="`${operate === 'edit' ? $t('edit') : operate === 'add' ? $t('create') : operate}${title}`"
       :width="props.width"
       v-bind="$attrs"
       @close="cancel"

@@ -80,7 +80,11 @@ const setPropData = () => {
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
   return Object.assign(obj, useAttrs())
 }
-
+onMounted(() => {
+  if(props.filterObj.value){
+    bindValue.value = getFinalVal(props.filterObj.value)
+  }
+})
 </script>
 
 <template>
