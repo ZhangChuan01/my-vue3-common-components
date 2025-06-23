@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Input, Select, Date,Cascader } from './base/base'
+import { type Input, type Select,type Date,type Cascader } from './base/base'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

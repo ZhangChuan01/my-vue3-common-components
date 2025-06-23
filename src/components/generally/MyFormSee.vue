@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
+import { type Input, type Select, type Date,type Switch,type ColorPicker,type Cascader } from './base/base'
 const props = withDefaults(defineProps<{
   formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader)[]
   labelWidth?: string | number

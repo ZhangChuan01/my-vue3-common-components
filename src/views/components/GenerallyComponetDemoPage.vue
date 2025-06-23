@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import useTabelHook from '@/hooks/useTableHook'
-import { GlobalComponents } from 'vue'
+import { type GlobalComponents } from 'vue'
 import BaseType from '@/baseType'
 import { getPeopleListApi,addPeopleApi,editPeopleApi,deletePeopleApi } from '@/api/test'
 
@@ -193,7 +193,7 @@ const dataSource = reactive({
     // width: 220,
     // close: true,
     list: [
-      { label: '编辑', type: 'primary', handleClick: async row => {
+      { label: '编辑', type: 'primary', handleClick: async (row: any) => {
         row.sex2 = { id: row.sex }
         edit(row)
         await nextTick()
@@ -287,4 +287,5 @@ const getSelectionRows = () => {
 .page {
   padding: 20px;
 }
+
 </style>

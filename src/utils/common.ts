@@ -12,5 +12,5 @@ export function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
 }
 
 export function hasField(obj: any, field: string) {
-  return Object.hasOwn(obj, field)
+  return Object.hasOwnProperty.call(obj, field)
 }

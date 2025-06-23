@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
-import { Input, Select, Date,Switch,ColorPicker,Cascader,CheckGroup,RadioGroup } from './base/base'
-import { InitConfig } from '../../index'
+import { type Input, type Select, type Date,type Switch,type ColorPicker,type Cascader,type CheckGroup,type RadioGroup } from './base/base'
+import { type InitConfig } from '../../index'
 
 const props = withDefaults(defineProps<{
   formDataList: (Input | Select | Date | Switch | ColorPicker | Cascader | CheckGroup | RadioGroup)[]
@@ -66,14 +66,14 @@ const checkRules = () => {
     }
   })
 }
-const deleteEmptyValue = (obj: {[key: string]: any}) => {
-  Object.keys(obj).forEach(key => {
-    if (obj[key] === '') {
-      delete obj[key]
-    }
-  })
-  return obj
-}
+// const deleteEmptyValue = (obj: {[key: string]: any}) => {
+//   Object.keys(obj).forEach(key => {
+//     if (obj[key] === '') {
+//       delete obj[key]
+//     }
+//   })
+//   return obj
+// }
 
 const submit = async () => {
   const valid = await checkRules()

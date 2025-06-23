@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Select } from './base'
+import { type Select } from './base'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -40,11 +40,11 @@ const setPropData = () => {
   }
   return Object.assign(obj, useAttrs())
 }
-const setCodesMap = val => {
-  console.log('aaaaaaaaaaaaa',props.filterObj)
+const setCodesMap = (val: any) => {
+  // console.log('aaaaaaaaaaaaa',props.filterObj)
   if(!props.filterObj.codesMap) return
   console.log('val',val)
-  let obj = {}
+  let obj:any = {}
   const key = props.filterObj.props?.value ? props.filterObj.props.value : 'id'
   const tartget = props.filterObj.options.find(o => o[key] === val[key])
   if(!tartget) return

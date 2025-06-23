@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-const getQuery = (url, name) => {
+const getQuery = (url:string, name:string) => {
   const index = url.indexOf('?')
   if (index !== -1) {
     const queryStrArr = url.substr(index + 1).split('&')
@@ -30,7 +30,7 @@ const data: {list: Test.People[]} = Mock.mock({
   ]
 })
 console.log(data)
-Mock.mock(/\/api\/people/, 'get', options => {
+Mock.mock(/\/api\/people/, 'get', (options:any) => {
   // console.log('get', options)
   const SkipCount = getQuery(options.url, 'SkipCount') || 0
   const MaxResultCount = getQuery(options.url, 'MaxResultCount') || 999
@@ -41,7 +41,7 @@ Mock.mock(/\/api\/people/, 'get', options => {
   let items: Test.People[] = [],totalCount = 0
   if ((keyword !== null && keyword !== '') || (sex !== null && sex !== '')) {
     // console.log('keyword', decodeURIComponent(keyword))
-    const filterData = sortData.filter(item => (item.name.includes(decodeURIComponent(keyword)) || item.address.includes(decodeURIComponent(keyword))) && item.sex === Number(sex))
+    const filterData = sortData.filter(item => (item.name.includes(decodeURIComponent(keyword as string)) || item.address.includes(decodeURIComponent(keyword as string))) && item.sex === Number(sex))
     items = filterData.slice(Number(SkipCount), Number(SkipCount) + Number(MaxResultCount))
     totalCount = filterData.length
   }else {
@@ -54,7 +54,7 @@ Mock.mock(/\/api\/people/, 'get', options => {
     totalCount
   }
 })
-Mock.mock('/api/people', 'post', options => {
+Mock.mock('/api/people', 'post', (options:any) => {
   // console.log(options)
   const body = JSON.parse(options.body)
   data.list.push(Mock.mock({
@@ -66,7 +66,7 @@ Mock.mock('/api/people', 'post', options => {
     code: 200
   }
 })
-Mock.mock('/api/people', 'put', options => {
+Mock.mock('/api/people', 'put', (options:any) => {
   // console.log(options)
   const body = JSON.parse(options.body)
   const item = data.list.find(item => item.id === body.id)
@@ -75,7 +75,7 @@ Mock.mock('/api/people', 'put', options => {
     code: 200
   }
 })
-Mock.mock(/\/api\/people/, 'delete', options => {
+Mock.mock(/\/api\/people/, 'delete', (options:any) => {
   // console.log(options)
   const id = options.url.substr(options.url.lastIndexOf('/') + 1)
   // console.log('id',id)

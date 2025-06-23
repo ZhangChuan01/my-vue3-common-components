@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
-import eslintPlugin from 'vite-plugin-eslint'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import AutoImport from 'unplugin-auto-import/vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
@@ -28,20 +27,17 @@ export default defineConfig({
     postcss: {
       plugins: [ autoprefixer({}) ]
     }
-    // preprocessorOptions: {
-    //   scss: {
-    //     additionalData: `@import "@/styles/theme.scss";`
-    //   }
-    // }
   },
   plugins: [
     vue(),
     vueJsx(),
-    dts(),
-    vueSetupExtend(),
-    eslintPlugin({
-      include: [ 'src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue' ]
+    dts({
+      tsconfigPath: './tsconfig.app.json'
     }),
+    vueSetupExtend(),
+    // eslintPlugin({
+    //   include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
+    // }),
     createHtmlPlugin({
       inject: {
         data: {

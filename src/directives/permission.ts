@@ -6,7 +6,7 @@ export default function setupPermissionDirective(app: App) {
     if (!permission) return
     const funListStr = localStorage.getItem('permissionNameList')
     if (funListStr) {
-      const funList = JSON.parse(funListStr).map(item => item.name)
+      const funList = JSON.parse(funListStr).map((item: any) => item.name)
       if (!funList.includes(permission)) {
         el.parentElement?.removeChild(el)
       }

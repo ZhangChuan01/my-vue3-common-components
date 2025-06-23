@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Select } from './base'
+import { type Select } from './base'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -41,12 +41,12 @@ const setPropData = () => {
   }
   return Object.assign(obj, useAttrs())
 }
-const setCodesMap = val => {
+const setCodesMap = (val: any) => {
   if(!props.filterObj.codesMap) return
-  let obj = {}
+  let obj:any = {}
   const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
   if(!target) return
-  Object.entries(props.filterObj.codesMap).forEach(item => {
+  Object.entries(props.filterObj.codesMap).forEach((item: any) => {
     obj[item[0]] = target[item[1]]
   })
   emits('updateModel', obj)

@@ -56,7 +56,7 @@ const getFileData = async () => {
     const res = await downloadFileApi()
     console.log('res: ', res)
     if(res.data){
-      docxPreview.renderAsync(res.data, privewContainer).catch(error => {
+      docxPreview.renderAsync(res.data, privewContainer).catch(() => {
         showError.value = true
       })
     }

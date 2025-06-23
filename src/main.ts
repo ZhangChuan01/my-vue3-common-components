@@ -9,7 +9,6 @@ import '@/styles/index.scss'
 
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
 import { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css'
 import './mock'

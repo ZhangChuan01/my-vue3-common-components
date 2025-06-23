@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { ColorPicker } from './base'
+import { type ColorPicker } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
 }>()

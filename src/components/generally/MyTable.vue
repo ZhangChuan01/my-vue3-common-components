@@ -158,9 +158,9 @@ const setSelectionRows = async (rows: any,isSelected: boolean) => {
     tableComponent.value.toggleRowSelection(rows,isSelected)
   }
 }
-const handleSelect = (rows: any,currentRow) => {
+const handleSelect = (rows: any,currentRow: any) => {
   if(props.selectionModel === 'saveData'){
-    const checked = rows.find(row => row.id === currentRow.id)
+    const checked = rows.find((row: any) => row.id === currentRow.id)
     if(checked){
       selectedRows.push(toRaw(currentRow))
     }else{
@@ -215,7 +215,7 @@ watch(() => pageData.pageSize, newV => {
 const handleBindObj = (data: any) => {
   if(data.filters){
     if(!data.filterMethod){
-      data.filterMethod = (value,row,column) => {
+      data.filterMethod = (value: any,row: any,column: any) => {
         return row[column['property']] === value
       }
     }
@@ -274,19 +274,18 @@ const handleOperateEmpty = async () => {
   const table = document.getElementById(tableId)
   const elDropDowns = Array.from(table!.querySelectorAll('.el-dropdown'))
   // console.log('elDropDowns', elDropDowns)
-  elDropDowns.forEach((elDropDown: any,index: number) => {
-    const elDropDownMenu = document.querySelector(`.operate-dropdown${tableId}${index}`)
+  for(let i = 0; i < elDropDowns.length; i++){
+    const elDropDownMenu = document.querySelector(`.operate-dropdown${tableId}${i}`)
     if (elDropDownMenu) {
       const liNums = elDropDownMenu.querySelectorAll('li').length
       // console.log('liNums', liNums)
       if (liNums === 0) {
-        (elDropDowns[index] as HTMLElement).style.display = 'none'
+        (elDropDowns[i] as HTMLElement).style.display = 'none'
       }else{
-        (elDropDowns[index] as HTMLElement).style.display = 'block'
+        (elDropDowns[i] as HTMLElement).style.display = 'block'
       }
     }
-  })
-  
+  }
 }
 
 defineExpose({

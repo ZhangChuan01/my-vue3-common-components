@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Input } from './base'
+import { type Input } from './base'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

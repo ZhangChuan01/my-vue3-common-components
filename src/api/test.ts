@@ -4,7 +4,7 @@ interface ParamsData {
   [key: string]: any
 }
 
-export function getPeopleListApi (data: ParamsData,arg1?:any,arg2?:any) {
+export function getPeopleListApi (data: ParamsData,_arg1?:any,_arg2?:any) {
   // console.log('getPeopleListApi', data, 'arg1',arg1,'arg2',arg2)
   return request({
     url: '/api/people',

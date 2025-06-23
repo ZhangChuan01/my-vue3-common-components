@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { App, defineAsyncComponent } from 'vue'
+import { type App, defineAsyncComponent } from 'vue'
 import { createI18n } from 'vue-i18n'
 import locals from './locals'
 export interface InitConfig {
@@ -18,7 +18,7 @@ export default {
       messages: locals
     })
     Object.keys(locals).forEach(lang => {
-      i18n.global.mergeLocaleMessage(lang, locals[lang])
+      i18n.global.mergeLocaleMessage(lang, locals[lang as keyof typeof locals])
     })
     // console.log('locals[lang]', i18n)
     if(!options?.i18n) {

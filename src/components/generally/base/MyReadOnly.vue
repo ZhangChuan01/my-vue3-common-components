@@ -1,8 +1,5 @@
 <script setup lang='ts'>
-import { Readonly } from './base'
-const emits = defineEmits<{
-  (e:'update:modelValue', modelValue: string | number): void
-}>()
+import { type Readonly } from './base'
 
 const props = withDefaults(defineProps<{
   filterObj: Readonly

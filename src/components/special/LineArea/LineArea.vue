@@ -81,7 +81,7 @@ const calculateArea = () => {
 
 const getPolygon = () => {
   let str = ''
-  props.lineData?.forEach((item,index) => {
+  props.lineData?.forEach((item:any) => {
     str += (item.x / props.maxX * 100) + '%' + ' ' + ((1 - item.y / props.maxY) * 100) + '%' + ','
   })
   // console.log('getPolygon', str,str.split(','))
@@ -114,7 +114,7 @@ const setTooltip = () => {
 
   document.body.appendChild(tooltip)
 }
-const showTooltip = (e,item: DataInfo) => {
+const showTooltip = (_e: MouseEvent,item: DataInfo) => {
   if(props.tooltip?.show === false) return
   // console.log('mouseover', e)
   const tooltip = document.querySelector('.custom-tooltip') as HTMLElement
@@ -126,11 +126,11 @@ const showTooltip = (e,item: DataInfo) => {
   tooltip.innerHTML = content.replace(/hh/g, '<br>')
   tooltip.style.display = 'block'
 }
-const moveEvent = e => {
+const moveEvent = (e: MouseEvent) => {
   const tooltip = document.querySelector('.custom-tooltip') as HTMLElement
   // 更新位置（带10px偏移）
-  tooltip.style.left = `${(e as MouseEvent).clientX + 10}px`
-  tooltip.style.top = `${(e as MouseEvent).clientY + 10}px`
+  tooltip.style.left = `${e.clientX + 10}px`
+  tooltip.style.top = `${e.clientY + 10}px`
 }
 const mouseOut = () => {
   const tooltip = document.querySelector('.custom-tooltip') as HTMLElement

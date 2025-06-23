@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { InternalAxiosRequestConfig, AxiosRequestConfig } from 'axios'
+ 
+import axios, { type InternalAxiosRequestConfig,type AxiosRequestConfig } from 'axios'
 import { useGlobalStore } from '@/store'
 
 interface RequestConfig extends InternalAxiosRequestConfig {
@@ -9,7 +9,7 @@ interface RequestConfig extends InternalAxiosRequestConfig {
 const globalStore = useGlobalStore()
 
 axios.interceptors.request.use((config: RequestConfig) => {
-  const hasLoading = Object.hasOwn(config, 'loading')
+  const hasLoading = Object.hasOwnProperty.call(config, 'loading')
   if (!hasLoading || (hasLoading && config.loading === false)) {
     globalStore.showSpin = true
   }
@@ -23,9 +23,9 @@ axios.interceptors.request.use((config: RequestConfig) => {
 const request = async <T = any>(config: AxiosRequestConfig): Promise<Api.Result<T>> => {
   try {
     const { data } = await axios.request<Api.Result<T>>(config)
-    if (data.code !== 200) {
+    if (data.code !== 200 && data.message) {
       // console.log(data.message)
-      data.message && window.$message.error(data.message)
+      window.$message.error(data.message)
     }
     return data
   } catch (err: any) {

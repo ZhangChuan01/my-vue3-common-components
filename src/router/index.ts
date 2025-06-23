@@ -25,7 +25,8 @@ const router = createRouter({
   routes: constantRoutes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((_to, _from, next) => {
+  // console.log('to', to,from)
   NProgress.start()
   next()
 })

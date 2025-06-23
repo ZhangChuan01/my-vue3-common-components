@@ -58,8 +58,10 @@ export interface Date extends Base {
   valueFormat?: string
 }
 export interface Switch extends Base {
+  loading?: boolean
 }
 export interface ColorPicker extends Base {
+  showAlpha?: boolean
 }
 export interface Cascader extends Base {
   props?: {
@@ -105,4 +107,6 @@ export interface RadioGroup extends Base {
   }
 }
 
-export interface Readonly extends Base {}
+export interface Readonly extends Base {
+  readonly?: boolean
+}

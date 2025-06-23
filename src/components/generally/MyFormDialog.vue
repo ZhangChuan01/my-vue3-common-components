@@ -2,8 +2,8 @@
 <script setup lang='ts'>
 import { v4 as uuidv4 } from 'uuid'
 import type { FormRules } from 'element-plus'
-import { GlobalComponents } from 'vue'
-import { Input, Select, Date,Switch,ColorPicker,Cascader } from './base/base'
+import { type GlobalComponents } from 'vue'
+import { type Input, type Select, type Date,type Switch,type ColorPicker,type Cascader } from './base/base'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 

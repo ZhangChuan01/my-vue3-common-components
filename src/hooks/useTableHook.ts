@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { GlobalComponents, ref } from 'vue'
+ 
+import { type GlobalComponents, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 export default function useTableHook(formDataList?: any):any {
@@ -41,7 +41,7 @@ export default function useTableHook(formDataList?: any):any {
       }
     })
   }
-  const defaultValueMap = {
+  const defaultValueMap:any = {
     'string': '',
     'number': '',
     'boolean': true

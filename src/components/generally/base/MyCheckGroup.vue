@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { CheckGroup } from './base'
+import { type CheckGroup } from './base'
 import { v4 as uuidv4 } from 'uuid'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string[] | number[]): void
@@ -28,7 +28,7 @@ const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
   if(props.filterObj.props) {
-    props.filterObj.options.forEach(item => {
+    props.filterObj.options.forEach((item: any) => {
       item.label = item[props.filterObj.props!.label]
       item.value = item[props.filterObj.props!.value]
     })

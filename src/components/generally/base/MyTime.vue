@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Date } from './base'
+import { type Date } from './base'
 const emits = defineEmits<{
   (e:'update:modelValue', modelValue: string | number): void
 }>()
