@@ -31,7 +31,7 @@ console.log('props.filterObj',props.filterObj)
 const setPropData = () => {
   let obj:any = { ...props.filterObj }
   delete obj.value
-  console.log('obj',obj)
+  // console.log('obj',obj)
   obj.placeholder = Object.hasOwnProperty.call(props.filterObj,'placeholder') ? props.filterObj.placeholder :  `${t('select')}${props.filterObj.label || ''}`
   obj.clearable = Object.hasOwnProperty.call(props.filterObj,'clearable') ? props.filterObj.clearable : true
   if(props.filterObj.emptyIsValue){
@@ -41,7 +41,7 @@ const setPropData = () => {
   return Object.assign(obj, useAttrs())
 }
 const setCodesMap = val => {
-  console.log('aaaaaaaaaaaaa',props.filterObj)
+  // console.log('aaaaaaaaaaaaa',props.filterObj)
   if(!props.filterObj.codesMap) return
   console.log('val',val)
   let obj = {}
