@@ -20,6 +20,7 @@ import SvgIcon from './components/special/SvgIcon/SvgIcon.vue'
 import PreviewFile from './components/special/PreviewFile/PreviewFile.vue'
 import LineArea from './components/special/LineArea/LineArea.vue'
 import NavtiveTable from './components/special/NavtiveTable/NavtiveTable.vue'
+import ContainerComponent from './components/special/ContainerComponent/ContainerComponent.vue'
 
 declare module 'vue'{
   export interface GlobalComponents {
@@ -44,5 +45,6 @@ declare module 'vue'{
     PreviewFile: typeof PreviewFile
     LineArea: typeof LineArea
     NavtiveTable: typeof NavtiveTable
+    ContainerComponent: typeof ContainerComponent
   }
 }
