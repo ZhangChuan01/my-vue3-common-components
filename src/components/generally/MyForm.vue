@@ -32,7 +32,7 @@ const setModel = () => {
   let obj:{[key: string]: any} = {}
   props.formDataList.forEach(formData => {
     if (formData.type !== 'title' && formData.code){
-      obj[formData.code] = formData.value === undefined ? '' : formData.value
+      obj[formData.code] = formData.value === undefined || formData.value === null ? '' : formData.value
     }
   })
   formModel.value = obj
@@ -79,8 +79,8 @@ const submit = async () => {
   const valid = await checkRules()
   // console.log('valid', valid)
   if (valid) {
-    // const res = deleteEmptyValue(JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value))))
-    const res = JSON.parse(JSON.stringify(Object.assign(formModel.value,modelParams)))
+    const res = deleteEmptyValue(JSON.parse(JSON.stringify(Object.assign(modelParams,formModel.value))))
+    // const res = JSON.parse(JSON.stringify(Object.assign(formModel.value,modelParams)))
     // console.log('ressssssssss', res)
     emits('submit', res)
     modelParams = {}

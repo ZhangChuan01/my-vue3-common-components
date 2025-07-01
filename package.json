@@ -1,6 +1,6 @@
 {
   "name": "my-vue3-common-components",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "type": "module",
   "description": "my-vue3-common-components",
   "main": "dist/index.js",
@@ -35,6 +35,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^10.0.0",
     "canvas-datagrid": "^0.4.7",
     "docx-preview": "^0.3.5",
     "moment": "^2.30.1",
