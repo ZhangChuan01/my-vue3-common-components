@@ -8,7 +8,6 @@ const titleChange = (title: string) => {
   <ContainerComponent
     :titles="['测试1', '测试2']"
     :height="0.3"
-    :top="0.3"
     shrink-direction="right"
     @change="titleChange"
   >

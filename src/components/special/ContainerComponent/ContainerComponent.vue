@@ -11,11 +11,13 @@ const props = withDefaults(defineProps<{
   shrinkDirection?: string
   top?: number
   bottom?: number
+  headerHeight?: number
 }>(), {
   width: 380,
   shrinkDirection: 'left',
   top: 0,
-  bottom: 0
+  bottom: 0,
+  headerHeight: 80
 })
 const id = uuidv4()
 let currentTitle = ref(props.titles[0])
@@ -54,9 +56,9 @@ defineExpose({
     :id="id"
     :class="['container',shrinkDirection === 'left' ? 'shrink-left' : 'shrink-right']"
     :style="{width: typeof props.width === 'number' ? props.width + 'px' : props.width, 
-    height: `calc((100vh - 80px) * ${props.height})`, 
-    top: `calc((100vh - 80px) * ${props.top})`,
-    bottom: `calc((100vh - 80px) * ${props.bottom})`}"
+    height: `calc((100vh - ${props.headerHeight}px) * ${props.height})`, 
+    top: `calc((100vh - ${props.headerHeight}px) * ${props.top} + ${props.headerHeight}px)`,
+    bottom: `calc((100vh - ${props.headerHeight}px) * ${props.bottom})`}"
   >
     <div class="title-container dfb">
       <div class="title-wrapper">
