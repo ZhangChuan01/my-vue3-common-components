@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
+import { type InitConfig } from '../../index'
 
 const emits = defineEmits<{
   (e:'pageChange', page: number): void
@@ -63,6 +64,8 @@ const props = withDefaults(defineProps<{
     }
   }
   fixedParams?: {[key: string]: any} | null,
+  height?: string | number | undefined
+  fixedTableHeight?: boolean
 }>(), {
   dataFun: null,
   filters: null,
@@ -72,7 +75,9 @@ const props = withDefaults(defineProps<{
   needSelection: false,
   selectionModel: 'noraml',
   needPage: true,
-  fixedParams: null
+  fixedParams: null,
+  height: undefined,
+  fixedTableHeight: false
 })
 
 const tableComponent = ref<any>()
@@ -287,7 +292,51 @@ const handleOperateEmpty = async () => {
     }
   }
 }
-
+function getTotalHeight(element: Element) {
+  // 获取元素自身高度（内容 + 内边距 + 边框）
+  const rect = element.getBoundingClientRect();
+  const ownHeight = rect.height;
+  
+  // 获取计算样式
+  const styles = window.getComputedStyle(element);
+  
+  // 解析上下外边距值
+  const marginTop = parseFloat(styles.marginTop) || 0;
+  const marginBottom = parseFloat(styles.marginBottom) || 0;
+  
+  // 总高度 = 自身高度 + 上外边距 + 下外边距
+  return ownHeight + marginTop + marginBottom;
+}
+const calcHeight = () => {
+  const container = document.querySelector('.page-wrapper')
+  if(container){
+    const height = container.clientHeight
+    const divList = Array.from(container.children)
+    // console.log('divList', divList)
+    let totalHeight = 0
+    for(let i = 0; i < divList.length; i++){
+      if(divList[i].id === tableId) continue
+      console.log('divList[i].clientHeight', divList[i].clientHeight)
+      totalHeight += getTotalHeight(divList[i])
+    }
+    // console.log('totalHeight', totalHeight)
+    return height - totalHeight - 54
+  }
+  return '-'
+}
+const initConfig: InitConfig | undefined = inject('initConfig')
+let showTable = ref(false), tableHeight = ref<number|string>('-')
+onMounted(() => {
+  // console.log('initConfig', initConfig)
+  if((initConfig?.fixedTableHeight || props.fixedTableHeight) && !props.height){
+    setTimeout(() => {
+      tableHeight.value = calcHeight()
+      showTable.value = true
+    }, 500)
+  }else{
+    showTable.value = true
+  }
+})
 defineExpose({
   handleCurrentChange,
   refresh,
@@ -301,6 +350,7 @@ defineExpose({
   <div
     :id="tableId"
     class="my-table"
+    v-if="showTable"
   >
     <el-table
       ref="tableComponent"
@@ -308,6 +358,7 @@ defineExpose({
       width="100%"
       stripe
       v-bind="$attrs"
+      :height="props.height || ((props.fixedTableHeight || initConfig?.fixedTableHeight) ? tableHeight : '-')"
       @select="handleSelect"
       @select-all="handleSelectAll"
     >

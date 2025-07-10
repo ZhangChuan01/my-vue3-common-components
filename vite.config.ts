@@ -9,6 +9,7 @@ import vueSetupExtend from 'vite-plugin-vue-setup-extend'  //便于使用组件�
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import autoprefixer from 'autoprefixer'
+// import terser from '@rollup/plugin-terser'
 
 const name = 'vue3通用组件'
 
@@ -80,7 +81,15 @@ export default defineConfig({
           vue: 'Vue',
           'element-plus': 'ElementPlus'
         }
-      }
+      },
+      // plugins: [
+      //   terser({
+      //     compress: {
+      //       drop_console: true,
+      //       drop_debugger: true
+      //     }
+      //   })
+      // ]
     },
     minify: 'terser',
     terserOptions: {

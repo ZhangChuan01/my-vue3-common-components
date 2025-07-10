@@ -6,6 +6,7 @@ export interface InitConfig {
   formCol?: number
   formLabelPosition?: string
   i18n?: any
+  fixedTableHeight?: boolean
 }
 export default {
   install (app: App, options?: InitConfig | undefined) {

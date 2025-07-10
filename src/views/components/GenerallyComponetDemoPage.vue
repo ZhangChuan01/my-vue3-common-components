@@ -218,7 +218,7 @@ const getSelectionRows = () => {
 }
 </script>
 <template>
-  <div class="page">
+  <div class="page-wrapper">
     <div class="common-filter-wrapper">
       <MyFilter
         :filter-list="filters"
@@ -284,8 +284,10 @@ const getSelectionRows = () => {
   </div>
 </template>
 <style lang="scss" scoped>
-.page {
+.page-wrapper {
+  box-sizing: border-box;
+  height: calc(100vh - 55px);
   padding: 20px;
+  overflow: hidden;
 }
-
 </style>
