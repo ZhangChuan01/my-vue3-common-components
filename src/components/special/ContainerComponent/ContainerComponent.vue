@@ -9,14 +9,14 @@ const props = withDefaults(defineProps<{
   width?: number | string
   height: number
   shrinkDirection?: string
-  top?: number
-  bottom?: number
+  top?: number | undefined
+  bottom?: number | undefined
   headerHeight?: number
 }>(), {
   width: 380,
   shrinkDirection: 'left',
-  top: 0,
-  bottom: 0,
+  top: undefined,
+  bottom: undefined,
   headerHeight: 80
 })
 const id = uuidv4()
@@ -74,6 +74,7 @@ defineExpose({
       </div>
       <slot
         name="title-right"
+        :title="currentTitle"
       />
     </div>
     <div class="content">

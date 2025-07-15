@@ -81,7 +81,7 @@ export default defineConfig({
           vue: 'Vue',
           'element-plus': 'ElementPlus'
         }
-      },
+      }
       // plugins: [
       //   terser({
       //     compress: {
