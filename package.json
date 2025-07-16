@@ -1,6 +1,6 @@
 {
   "name": "my-vue3-common-components",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "type": "module",
   "description": "my-vue3-common-components",
   "main": "dist/index.js",
@@ -73,6 +73,7 @@
     "stylelint-config-standard-scss": "^6.1.0",
     "stylelint-order": "^6.0.1",
     "stylelint-scss": "^4.3.0",
+    "toolite": "^0.1.6",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
     "unplugin-auto-import": "^19.3.0",
@@ -87,6 +88,7 @@
     "vue-tsc": "^2.2.8"
   },
   "peerDependencies": {
+    "toolite": "^0.1.6",
     "element-plus": "^2.10.2",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",

@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import toolite from 'toolite'
 import { v4 as uuidv4 } from 'uuid'
 import shrinkImg from './shrink.png'
 const emits = defineEmits<{
@@ -12,12 +13,14 @@ const props = withDefaults(defineProps<{
   top?: number | undefined
   bottom?: number | undefined
   headerHeight?: number
+  defaultShow?: boolean
 }>(), {
   width: 380,
   shrinkDirection: 'left',
   top: undefined,
   bottom: undefined,
-  headerHeight: 80
+  headerHeight: 80,
+  defaultShow: true
 })
 const id = uuidv4()
 let currentTitle = ref(props.titles[0])
@@ -45,6 +48,13 @@ const shrinkContainer = (val?: boolean) => {
     }
   }
 }
+toolite.emitter.on('toggleShow',val => shrinkContainer(val))
+onMounted(() => {
+  if(!props.defaultShow) shrinkContainer(false)
+})
+onBeforeUnmount(() => {
+  toolite.emitter.off('toggleShow')
+})
 defineExpose({
   shrinkContainer
 })
