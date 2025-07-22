@@ -211,6 +211,8 @@ const refresh = (pagenum?: number) => {
       pageData.currentPage = pagenum
   }else if(pageData.currentPage !== 1 && pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
     pageData.currentPage = pageData.currentPage - 1
+  }else{
+    getData()
   }
 }
 watch(() => pageData.currentPage, newV => {
