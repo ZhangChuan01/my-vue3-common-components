@@ -1,6 +1,10 @@
 <script setup lang='ts'>
+// import toolite from 'toolite';
 import { type Input, type Select,type Date,type Cascader } from './base/base'
 import { useI18n } from 'vue-i18n'
+import type { GlobalComponents } from 'vue'
+import { type InitConfig } from '../../index'
+import toolite from 'toolite'
 
 const { t } = useI18n()
 const props = withDefaults(defineProps<{
@@ -8,10 +12,12 @@ const props = withDefaults(defineProps<{
   needBtn?: boolean
   confirmText?: string
   resetText?: string
+  tableComponent?: GlobalComponents['MyTable'] | undefined
 }>(), {
   needBtn: true,
   confirmText: '',
-  resetText: ''
+  resetText: '',
+  tableComponent: undefined
 })
 const emits = defineEmits<{
   (e: 'search', filter: {[key: string]: unknown}): void
@@ -38,11 +44,25 @@ const deleteEmptyValue = (obj: {[key: string]: any}) => {
   })
   return obj
 }
+const initConfig: InitConfig | undefined = inject('initConfig')
 const reset = () => {
+  const res: {[key: string]: any} = {}
   props.filterList.forEach(filter => {
     filter.value = ''
+    if(filter.code){
+      res[filter.code] = filter.value
+    }
   })
   emits('reset')
+  if(initConfig?.filterResetData){
+    if(props.tableComponent){
+      // console.log('props.tableComponent', props.tableComponent)
+      props.tableComponent.resetTableData = true
+    }else {
+      toolite.emitter.emit('resetTableData')
+    }
+    emits('search', {})
+  }
 }
 const computedStyle = (style: any) => {
   if(style){

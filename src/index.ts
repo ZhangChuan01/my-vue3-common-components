@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { type App, defineAsyncComponent } from 'vue'
 import { createI18n } from 'vue-i18n'
 import locals from './locals'
@@ -7,6 +7,7 @@ export interface InitConfig {
   formLabelPosition?: string
   i18n?: any
   fixedTableHeight?: boolean
+  filterResetData?: boolean
 }
 export default {
   install (app: App, options?: InitConfig | undefined) {

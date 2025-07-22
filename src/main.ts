@@ -28,6 +28,6 @@ app
   .use(router)
   .use(store)
   .use(ElementPlus, { locale: zhCn })
-  .use(components,{ formCol: 1,formLabelPosition: 'right',fixedTableHeight: true })
+  .use(components, { formCol: 1, formLabelPosition: 'right', fixedTableHeight: true, filterResetData: true })
   // .use(i18n)
   .mount('#app')

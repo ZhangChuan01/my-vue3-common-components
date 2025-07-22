@@ -4,6 +4,7 @@ import moment from 'moment'
 import FilterSvg from '../assets/FilterSvg.vue'
 import MySwitch from './base/MySwitch.vue'
 import { type InitConfig } from '../../index'
+import toolite from 'toolite'
 
 const emits = defineEmits<{
   (e:'pageChange', page: number): void
@@ -197,14 +198,20 @@ const handleCurrentChange = (currentPage: number) => {
   pageData.currentPage = currentPage
   getData()
 }
+let resetTableData = ref(false)
+toolite.emitter.on('resetTableData', () => {
+  resetTableData.value = true
+})
 const refresh = (pagenum?: number) => {
-  if (pagenum) {
-    pageData.currentPage = pagenum
-  }
-  if(pageData.currentPage !== 1 && pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
+  // console.log('resetTableData.value', resetTableData.value)
+  if(resetTableData.value){
+    pageData.currentPage = 1
+    resetTableData.value = false
+  }else if (pagenum) {
+      pageData.currentPage = pagenum
+  }else if(pageData.currentPage !== 1 && pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
     pageData.currentPage = pageData.currentPage - 1
   }
-  getData()
 }
 watch(() => pageData.currentPage, newV => {
   console.log('currentPage', newV)
@@ -337,12 +344,14 @@ onMounted(() => {
     showTable.value = true
   }
 })
+
 defineExpose({
   handleCurrentChange,
   refresh,
   tableData,
   getSelectionRows,
-  resetSelectionRows
+  resetSelectionRows,
+  resetTableData
 })
 </script>
 

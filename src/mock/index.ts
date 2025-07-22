@@ -1,9 +1,11 @@
 import Mock from 'mockjs'
 
 const getQuery = (url:string, name:string) => {
+  // console.log(url, name)
   const index = url.indexOf('?')
   if (index !== -1) {
     const queryStrArr = url.substr(index + 1).split('&')
+    // console.log('queryStrArr', queryStrArr)
     for (let i = 0; i < queryStrArr.length; i++) {
       const itemArr = queryStrArr[i].split('=')
       // console.log(itemArr)
@@ -31,6 +33,8 @@ const data: {list: Test.People[]} = Mock.mock({
 })
 console.log(data)
 Mock.mock(/\/api\/people/, 'get', (options:any) => {
+  console.log('ooooo', options)
+
   // console.log('get', options)
   const SkipCount = getQuery(options.url, 'SkipCount') || 0
   const MaxResultCount = getQuery(options.url, 'MaxResultCount') || 999
@@ -40,22 +44,22 @@ Mock.mock(/\/api\/people/, 'get', (options:any) => {
   const sortData: Test.People[] = data.list.sort((a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime())
   let items: Test.People[] = [],totalCount = 0
   if ((keyword !== null && keyword !== '') || (sex !== null && sex !== '')) {
-    // console.log('keyword', decodeURIComponent(keyword))
-    const filterData = sortData.filter(item => (item.name.includes(decodeURIComponent(keyword as string)) || item.address.includes(decodeURIComponent(keyword as string))) && item.sex === Number(sex))
+    // console.log('keyword', keyword, 'sex', sex, 'sortData', sortData)
+    const filterData = !keyword ? sortData.filter(item => item.sex === Number(sex)) :
+      sortData.filter(item => (item.name.includes(decodeURIComponent(keyword as string)) || item.address.includes(decodeURIComponent(keyword as string))) && item.sex === Number(sex))
     items = filterData.slice(Number(SkipCount), Number(SkipCount) + Number(MaxResultCount))
     totalCount = filterData.length
   }else {
     items = sortData.slice(Number(SkipCount), Number(SkipCount) + Number(MaxResultCount))
     totalCount = sortData.length
   }
-  console.log(items)
+  // console.log(items)
   return {
     items,
     totalCount
   }
 })
 Mock.mock('/api/people', 'post', (options:any) => {
-  // console.log(options)
   const body = JSON.parse(options.body)
   data.list.push(Mock.mock({
     'id': '@increment(1)',
