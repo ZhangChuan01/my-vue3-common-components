@@ -198,16 +198,22 @@ const handleCurrentChange = (currentPage: number) => {
   pageData.currentPage = currentPage
   getData()
 }
-let resetTableData = ref(false)
+let resetTableData = false
 toolite.emitter.on('resetTableData', () => {
-  resetTableData.value = true
+  resetTableData = true
+  setTimeout(() => {
+    resetTableData = false
+  }, 1000)
 })
 const refresh = (pagenum?: number) => {
-  // console.log('resetTableData.value', resetTableData.value)
+  // console.log('resetTableData', resetTableData)
   // console.log('pagenum', pagenum)
-  if(resetTableData.value){
+  if(resetTableData){
+    if(pageData.currentPage === 1){
+      getData()
+      return
+    }
     pageData.currentPage = 1
-    resetTableData.value = false
   }else if (pagenum) {
     if(pageData.currentPage === pagenum) {
       getData()
@@ -357,8 +363,7 @@ defineExpose({
   refresh,
   tableData,
   getSelectionRows,
-  resetSelectionRows,
-  resetTableData
+  resetSelectionRows
 })
 </script>
 

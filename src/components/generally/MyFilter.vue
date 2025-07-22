@@ -2,7 +2,6 @@
 // import toolite from 'toolite';
 import { type Input, type Select,type Date,type Cascader } from './base/base'
 import { useI18n } from 'vue-i18n'
-import type { GlobalComponents } from 'vue'
 import { type InitConfig } from '../../index'
 import toolite from 'toolite'
 
@@ -12,12 +11,10 @@ const props = withDefaults(defineProps<{
   needBtn?: boolean
   confirmText?: string
   resetText?: string
-  tableComponent?: GlobalComponents['MyTable'] | undefined
 }>(), {
   needBtn: true,
   confirmText: '',
-  resetText: '',
-  tableComponent: undefined
+  resetText: ''
 })
 const emits = defineEmits<{
   (e: 'search', filter: {[key: string]: unknown}): void
@@ -55,12 +52,7 @@ const reset = () => {
   })
   emits('reset')
   if(initConfig?.filterResetData){
-    if(props.tableComponent){
-      // console.log('props.tableComponent', props.tableComponent)
-      props.tableComponent.resetTableData = true
-    }else {
-      toolite.emitter.emit('resetTableData')
-    }
+    toolite.emitter.emit('resetTableData')
     emits('search', {})
   }
 }
