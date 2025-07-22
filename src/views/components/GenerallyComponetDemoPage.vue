@@ -176,7 +176,7 @@ const { mytable, dialogVisible, operate, rowValue, create, edit, resetForm, dele
 const search = (filters:any) => {
   filterRes.value = filters
   console.log('search', filterRes.value)
-  mytable.value?.refresh()
+  mytable.value?.refresh(1)
 }
 // 表格
 const dataSource = reactive({

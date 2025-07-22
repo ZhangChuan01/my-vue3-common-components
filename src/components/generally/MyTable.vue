@@ -204,11 +204,16 @@ toolite.emitter.on('resetTableData', () => {
 })
 const refresh = (pagenum?: number) => {
   // console.log('resetTableData.value', resetTableData.value)
+  // console.log('pagenum', pagenum)
   if(resetTableData.value){
     pageData.currentPage = 1
     resetTableData.value = false
   }else if (pagenum) {
-      pageData.currentPage = pagenum
+    if(pageData.currentPage === pagenum) {
+      getData()
+      return
+    }
+    pageData.currentPage = pagenum
   }else if(pageData.currentPage !== 1 && pageData.total > 0 && ((pageData.currentPage - 1) * pageData.pageSize === pageData.total - 1)){
     pageData.currentPage = pageData.currentPage - 1
   }else{
