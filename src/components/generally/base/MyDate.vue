@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { type Date } from './base'
 const emits = defineEmits<{
-  (e:'update:modelValue', modelValue: string | number): void
+  (e:'update:modelValue', modelValue: any): void
 }>()
 
 const props = defineProps<{

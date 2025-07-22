@@ -4,13 +4,13 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const emits = defineEmits<{
-  (e:'update:modelValue', modelValue: string | number): void
-  (e:'change', modelValue: string | number): void
+  (e:'update:modelValue', modelValue: any): void
+  (e:'change', modelValue: any): void
 }>()
 
 const props = withDefaults(defineProps<{
   filterObj: Input
-  modelValue: string | number | any
+  modelValue: any
 }>(), {
   modelValue: ''
 })

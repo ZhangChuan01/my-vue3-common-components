@@ -2,7 +2,7 @@
 import { type CheckGroup } from './base'
 import { v4 as uuidv4 } from 'uuid'
 const emits = defineEmits<{
-  (e:'update:modelValue', modelValue: string[] | number[]): void
+  (e:'update:modelValue', modelValue: any): void
 }>()
 
 const props = withDefaults(defineProps<{

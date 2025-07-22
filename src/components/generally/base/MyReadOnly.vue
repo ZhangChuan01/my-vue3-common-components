@@ -3,7 +3,7 @@ import { type Readonly } from './base'
 
 const props = withDefaults(defineProps<{
   filterObj: Readonly
-  modelValue: string | number | any
+  modelValue: any
 }>(), {
   modelValue: ''
 })

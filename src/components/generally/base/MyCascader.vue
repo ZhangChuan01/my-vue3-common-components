@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const emits = defineEmits<{
-  (e:'update:modelValue', modelValue: string | number): void
+  (e:'update:modelValue', modelValue: any): void
 }>()
 
 const props = defineProps<{
