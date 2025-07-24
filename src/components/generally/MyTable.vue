@@ -422,7 +422,7 @@ defineExpose({
           </template>
         </el-table-column>
         <el-table-column
-          v-else-if="col.type === 'datetime' || col.type === 'datetime2' || col.type === 'date' || col.type === 'time'"
+          v-else-if="col.type === 'datetime' || col.type === 'dateyear' || col.type === 'datemonth' || col.type === 'date' || col.type === 'time'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
         >
@@ -437,13 +437,8 @@ defineExpose({
             <FilterSvg v-else />
           </template>
           <template #default="scope">
-            <span v-if="col.type === 'datetime2'">
-              {{ dateFormat(scope.row[col.code],'YYYY-MM-DD') }}
-              <br>
-              {{ dateFormat(scope.row[col.code],'HH:mm:ss') }}
-            </span>
-            <span v-else>
-              {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
+            <span>
+              {{ dateFormat(scope.row[col.code], col.type === 'date' ? 'YYYY-MM-DD' : col.type === 'dateyear' ? 'YYYY' : col.type === 'datemonth' ? 'YYYY-MM' : col.type === 'time' ? 'HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss') }}
             </span>
           </template>
         </el-table-column>
