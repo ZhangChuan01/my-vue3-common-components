@@ -72,10 +72,12 @@ defineExpose({
             :rowspan="tdData.rowspan"
             :colspan="tdData.colspan"
             :width="tdData.width"
+            :title="tdData.value"
           >
+            <span v-html="tdData.value" class="no-border" v-if="tdData.type !== 'input'"></span>
             <input
+              v-else
               v-model="tdData.value"
-              :disabled="tdData.type !== 'input'"
               type="text"
               class="no-border"
             >
@@ -96,6 +98,7 @@ table {
   border-collapse: collapse;
 }
 thead {
+  font-weight: 600;
   border-bottom: 1px solid black;
 }
 tr {
@@ -108,29 +111,31 @@ th,
 td {
   padding: 8px;
   color: #000;
-  font-weight: 600;
   font-size: 14px;
   line-height: 22px;
   text-align: center;
   vertical-align: middle;
   border-right: 1px solid black;
   &:last-child {
-    border-right: none;
+    // border-right: none;
   }
   span {
     display: block;
     width: 100%;
-    font-weight: 400;
     input {
       width: 100%;
     }
   }
 }
 .no-border {
+  width: 100%;
   padding: 0;
+  overflow: hidden;
   color: #000;
   font-size: 14px;
+  white-space: nowrap;
   text-align: center;
+  text-overflow: ellipsis;
   background: transparent;
   border: none;
   border-radius: 4px;
