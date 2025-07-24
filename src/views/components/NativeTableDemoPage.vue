@@ -3,7 +3,7 @@ const dataSource = reactive({
   thead: [
     [
       {
-        value: '测试1',
+        value: '测试<br/>1',
         rowspan: 2
       },
       {

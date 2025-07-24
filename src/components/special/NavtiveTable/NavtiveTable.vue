@@ -56,7 +56,7 @@ defineExpose({
             :colspan="item.colspan"
             :width="item.width"
           >
-            {{ item.value }}
+            <span v-html="item.value"></span>
           </th>
         </tr>
       </thead>
