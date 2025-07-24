@@ -4,11 +4,12 @@ import { type GlobalComponents } from 'vue'
 import BaseType from '@/baseType'
 import { getPeopleListApi,addPeopleApi,editPeopleApi,deletePeopleApi } from '@/api/test'
 
-const filters = reactive([
+const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | BaseType.Cascader)[]>([
   {
     label: '测试时间组件',
     code: 'time',
     type: 'datetimerange',
+    limitDay: 7,
     value: ''
   },
   {

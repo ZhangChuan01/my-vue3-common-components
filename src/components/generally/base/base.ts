@@ -56,6 +56,7 @@ export interface Select extends Base {
 }
 export interface Date extends Base {
   valueFormat?: string
+  limitDay?: number
 }
 export interface Switch extends Base {
   loading?: boolean
