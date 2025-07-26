@@ -4,6 +4,7 @@ import PreviewFileDemoPage from '../components/PreviewFileDemoPage.vue'
 import LineAreaDemoPage from '../components/LineAreaDemoPage.vue'
 import NativeTableDemoPage from '../components/NativeTableDemoPage.vue'
 import ContainerComponentDemoPage from '../components/ContainerComponentDemoPage.vue'
+import VideoComponetDemoPage from '../components/VideoComponetDemoPage.vue'
 const activeName = ref('first')
 
 </script>
@@ -39,6 +40,12 @@ const activeName = ref('first')
       name="fifth"
     >
       <ContainerComponentDemoPage />
+    </el-tab-pane>
+    <el-tab-pane
+      label="视频组件"
+      name="sixth"
+    >
+      <VideoComponetDemoPage />
     </el-tab-pane>
   </el-tabs>
 </template>

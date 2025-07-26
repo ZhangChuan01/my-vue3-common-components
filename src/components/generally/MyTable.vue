@@ -340,7 +340,7 @@ const calcHeight = () => {
       totalHeight += getTotalHeight(divList[i])
     }
     // console.log('totalHeight', totalHeight)
-    return height - totalHeight - 54
+    return height - totalHeight - (props.needPage ? 54 : 2)
   }
   return '-'
 }

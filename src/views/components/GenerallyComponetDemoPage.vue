@@ -249,6 +249,7 @@ const getSelectionRows = () => {
       :data-fun="getPeopleListApi"
       :data-source="dataSource"
       :need-selection="true"
+      :need-page="false"
       selection-model="normal"
       @row-click="rowClick"
       @page-change="handleCurrentChange"

@@ -15,6 +15,7 @@ declare module 'nprogress';
 declare module 'reset-css';
 declare module 'element-plus/dist/locale/zh-cn.mjs'
 declare module 'canvas-datagrid';
+declare module '@cycjimmy/jsmpeg-player';
 interface Window {
   $message: any
   $router: any

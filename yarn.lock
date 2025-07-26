@@ -241,6 +241,11 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz#b6c75a56a1947cc916ea058772d666a2c8932f31"
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
+"@cycjimmy/jsmpeg-player@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/jsmpeg-player/-/jsmpeg-player-6.1.2.tgz#6dd83779ca6319a217fc2043064f8d9fb0866cbd"
+  integrity sha512-U9DBDe5fxHmbwQww9rFxMLNI2Wlg7DhPzI7AVFpq8GehiUP7+NwuMPXpP4zAd52sgkxtOqOeMjgE5g0ZLnQZ0w==
+
 "@element-plus/icons-vue@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@element-plus/icons-vue/-/icons-vue-2.3.1.tgz#1f635ad5fdd5c85ed936481525570e82b5a8307a"

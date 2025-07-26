@@ -1,6 +1,6 @@
 {
   "name": "my-vue3-common-components",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "type": "module",
   "description": "my-vue3-common-components",
   "main": "dist/index.js",
@@ -36,6 +36,7 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@cycjimmy/jsmpeg-player": "^6.1.2",
     "canvas-datagrid": "^0.4.7",
     "docx-preview": "^0.3.5",
     "moment": "^2.30.1",
@@ -88,10 +89,10 @@
     "vue-tsc": "^2.2.8"
   },
   "peerDependencies": {
-    "toolite": "^0.1.6",
     "element-plus": "^2.10.2",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
+    "toolite": "^0.1.6",
     "vue": "^3.5.13"
   }
 }

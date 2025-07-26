@@ -21,6 +21,7 @@ import PreviewFile from './components/special/PreviewFile/PreviewFile.vue'
 import LineArea from './components/special/LineArea/LineArea.vue'
 import NavtiveTable from './components/special/NavtiveTable/NavtiveTable.vue'
 import ContainerComponent from './components/special/ContainerComponent/ContainerComponent.vue'
+import VideoComponent from './components/special/VideoComponent/VideoComponent.vue'
 
 declare module 'vue'{
   export interface GlobalComponents {
@@ -46,5 +47,6 @@ declare module 'vue'{
     LineArea: typeof LineArea
     NavtiveTable: typeof NavtiveTable
     ContainerComponent: typeof ContainerComponent
+    VideoComponent: typeof VideoComponent
   }
 }
