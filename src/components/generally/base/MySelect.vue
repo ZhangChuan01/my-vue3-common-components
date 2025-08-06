@@ -44,11 +44,26 @@ const setPropData = () => {
 const setCodesMap = (val: any) => {
   if(!props.filterObj.codesMap) return
   let obj:any = {}
-  const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
-  if(!target) return
-  Object.entries(props.filterObj.codesMap).forEach((item: any) => {
-    obj[item[0]] = target[item[1]]
-  })
+  if(props.filterObj.multiple){
+    Object.keys(props.filterObj.codesMap).forEach((item: any) => {
+      obj[item] = []
+    })
+    val.forEach((item: any) => {
+      const target = props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === item : o.id === item)
+      // console.log('ttttttttt',target,obj)
+      if(target) {
+        Object.entries(props.filterObj.codesMap!).forEach((item: any) => {
+          obj[item[0]].push(target[item[1]])
+        })
+      }
+    })
+  }else {
+    const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
+    if(!target) return
+    Object.entries(props.filterObj.codesMap).forEach((item: any) => {
+      obj[item[0]] = target[item[1]]
+    })
+  }
   emits('updateModel', obj)
 }
 onMounted(() => {

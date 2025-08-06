@@ -45,13 +45,27 @@ const setCodesMap = (val: any) => {
   if(!props.filterObj.codesMap) return
   console.log('val',val)
   let obj:any = {}
-  const key = props.filterObj.props?.value ? props.filterObj.props.value : 'id'
-  const tartget = props.filterObj.options.find(o => o[key] === val[key])
-  if(!tartget) return
-  Object.entries(props.filterObj.codesMap).forEach(item => {
-    obj[item[0]] = tartget[item[1]]
-  })
   // console.log('oooooooooo',val,props.filterObj.codesMap,obj)
+  if(props.filterObj.multiple){
+    Object.keys(props.filterObj.codesMap).forEach((item: any) => {
+      obj[item] = []
+    })
+    val.forEach((item: any) => {
+      const target = props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === item : o.id === item)
+      // console.log('ttttttttt',target,obj)
+      if(target) {
+        Object.entries(props.filterObj.codesMap!).forEach((item: any) => {
+          obj[item[0]].push(target[item[1]])
+        })
+      }
+    })
+  }else {
+    const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
+    if(!target) return
+    Object.entries(props.filterObj.codesMap).forEach((item: any) => {
+      obj[item[0]] = target[item[1]]
+    })
+  }
   emits('updateModel', obj)
 }
 onMounted(() => {

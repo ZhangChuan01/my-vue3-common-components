@@ -39,17 +39,17 @@ const setModel = () => {
   // console.log('formModel', formModel.value)
 }
 setModel()
+let modelParams = {}
+const changeModel = (val: any) => {
+  console.log('changeModel', val)
+  Object.assign(modelParams, val)
+}
 const getValue = (code?: string) => {
-  return code ? formModel.value[code] : formModel.value
+  return code ? formModel.value[code] : Object.assign({}, formModel.value, modelParams)
 }
 const setValue = (data: {[key:string]: any}) => {
   Object.assign(formModel.value, data)
   // console.log('setValue', formModel.value)
-}
-let modelParams = {}
-const changeModel = (val: any) => {
-  // console.log('changeModel', val)
-  Object.assign(modelParams, val)
 }
 const checkRules = () => {
   return new Promise(reslove => {
