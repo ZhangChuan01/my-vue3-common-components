@@ -50,6 +50,9 @@ const getFinalVal = (val: string | number) => {
   if(res.toString().length > 100 && props.filterObj.type !== 'textarea'){
     res = res.toString().slice(0, 100)
   }
+  if(props.filterObj.type !== 'textarea'){
+    res = res.toString().replace(/\s*/g,"")
+  }
   return res
 }
 
