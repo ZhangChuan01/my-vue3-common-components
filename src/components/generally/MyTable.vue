@@ -21,10 +21,6 @@ function dateFormat(val: string, type = 'YYYY-MM-DD HH:mm:ss') {
     return ' '
   }
 }
-function takeMoreThan(value: number) {
-  if (!value || value === 0) return value
-  return Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))
-}
 const props = withDefaults(defineProps<{
   dataFun?: null | ((params?: any,...args: any) => Promise<any>)
   filters?: null | {[key: string]: unknown}
@@ -45,6 +41,7 @@ const props = withDefaults(defineProps<{
       type?: string  // template,datetime,date,time,num
       headerSlot?: string
       filterSlot?: string
+      digit?: number
       valueChange?: (val: any) => void
     }[]
     operate?: {
@@ -443,7 +440,7 @@ defineExpose({
           </template>
         </el-table-column>
         <el-table-column
-          v-else-if="col.type === 'num'"
+          v-else-if="col.type === 'num' || col.type === 'intNum' || col.type === 'weight'"
           :prop="col.code"
           v-bind="handleBindObj(col)"
         >
@@ -458,26 +455,7 @@ defineExpose({
             <FilterSvg v-else />
           </template>
           <template #default="scope">
-            {{ takeMoreThan(scope.row[col.code || '']) }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          v-else-if="col.type === 'intNum' || col.type === 'weight'"
-          :prop="col.code"
-          v-bind="handleBindObj(col)"
-        >
-          <template #header>
-            <slot :name="col.headerSlot" />
-          </template>
-          <template #filter-icon>
-            <slot
-              v-if="col.filterSlot"
-              :name="col.filterSlot"
-            />
-            <FilterSvg v-else />
-          </template>
-          <template #default="scope">
-            {{ Math.floor(scope.row[col.code]) || 0 }}
+            {{ toolite.formatNumber(scope.row[col.code],col.digit || (col.type === 'num' ? 2 : 0)) }}
           </template>
         </el-table-column>
         <el-table-column
