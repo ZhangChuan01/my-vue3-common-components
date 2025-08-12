@@ -37,7 +37,7 @@ const search = () => {
           }
         })
         if(count > 0){
-          window.$message.error(`${filter.label}时间范围必须全选`)
+          window.$message.error(`${filter.label}范围必须全选`)
           flag = true
         }else{
           const diff = toolite.dateDiff({
@@ -46,7 +46,7 @@ const search = () => {
             type: 'seconds'
           })
           if(diff < 0){
-            window.$message.error(`${filter.label}时间范围开始时间不能大于结束时间`)
+            window.$message.error(`${filter.label}范围开始时间不能大于结束时间`)
             flag = true
           }
         }
