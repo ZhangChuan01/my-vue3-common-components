@@ -13,6 +13,12 @@ const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | Bas
     value: ''
   },
   {
+    label: '测试时间组件',
+    code: 'time2',
+    type: 'datetimerange2',
+    value: ''
+  },
+  {
     label: '性别',
     code: 'sex',
     type: 'virtualizedSelect',

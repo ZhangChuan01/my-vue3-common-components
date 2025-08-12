@@ -8,6 +8,7 @@ import MyInput from './components/generally/base/MyInput.vue'
 import MySelect from './components/generally/base/MySelect.vue'
 import MyVirtualizedSelect from './components/generally/base/MyVirtualizedSelect.vue'
 import MyDate from './components/generally/base/MyDate.vue'
+import MyDateTimeRange from './components/generally/base/MyDateTimeRange.vue'
 import MyCascader from './components/generally/base/MyCascader.vue'
 import MyTime from './components/generally/base/MyTime.vue'
 import MySwitch from './components/generally/base/MySwitch.vue'
@@ -35,6 +36,7 @@ declare module 'vue'{
     MySelect: typeof MySelect
     MyVirtualizedSelect: typeof MyVirtualizedSelect
     MyDate: typeof MyDate
+    MyDateTimeRange: typeof MyDateTimeRange
     MyCascader: typeof MyCascader
     MyTime: typeof MyTime
     MySwitch: typeof MySwitch

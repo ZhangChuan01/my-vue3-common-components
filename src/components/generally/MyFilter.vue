@@ -25,12 +25,39 @@ const inputTypes = [ 'text', 'number' ]
 const dateTypes = [ 'year', 'month', 'date', 'dates', 'datetime', 'week', 'datetimerange', 'daterange', 'monthrange' ]
 const search = () => {
   const res: {[key: string]: any} = {}
+  let flag = false
   props.filterList.forEach(filter => {
+    if(filter.type === 'datetimerange2'){
+      console.log('filter.value',filter.value)
+      if(filter.value && filter.value.length > 0){
+        let count = 0
+        filter.value.forEach((item: any) => {
+          if(item.length > 0 && item.length < 19){
+            count++
+          }
+        })
+        if(count > 0){
+          window.$message.error(`${filter.label}时间范围必须全选`)
+          flag = true
+        }else{
+          const diff = toolite.dateDiff({
+            start: filter.value[0],
+            end: filter.value[1],
+            type: 'seconds'
+          })
+          if(diff < 0){
+            window.$message.error(`${filter.label}时间范围开始时间不能大于结束时间`)
+            flag = true
+          }
+        }
+      }
+    }
     if(filter.code){
       res[filter.code] = filter.value
     }
   })
-  // console.log('res2222', res)
+  if(flag) return
+  console.log('res2222', res)
   emits('search', deleteEmptyValue(JSON.parse(JSON.stringify(res))))
 }
 const deleteEmptyValue = (obj: {[key: string]: any}) => {
@@ -104,6 +131,11 @@ const computedStyle = (style: any) => {
             v-else-if="filter.type === 'virtualizedSelect'"
             v-model="(filter.value as string)"
             :filter-obj="(filter as Select)"
+          />
+          <MyDateTimeRange
+            v-else-if="filter.type === 'datetimerange2'"
+            v-model="(filter.value as string)"
+            :filter-obj="filter"
           />
           <MyDate
             v-else-if="dateTypes.includes(filter.type)"
