@@ -78,7 +78,7 @@ defineExpose({
             <MyInput
               v-else
               v-model="tdData.value"
-              :filter-obj="{...tdData,clearable: false}"
+              :filter-obj="{...tdData,type:'text',clearable: false}"
               type="text"
               class="no-border"
             />
