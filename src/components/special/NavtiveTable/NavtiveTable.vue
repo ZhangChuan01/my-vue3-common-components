@@ -75,12 +75,13 @@ defineExpose({
             :title="tdData.value"
           >
             <span v-html="tdData.value" class="no-border" v-if="tdData.type !== 'input'"></span>
-            <input
+            <MyInput
               v-else
               v-model="tdData.value"
+              :filter-obj="{...tdData,clearable: false}"
               type="text"
               class="no-border"
-            >
+            />
           </td>
         </tr>
       </tbody>
@@ -141,6 +142,12 @@ td {
   border-radius: 4px;
   outline: none;
   transition: all 0.3s;
+  :deep(.el-input__wrapper) {
+    box-shadow: none;
+    input {
+      color: #000;
+    }
+  }
 }
 td:nth-child(n+3) input {
   box-sizing: border-box;

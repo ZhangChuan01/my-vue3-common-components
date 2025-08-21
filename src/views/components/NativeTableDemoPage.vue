@@ -38,13 +38,13 @@ const dataSource = reactive({
     [
       {
         value: '1-1',
-        type: 'input',
         code: 'a'
       },
       {
         value: '1-2',
         colspan: 2,
         type: 'input',
+        limitIntNumber: true,
         code: 'b'
       },
       {
