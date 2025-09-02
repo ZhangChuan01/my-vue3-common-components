@@ -53,12 +53,14 @@ const getFinalVal = (val: string | number) => {
   if(props.filterObj.type !== 'textarea'){
     res = res.toString().replace(/\s*/g,"")
   }
+  // console.log('res',res)
   return res
 }
 
 const bindValue = computed({
   get: () => props.modelValue,
   set: val => {
+    // console.log('val',val)
     if (props.filterObj.handleChange) {
       props.filterObj.handleChange(getFinalVal(val),props.modelValue)
     }
@@ -67,6 +69,7 @@ const bindValue = computed({
   }
 })
 const checkValue = () => {
+  if(bindValue.value === null || bindValue.value === undefined) return
   if(bindValue.value === '-'){
     bindValue.value = ''
   }

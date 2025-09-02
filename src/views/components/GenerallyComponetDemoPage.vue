@@ -65,6 +65,10 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     label: '姓名',
     code: 'name',
     type: 'text',
+    limitNumber: true,
+    allowNegativeNumber: true,
+    min: 1,
+    max: 999,
     value: ''
   },
   {
@@ -223,9 +227,11 @@ const handleSizeChange = (size: number) => {
 const getSelectionRows = () => {
   console.log('getSelectionRows',mytable.value?.getSelectionRows())
 }
+const test = ref(null)
 </script>
 <template>
   <div class="page-wrapper">
+    <MyInput v-model="test" :filter-obj="{ label: '姓名', code: 'name', type: 'text',limitNumber: true,allowNegativeNumber: true,min: 1,max: 999}" />
     <div class="common-filter-wrapper">
       <MyFilter
         :filter-list="filters"
