@@ -70,9 +70,10 @@ const checkValue = () => {
   if(bindValue.value === '-'){
     bindValue.value = ''
   }
-  if (props.filterObj.max && Number(bindValue.value) > props.filterObj.max) {
+  if(bindValue.value === '') return
+  if ((props.filterObj.max !== null && props.filterObj.max !== undefined) && Number(bindValue.value) > props.filterObj.max) {
     bindValue.value = props.filterObj.max
-  } else if (props.filterObj.min && Number(bindValue.value) < props.filterObj.min) {
+  } else if ((props.filterObj.min !== null && props.filterObj.min !== undefined) && Number(bindValue.value) < props.filterObj.min) {
     bindValue.value = props.filterObj.min
   }
 }
