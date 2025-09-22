@@ -132,6 +132,11 @@ const computedStyle = (style: any) => {
             v-model="(filter.value as string)"
             :filter-obj="(filter as Select)"
           />
+          <MyTime
+            v-else-if="filter.type === 'time'"
+            v-model="(filter.value as string)"
+            :filter-obj="filter"
+          />
           <MyDateTimeRange
             v-else-if="filter.type === 'datetimerange2'"
             v-model="(filter.value as string)"

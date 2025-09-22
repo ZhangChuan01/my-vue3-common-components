@@ -55,6 +55,7 @@ export interface Select extends Base {
   customLabel?: string
 }
 export interface Date extends Base {
+  isRange?: boolean
   valueFormat?: string
   limitDay?: number
 }
