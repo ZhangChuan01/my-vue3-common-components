@@ -11,10 +11,12 @@ const props = withDefaults(defineProps<{
   needBtn?: boolean
   confirmText?: string
   resetText?: string
+  rememberDefault?: boolean
 }>(), {
   needBtn: true,
   confirmText: '',
-  resetText: ''
+  resetText: '',
+  rememberDefault: false
 })
 const emits = defineEmits<{
   (e: 'search', filter: {[key: string]: unknown}): void
@@ -69,14 +71,24 @@ const deleteEmptyValue = (obj: {[key: string]: any}) => {
   return obj
 }
 const initConfig: InitConfig | undefined = inject('initConfig')
+let defaultFilter: {[key: string]: any} = {}
 const reset = () => {
-  const res: {[key: string]: any} = {}
-  props.filterList.forEach(filter => {
-    filter.value = ''
-    if(filter.code){
-      res[filter.code] = filter.value
-    }
-  })
+  let res: {[key: string]: any} = {}
+  if(props.rememberDefault){
+    props.filterList.forEach(filter => {
+      if(filter.code){
+        filter.value = defaultFilter[filter.code]
+      }
+    })
+  }else{
+    props.filterList.forEach(filter => {
+      filter.value = ''
+      if(filter.code){
+        res[filter.code] = filter.value
+      }
+    })
+  }
+  console.log('props.filterList',props.filterList)
   emits('reset')
   if(initConfig?.filterResetData){
     toolite.emitter.emit('resetTableData')
@@ -94,6 +106,17 @@ const computedStyle = (style: any) => {
     }
   }
 }
+
+onMounted(() => {
+  if(props.rememberDefault){
+    props.filterList.forEach(filter => {
+      if(filter.code){
+        defaultFilter[filter.code] = filter.value
+      }
+    })
+    console.log('defaultFilter',defaultFilter)
+  }
+})
 </script>
 
 <template>

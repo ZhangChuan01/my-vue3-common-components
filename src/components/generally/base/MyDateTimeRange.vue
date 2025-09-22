@@ -38,6 +38,14 @@ onMounted(() => {
     endTime.value = toolite.dateFormat({date: props.modelValue[1],type: 'HH:mm:ss'})
   }
 })
+watch(() => props.modelValue, () => {
+  if(!props.modelValue){
+    startDate.value = ''
+    startTime.value = ''
+    endDate.value = ''
+    endTime.value = ''
+  }
+})
 </script>
 
 <template>

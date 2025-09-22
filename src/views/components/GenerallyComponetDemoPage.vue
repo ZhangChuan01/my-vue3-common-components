@@ -26,7 +26,7 @@ const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | Bas
       { name: '男', id: 1 },
       { name: '女', id: 0 }
     ],
-    value: '',
+    value: 1,
     props: {
       label: 'name',
       value: 'id'
@@ -53,7 +53,7 @@ const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | Bas
     label: '关键词',
     code: 'keyword',
     placeholder: '请输入姓名/地址',
-    value: '',
+    value: '123',
     type: 'text'
   }
 ])
@@ -235,6 +235,7 @@ const test = ref(null)
     <div class="common-filter-wrapper">
       <MyFilter
         :filter-list="filters"
+        rememberDefault
         @search="search"
       />
       <el-button
@@ -254,7 +255,7 @@ const test = ref(null)
         获取选中项
       </el-button>
     </div>
-    <my-table
+    <MyTable
       ref="mytable"
       :need-index="true"
       :filters="filterRes"
@@ -279,7 +280,7 @@ const test = ref(null)
           自定义按钮
         </el-button>
       </template>
-    </my-table>
+    </MyTable>
     <my-form-dialog
       ref="formRef"
       v-model:dialog-visible="dialogVisible"
