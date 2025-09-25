@@ -16,6 +16,7 @@ import MyColorPicker from './components/generally/base/MyColorPicker.vue'
 import MyCheckGroup from './components/generally/base/MyCheckGroup.vue'
 import MyRadioGroup from './components/generally/base/MyRadioGroup.vue'
 import MyReadOnly from './components/generally/base/MyReadOnly.vue'
+import MyTab from './components/generally/MyTab.vue'
 
 import SvgIcon from './components/special/SvgIcon/SvgIcon.vue'
 import PreviewFile from './components/special/PreviewFile/PreviewFile.vue'
@@ -44,6 +45,7 @@ declare module 'vue'{
     MyCheckGroup: typeof MyCheckGroup
     MyRadioGroup: typeof MyRadioGroup
     MyReadOnly: typeof MyReadOnly
+    MyTab: typeof MyTab
     SvgIcon: typeof SvgIcon
     PreviewFile: typeof PreviewFile
     LineArea: typeof LineArea
