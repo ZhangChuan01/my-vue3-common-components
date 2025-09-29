@@ -37,7 +37,7 @@ const getFinalVal = (val: string | number) => {
         res = parts[0] + '.' + parts[1] // 只保留第一个小数点
       }
       if (parts.length > 1) {
-        res = parts[0] + '.' + parts[1].slice(0, 2) // 限制小数部分最多为两位
+        res = parts[0] + '.' + parts[1].slice(0, props.filterObj.precision ?? 2) // 限制小数部分
       }
     }
     if(props.filterObj.limitIntNumber){

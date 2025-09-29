@@ -33,6 +33,7 @@ export interface Input extends Base {
   labelIsInner?: boolean
   allowNegativeNumber?: boolean
   reg?: RegExp
+  precision?: number
 }
 
 /**
