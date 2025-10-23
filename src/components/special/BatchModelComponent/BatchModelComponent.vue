@@ -402,20 +402,28 @@ onBeforeUnmount(() => {
         :style="{ left: left1 + 'px', zIndex: zIndex1 }"
         @mousedown="moveLine($event, 'minX')"
       >
-        <SvgIcon
+        <img
+          src="../../../assets/move-start.png"
+          alt=""
+        >
+        <!-- <SvgIcon
           icon="drag-x"
           :size="20"
-        />
+        /> -->
       </div>
       <div
         class="line-end"
         :style="{ left: left2 + 'px', zIndex: zIndex2 }"
         @mousedown="moveLine($event, 'maxX')"
       >
-        <SvgIcon
+        <img
+          src="../../../assets/move-end.png"
+          alt=""
+        >
+        <!-- <SvgIcon
           icon="drag-x"
           :size="20"
-        />
+        /> -->
       </div>
     </div>
     <div class="range-info range-info-bottom">
@@ -648,7 +656,7 @@ onBeforeUnmount(() => {
   width: 1px;
   height: v-bind("`${height + 40}px`");
   background-color: #1d41ff;
-  svg {
+  img {
     position: absolute;
     bottom: 0;
     left: 50%;
