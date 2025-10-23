@@ -24,6 +24,7 @@ import LineArea from './components/special/LineArea/LineArea.vue'
 import NavtiveTable from './components/special/NavtiveTable/NavtiveTable.vue'
 import ContainerComponent from './components/special/ContainerComponent/ContainerComponent.vue'
 import VideoComponent from './components/special/VideoComponent/VideoComponent.vue'
+import BatchModelComponent from './components/special/BatchModelComponent/BatchModelComponent.vue'
 
 declare module 'vue'{
   export interface GlobalComponents {
@@ -52,5 +53,6 @@ declare module 'vue'{
     NavtiveTable: typeof NavtiveTable
     ContainerComponent: typeof ContainerComponent
     VideoComponent: typeof VideoComponent
+    BatchModelComponent: typeof BatchModelComponent
   }
 }

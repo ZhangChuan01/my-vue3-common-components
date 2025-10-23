@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import type { GlobalComponents } from 'vue';
+import type { GlobalComponents } from 'vue' 
 
 const tabClick = (tab: any) => {
   console.log('tabClick', tab.paneName)
@@ -12,7 +12,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <MyTab ref="myTab" :tabs="['测试1', '测试2']" :permissions="['AbpIdentity.Roles','AbpIdentity.Users']" @tab-click="tabClick" :type="'card'" :lazy="true">
+  <MyTab
+    ref="myTab"
+    :tabs="['测试1', '测试2']"
+    :permissions="['AbpIdentity.Roles','AbpIdentity.Users']"
+    :type="'card'"
+    :lazy="true"
+    @tab-click="tabClick"
+  >
     <template #测试1>
       <div>测试1</div>
     </template>

@@ -227,7 +227,6 @@ onBeforeUnmount(() => {
 
 <style scoped lang=scss>
 .area-chart {
-  padding: 20px;
   padding-bottom: 40px;
 }
 .legend {

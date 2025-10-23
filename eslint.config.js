@@ -23,10 +23,10 @@ export default eslint_ts.config(
       parser: vue_parser,
       parserOptions: {
         sourceType: 'module',
-        parser: eslint_ts.parser
-      },
-      ecmaFeatures: {
-        jsx: true
+        parser: eslint_ts.parser,
+        ecmaFeatures: {
+          jsx: true
+        }
       }
     }
   },
