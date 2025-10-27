@@ -35,6 +35,7 @@ const setPropData = () => {
 <template>
   <el-cascader
     v-model="bindValue"
+    :multiple="true"
     v-bind="setPropData()"
   />
 </template>

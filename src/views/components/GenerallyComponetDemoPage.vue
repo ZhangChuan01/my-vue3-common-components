@@ -37,7 +37,6 @@ const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | Bas
     code: 'cascader',
     // type: 'virtualizedSelect',
     type: 'cascader',
-    // multiple: true,
     options: [
       { name: 'a', id: 1, children: [ { name: 'aa', id: 11 } ] },
       { name: 'b', id: 0, children: [ { name: 'bb', id: 22 } ] }
@@ -47,6 +46,7 @@ const filters = reactive<(BaseType.Input | BaseType.Select | BaseType.Date | Bas
       label: 'name',
       value: 'id',
       children: 'children'
+      // multiple: true
     }
   },
   {
@@ -231,11 +231,14 @@ const test = ref(null)
 </script>
 <template>
   <div class="page-wrapper">
-    <MyInput v-model="test" :filter-obj="{ label: '姓名', code: 'name', type: 'text',limitNumber: true,allowNegativeNumber: true,min: 1,max: 999}" />
+    <MyInput
+      v-model="test"
+      :filter-obj="{ label: '姓名', code: 'name', type: 'text',limitNumber: true,allowNegativeNumber: true,min: 1,max: 999}"
+    />
     <div class="common-filter-wrapper">
       <MyFilter
         :filter-list="filters"
-        rememberDefault
+        remember-default
         @search="search"
       />
       <el-button

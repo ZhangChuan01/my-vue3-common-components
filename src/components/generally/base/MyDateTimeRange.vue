@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import toolite from 'toolite';
+import toolite from 'toolite'
 import { type Date } from './base'
 
 const emits = defineEmits<{
@@ -27,15 +27,15 @@ const valChange = () => {
   if(checkValue(startDate.value) && checkValue(startTime.value) && checkValue(endDate.value) && checkValue(endTime.value)) {
     bindValue.value = []
   }else{
-    bindValue.value = [`${startDate.value} ${startTime.value}`,`${endDate.value} ${endTime.value}`]
+    bindValue.value = [ `${startDate.value} ${startTime.value}`,`${endDate.value} ${endTime.value}` ]
   }
 }
 onMounted(() => {
   if(props.modelValue){
-    startDate.value = toolite.dateFormat({date: props.modelValue[0],type: 'YYYY-MM-DD'})
-    startTime.value = toolite.dateFormat({date: props.modelValue[0],type: 'HH:mm:ss'})
-    endDate.value = toolite.dateFormat({date: props.modelValue[1],type: 'YYYY-MM-DD'})
-    endTime.value = toolite.dateFormat({date: props.modelValue[1],type: 'HH:mm:ss'})
+    startDate.value = toolite.dateFormat({ date: props.modelValue[0],type: 'YYYY-MM-DD' })
+    startTime.value = toolite.dateFormat({ date: props.modelValue[0],type: 'HH:mm:ss' })
+    endDate.value = toolite.dateFormat({ date: props.modelValue[1],type: 'YYYY-MM-DD' })
+    endTime.value = toolite.dateFormat({ date: props.modelValue[1],type: 'HH:mm:ss' })
   }
 })
 watch(() => props.modelValue, () => {

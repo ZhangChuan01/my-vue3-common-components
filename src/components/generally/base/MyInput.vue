@@ -51,7 +51,7 @@ const getFinalVal = (val: string | number) => {
     res = res.toString().slice(0, 100)
   }
   if(props.filterObj.type !== 'textarea'){
-    res = res.toString().replace(/\s*/g,"")
+    res = res.toString().replace(/\s*/g,'')
   }
   // console.log('res',res)
   return res

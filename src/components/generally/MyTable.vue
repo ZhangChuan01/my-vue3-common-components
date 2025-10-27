@@ -311,18 +311,18 @@ const handleOperateEmpty = async () => {
 }
 function getTotalHeight(element: Element) {
   // 获取元素自身高度（内容 + 内边距 + 边框）
-  const rect = element.getBoundingClientRect();
-  const ownHeight = rect.height;
+  const rect = element.getBoundingClientRect()
+  const ownHeight = rect.height
   
   // 获取计算样式
-  const styles = window.getComputedStyle(element);
+  const styles = window.getComputedStyle(element)
   
   // 解析上下外边距值
-  const marginTop = parseFloat(styles.marginTop) || 0;
-  const marginBottom = parseFloat(styles.marginBottom) || 0;
+  const marginTop = parseFloat(styles.marginTop) || 0
+  const marginBottom = parseFloat(styles.marginBottom) || 0
   
   // 总高度 = 自身高度 + 上外边距 + 下外边距
-  return ownHeight + marginTop + marginBottom;
+  return ownHeight + marginTop + marginBottom
 }
 const calcHeight = () => {
   const container = document.querySelector('.page-wrapper')
@@ -366,9 +366,9 @@ defineExpose({
 
 <template>
   <div
+    v-if="showTable"
     :id="tableId"
     class="my-table"
-    v-if="showTable"
   >
     <el-table
       ref="tableComponent"
