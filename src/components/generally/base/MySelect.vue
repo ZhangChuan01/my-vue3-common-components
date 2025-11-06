@@ -93,6 +93,7 @@ onMounted(() => {
       v-for="item in props.filterObj.options"
       :key="props.filterObj.props?.value ? item[props.filterObj.props.value] : item.id"
       :label="props.filterObj.props?.label ? item[props.filterObj.props.label] : item.name"
+      :disabled="item.disabled ?? false"
       :value="props.filterObj.valueKey ? item : props.filterObj.props && props.filterObj.props.value ? item[props.filterObj.props.value] : item.id"
     />
   </el-select>

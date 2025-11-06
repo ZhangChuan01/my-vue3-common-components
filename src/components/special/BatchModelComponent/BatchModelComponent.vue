@@ -206,7 +206,7 @@ watch(() => props.batchData, () => {
   calculateArea()
 }, { immediate: true })
 
-const visible = ref(false),triggerRef = ref()
+const visible = ref(false),mymyTriggerRef = ref()
 
 // 创建一个隐藏的DOM元素作为虚拟锚点
 const virtualElement = {
@@ -229,7 +229,7 @@ const posX = ref(0)
 const posY = ref(0)
 
 // 将虚拟锚点与我们的virtualElement绑定
-triggerRef.value = virtualElement
+mymyTriggerRef.value = virtualElement
 let clickX = ref(0), clickY = ref(0),currentData = ref<DataInfo>()
 // 点击事件处理函数
 const handlePageClick = (event: MouseEvent, data: DataInfo) => {
@@ -475,7 +475,7 @@ onBeforeUnmount(() => {
     </div>
   </div>
   <el-popover
-    :virtual-ref="triggerRef"
+    :virtual-ref="mymyTriggerRef"
     virtual-triggering
     :visible="visible"
     placement="bottom-start"

@@ -42,6 +42,7 @@ const props = withDefaults(defineProps<{
       headerSlot?: string
       filterSlot?: string
       digit?: number
+      show?: boolean
       valueChange?: (val: any) => void
     }[]
     operate?: {
@@ -393,7 +394,7 @@ defineExpose({
         width="50"
       />
       <template
-        v-for="col in props.dataSource.cols"
+        v-for="col in props.dataSource.cols.filter(item => (item.show === true || item.show === undefined))"
         :key="col.code"
       >
         <el-table-column
