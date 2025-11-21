@@ -112,14 +112,14 @@ const formDataList = reactive<(BaseType.Input | BaseType.Select | BaseType.Check
     code: 'sex2',
     // type: 'virtualizedSelect',
     type: 'select',
-    // multiple: true,
+    multiple: true,
     options: [
       { name: '男', id: 1 },
       { name: '女', id: 0 }
     ],
     value: '',
     clearable: false,
-    valueKey: 'id',
+    // valueKey: 'id',
     codesMap: { sexC: 'name',sexV: 'id' }
   },
   {

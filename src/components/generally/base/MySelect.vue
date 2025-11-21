@@ -42,21 +42,26 @@ const setPropData = () => {
   return Object.assign(obj, useAttrs())
 }
 const setCodesMap = (val: any) => {
-  if(!props.filterObj.codesMap) return
+  if(!props.filterObj.codesMap || !val) return
   let obj:any = {}
   if(props.filterObj.multiple){
     Object.keys(props.filterObj.codesMap).forEach((item: any) => {
       obj[item] = []
     })
-    val.forEach((item: any) => {
-      const target = props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === item : o.id === item)
-      // console.log('ttttttttt',target,obj)
-      if(target) {
-        Object.entries(props.filterObj.codesMap!).forEach((item: any) => {
-          obj[item[0]].push(target[item[1]])
-        })
-      }
-    })
+    console.log('val',val)
+    try {
+      val.forEach((item: any) => {
+        const target = props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === item : o.id === item)
+        // console.log('ttttttttt',target,obj)
+        if(target) {
+          Object.entries(props.filterObj.codesMap!).forEach((item: any) => {
+            obj[item[0]].push(target[item[1]])
+          })
+        }
+      })
+    } catch (error) {
+      console.log('codesMap',error)
+    }
   }else {
     const target = typeof val === 'object' ? val : props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === val : o.id === val)
     if(!target) return
