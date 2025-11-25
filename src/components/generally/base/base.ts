@@ -7,6 +7,7 @@ export interface Base {
   labelWidth?: string | number
   type?: string
   code?: string
+  show?: boolean
   value?: string | number | boolean | { [key: string]: string | number | boolean } | null | string[] | any
   clearable?: boolean
   showPassword?: boolean

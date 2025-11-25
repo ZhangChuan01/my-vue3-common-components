@@ -132,7 +132,7 @@ defineExpose({
       v-bind="$attrs"
     >
       <template
-        v-for="formData in props.formDataList"
+        v-for="formData in props.formDataList.filter(formData => !Object.hasOwnProperty.call(formData, 'show') || formData.show === true)"
         :key="formData.type === 'title' ? formData.label : formData.code"
       >
         <el-form-item
