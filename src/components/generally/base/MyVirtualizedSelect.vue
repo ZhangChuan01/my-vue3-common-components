@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
 const bindValue = computed({
   get: () => props.modelValue,
   set: val => {
+    if(JSON.stringify(val) === JSON.stringify(props.modelValue)) return
     if (props.filterObj.handleChange) {
       props.filterObj.handleChange(val)
     }

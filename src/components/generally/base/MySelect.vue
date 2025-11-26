@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
 const bindValue = computed({
   get: () => props.modelValue,
   set: val => {
+    if(JSON.stringify(val) === JSON.stringify(props.modelValue)) return
     if (props.filterObj.handleChange) {
       props.filterObj.handleChange(val)
     }
@@ -42,13 +43,13 @@ const setPropData = () => {
   return Object.assign(obj, useAttrs())
 }
 const setCodesMap = (val: any) => {
-  if(!props.filterObj.codesMap || !val) return
+  if(!props.filterObj.codesMap || val === null || val === undefined) return
   let obj:any = {}
   if(props.filterObj.multiple){
     Object.keys(props.filterObj.codesMap).forEach((item: any) => {
       obj[item] = []
     })
-    console.log('val',val)
+    // console.log('vallllllllllllcodesmap',val)
     try {
       val.forEach((item: any) => {
         const target = props.filterObj.options.find(o => props.filterObj.props?.value ? o[props.filterObj.props.value] === item : o.id === item)
