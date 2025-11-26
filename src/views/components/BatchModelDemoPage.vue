@@ -16,13 +16,13 @@ import toolite from 'toolite'
 // })
 // console.log('batchDataArray', batchDataArray)
 let testData = ref<any>([]),rangeInfo = ref<any>([])
-fetch('http://192.168.8.181:44366/api/app/storageCoalInfo/storageSideViewPointListByShape?sectionCode=1').then(res => res.json()).then(res => {
+fetch('http://192.168.8.181:44366/api/app/storageCoalInfo/storageSideViewPointListByVersion?sectionCode=1').then(res => res.json()).then(res => {
   console.log('res', res)
   testData.value = res
 })
 const getRangeInfo = (data: any) => {
   console.log('getRangeInfo', data)
-  fetch(`http://192.168.8.181:44366/api/app/storageCoalInfo/storageListByRange?sectionCode=1&minX=${data.start}&maxX=${data.end}`,{
+  fetch(`http://192.168.8.181:44366/api/app/storageCoalInfo/storageList?sectionCode=1&minX=${data.start}&maxX=${data.end}`,{
     method: 'get'
   }).then(res => res.json()).then(res => {
     console.log('res', res)
@@ -36,7 +36,7 @@ getRangeInfo({ start: 0, end: 280 })
 let pointInfo = ref<any>()
 const clickArea = (data: any) => {
   console.log('clickArea', data)
-  fetch(`http://192.168.8.181:44366/api/app/storageCoalInfo/storageInfoByRange?x=${data.x}&y=${data.y}&stackId=${data.stackId}`,{
+  fetch(`http://192.168.8.181:44366/api/app/storageCoalInfo/storageInfo?x=${data.x}&y=${data.y}&id=${data.stackId}`,{
     method: 'get'
   }).then(res => res.json()).then(res => {
     pointInfo.value = Object.assign({}, res, { weight: toolite.formatNumber(res.weight,0) })

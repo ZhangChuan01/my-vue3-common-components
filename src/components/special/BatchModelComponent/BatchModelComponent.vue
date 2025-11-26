@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emits = defineEmits<{
-  (e: 'clickArea', position: { x: number, y: number, currentData: DataInfo }): void
+  (e: 'clickArea', position: { x: number, y: number }): void
   (e: 'getRangeInfo', range: { start: number, end: number }): void
 }>()
 
@@ -113,10 +113,9 @@ const calculateArea = () => {
         lineData2.push({ x: area.x, y: item.z * props.yScale })
       }
       const info = {
-        batchNo: item.batchNo,
         percentage: index === 0 ? 1 : item.z * props.yScale / props.maxY,
         color: item.color || mapColor[item.batchNo] || '#fff',
-        stackId: item.stackId
+        ...item
       }
       dataInfo.push(info)
     })
@@ -244,7 +243,7 @@ const handlePageClick = (event: MouseEvent, data: DataInfo) => {
   const top = event.clientY - center.getBoundingClientRect().top
   clickY.value = getY(top)
   currentData.value = data
-  emits('clickArea',{ x: clickX.value,y: clickY.value,currentData: currentData.value })
+  emits('clickArea',{ x: clickX.value,y: clickY.value,...currentData.value })
 }
 
 // 点击页面其他区域关闭Popover

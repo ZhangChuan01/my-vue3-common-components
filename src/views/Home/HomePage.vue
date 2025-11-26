@@ -7,7 +7,7 @@ import NativeTableDemoPage from '../components/NativeTableDemoPage.vue'
 import ContainerComponentDemoPage from '../components/ContainerComponentDemoPage.vue'
 import VideoComponetDemoPage from '../components/VideoComponetDemoPage.vue'
 import BatchModelDemoPage from '../components/BatchModelDemoPage.vue'
-const activeName = ref('first')
+const activeName = ref('eight')
 
 </script>
 
