@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emits = defineEmits<{
-  (e: 'clickArea', position: { x: number, y: number, stackId: string }): void
+  (e: 'clickArea', position: { x: number, y: number, currentData: DataInfo }): void
   (e: 'getRangeInfo', range: { start: number, end: number }): void
 }>()
 
@@ -244,7 +244,7 @@ const handlePageClick = (event: MouseEvent, data: DataInfo) => {
   const top = event.clientY - center.getBoundingClientRect().top
   clickY.value = getY(top)
   currentData.value = data
-  emits('clickArea',{ x: clickX.value,y: clickY.value,stackId: currentData.value.stackId })
+  emits('clickArea',{ x: clickX.value,y: clickY.value,currentData: currentData.value })
 }
 
 // 点击页面其他区域关闭Popover
