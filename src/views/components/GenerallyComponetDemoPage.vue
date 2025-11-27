@@ -201,7 +201,7 @@ const dataSource = reactive({
     { code: 'score',label: '分数',type: 'intNum',show: false },
     { code: 'address', label: '地址',width: 300 },
     { code: 'switch', label: '状态',style: { '--el-switch-on-color': '#13ce66', '--el-switch-off-color': '#ff4949' },valueChange: (val: any) => console.log('val',val), type: 'switch' },
-    { code: 'createTime', label: '创建时间', type: 'datetime2' }
+    { code: 'createTime', label: '创建时间', type: 'datetime' }
   ],
   operate: {
     // width: 220,
@@ -218,6 +218,10 @@ const dataSource = reactive({
     ]
   }
 })
+const beforeSubmit = () => {
+  console.log('beforeSubmit')
+  return false
+}
 const rowClick = (row: any) => {
   console.log('rowClick', row)
 }
@@ -296,6 +300,7 @@ const test = ref(null)
       :current-row-value="rowValue"
       :form-data-list="formDataList"
       :fun-args-edit="['2222',{x: 10}]"
+      :before-submit="beforeSubmit"
       :rules="rules"
       :add-fun="addPeopleApi"
       :edit-fun="editPeopleApi"

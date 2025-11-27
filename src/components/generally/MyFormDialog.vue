@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
   dialogVisible?: boolean
   currentRowValue?: any
   fixedParams?: {[key: string]: any} | undefined
-  beforeSubmit?: (() => boolean)| null
+  beforeSubmit?: ((res: any) => boolean)| null
   handleField?: ((res: any) => void ) | null
   labelPosition?: string | undefined
   col?: number | undefined
@@ -68,15 +68,16 @@ const cancel = () => {
   emits('cancel')
 }
 const formSubmit = async () => {
-  if(props.beforeSubmit){
-    const valid = props.beforeSubmit()
-    if(!valid) return
-  }
+  
   const formRes = await myDialogForm.value?.submit()
   // console.log('valid1111', formRes)
-  let res:any
   
   if (formRes && formRes !== true) {
+    if(props.beforeSubmit){
+      const valid = props.beforeSubmit(formRes)
+      if(!valid) return
+    }
+    let res:any
     if(props.handleField){
       props.handleField(formRes)
     }
